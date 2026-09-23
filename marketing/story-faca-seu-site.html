@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Story Code Site</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --blue:#1e6bff; --blue-2:#4d9bff; --black:#05070d; --white:#ffffff; --muted:#a9b4c8; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1080px; height:1920px; background:var(--black); }
+  body { font-family:'Inter',sans-serif; color:var(--white); overflow:hidden; position:relative; }
+
+  .grid { position:absolute; inset:0;
+    background-image:linear-gradient(rgba(77,155,255,.08) 1px, transparent 1px),
+                     linear-gradient(90deg, rgba(77,155,255,.08) 1px, transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse at 50% 35%, #000 20%, transparent 75%); }
+  .glow { position:absolute; border-radius:50%; filter:blur(120px); }
+  .glow.a { width:760px; height:760px; background:#1e6bff; opacity:.45; top:-220px; right:-260px; }
+  .glow.b { width:620px; height:620px; background:#0a3dcc; opacity:.4; bottom:-160px; left:-240px; }
+
+  .wrap { position:relative; z-index:2; height:100%; padding:150px 90px 170px; display:flex; flex-direction:column; }
+
+  .logo { display:flex; align-items:center; gap:22px; }
+  .logo .mark { width:92px; height:92px; border-radius:24px; background:var(--blue);
+    display:grid; place-items:center; font-family:'JetBrains Mono',monospace; font-weight:700; font-size:40px;
+    box-shadow:0 12px 40px rgba(30,107,255,.55); }
+  .logo .name { font-size:48px; font-weight:800; letter-spacing:-1px; }
+  .logo .name span { color:var(--blue-2); }
+
+  .tag { margin-top:120px; align-self:flex-start; font-family:'JetBrains Mono',monospace; font-size:30px;
+    color:var(--blue-2); border:2px solid rgba(77,155,255,.5); padding:14px 26px; border-radius:999px;
+    background:rgba(30,107,255,.1); }
+
+  h1 { margin-top:44px; font-size:118px; line-height:1.0; font-weight:900; letter-spacing:-4px; }
+  h1 .hl { color:var(--blue); }
+  h1 .u { background:linear-gradient(transparent 70%, rgba(30,107,255,.55) 70%); }
+
+  .sub { margin-top:44px; font-size:40px; line-height:1.4; color:var(--muted); font-weight:500; max-width:860px; }
+  .sub b { color:var(--white); }
+
+  .card { margin-top:70px; background:var(--white); color:var(--black); border-radius:40px; padding:54px 56px;
+    box-shadow:0 30px 80px rgba(0,0,0,.5); }
+  .card ul { list-style:none; display:grid; gap:30px; }
+  .card li { display:flex; align-items:center; gap:26px; font-size:38px; font-weight:700; letter-spacing:-.5px; }
+  .card li i { flex:none; width:58px; height:58px; border-radius:16px; background:var(--blue); display:grid; place-items:center; }
+  .card li i svg { width:32px; height:32px; }
+
+  .cta { margin-top:auto; text-align:center; }
+  .cta .btn { display:inline-flex; align-items:center; gap:22px; background:var(--blue); color:var(--white);
+    font-size:46px; font-weight:800; padding:38px 70px; border-radius:999px; box-shadow:0 20px 60px rgba(30,107,255,.6); }
+  .cta .btn svg { width:44px; height:44px; }
+  .cta .site { margin-top:34px; font-family:'JetBrains Mono',monospace; font-size:34px; color:var(--muted); }
+  .cta .site b { color:var(--white); }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="glow a"></div>
+  <div class="glow b"></div>
+
+  <div class="wrap">
+    <div class="logo">
+      <div class="mark">&lt;/&gt;</div>
+      <div class="name">Code<span>Site</span></div>
+    </div>
+
+    <div class="tag">&lt;seu_negocio online /&gt;</div>
+
+    <h1>Faça seu <span class="hl">site</span> <span class="u">com a gente</span>.</h1>
+
+    <p class="sub">Seu negócio merece uma presença digital <b>profissional, rápida e que vende</b>.</p>
+
+    <div class="card">
+      <ul>
+        <li><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i>Design moderno e exclusivo</li>
+        <li><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i>100% adaptado para celular</li>
+        <li><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i>Otimizado para o Google</li>
+        <li><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i>Integração com WhatsApp</li>
+        <li><i><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></i>Entrega rápida e suporte</li>
+      </ul>
+    </div>
+
+    <div class="cta">
+      <div class="btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Chama no Direct!
+      </div>
+      <div class="site">orçamento sem compromisso · <b>codesite.com</b></div>
+    </div>
+  </div>
+</body>
+</html>
