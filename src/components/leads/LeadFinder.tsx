@@ -5,13 +5,16 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { CodeSiteMark, InstagramIcon, WhatsAppIcon } from "@/components/icons";
 import {
   CATEGORIES,
+  FOLLOW_UP_DAYS,
   STATUSES,
   buildQuery,
+  daysSince,
   fetchOsm,
   googleLink,
   heat,
   mapsLink,
   pitch,
+  splitCities,
   toCsv,
   toLead,
   type CategoryId,
@@ -71,7 +74,10 @@ export default function LeadFinder() {
   const [minHeat, setMinHeat] = useState<"todos" | "morno" | "quente">("todos");
   const [text, setText] = useState("");
   const [shown, setShown] = useState(40);
-  const [statusFilter, setStatusFilter] = useState<Status | "ativos">("ativos");
+  const [bairro, setBairro] = useState("");
+  const [sort, setSort] = useState<"nota" | "nome" | "bairro">("nota");
+  const [hideContacted, setHideContacted] = useState(true);
+  const [statusFilter, setStatusFilter] = useState<Status | "ativos" | "cobrar">("ativos");
 
   useEffect(() => {
     // localStorage only exists in the browser, so state hydrates after mount.
@@ -90,15 +96,17 @@ export default function LeadFinder() {
   }, [tracked, ready]);
 
   const search = async () => {
-    if (!settings.city.trim() || cats.length === 0) return;
+    const cities = splitCities(settings.city);
+    if (cities.length === 0 || cats.length === 0) return;
     abort.current?.abort();
     const ctrl = new AbortController();
     abort.current = ctrl;
     setLoading(true);
     setError("");
     setShown(40);
+    setBairro("");
     try {
-      const elements = await fetchOsm(buildQuery(settings.city, cats), ctrl.signal);
+      const elements = await fetchOsm(buildQuery(cities, cats), ctrl.signal);
       const seen = new Set<string>();
       const leads = elements
         .map((el) => toLead(el, settings.ddd))
@@ -111,7 +119,7 @@ export default function LeadFinder() {
         })
         .sort((a, b) => b.score - a.score);
       setResults(leads);
-      if (leads.length === 0) setError(`Nada encontrado em "${settings.city}". Confira o nome da cidade (com acento) ou marque outros tipos.`);
+      if (leads.length === 0) setError(`Nada encontrado em ${cities.join(", ")}. Confira o nome da cidade (com acento) ou marque outros tipos.`);
     } catch (e) {
       if (!ctrl.signal.aborted) {
         setError("O mapa não respondeu agora. Espere um minuto e tente de novo.");
@@ -123,10 +131,20 @@ export default function LeadFinder() {
   };
 
   const setStatus = (lead: Lead, status: Status) =>
-    setTracked((t) => ({ ...t, [lead.id]: { lead, note: t[lead.id]?.note ?? "", status, updatedAt: Date.now() } }));
+    setTracked((t) => {
+      const prev = t[lead.id];
+      const contactedAt = status === "contatado" ? (prev?.status === "contatado" && prev.contactedAt ? prev.contactedAt : Date.now()) : prev?.contactedAt;
+      return { ...t, [lead.id]: { lead, note: prev?.note ?? "", status, updatedAt: Date.now(), contactedAt } };
+    });
 
   const setNote = (lead: Lead, note: string) =>
-    setTracked((t) => ({ ...t, [lead.id]: { lead, status: t[lead.id]?.status ?? "novo", note, updatedAt: Date.now() } }));
+    setTracked((t) => ({ ...t, [lead.id]: { ...t[lead.id], lead, status: t[lead.id]?.status ?? "novo", note, updatedAt: Date.now() } }));
+
+  const bairros = useMemo(() => {
+    const count = new Map<string, number>();
+    for (const l of results ?? []) if (l.bairro) count.set(l.bairro, (count.get(l.bairro) ?? 0) + 1);
+    return [...count.entries()].sort((a, b) => b[1] - a[1]);
+  }, [results]);
 
   const visible = useMemo(() => {
     if (!results) return [];
@@ -135,17 +153,30 @@ export default function LeadFinder() {
       if (onlyWhatsapp && !l.phone?.whatsapp) return false;
       if (minHeat === "quente" && l.score < 75) return false;
       if (minHeat === "morno" && l.score < 55) return false;
-      if (tracked[l.id]?.status === "descartado") return false;
+      const st = tracked[l.id]?.status ?? "novo";
+      if (st === "descartado") return false;
+      if (hideContacted && st !== "novo") return false;
+      if (bairro && l.bairro !== bairro) return false;
       if (q && !`${l.name} ${l.bairro} ${l.address} ${l.kind}`.toLowerCase().includes(q)) return false;
       return true;
-    });
-  }, [results, onlyWhatsapp, minHeat, text, tracked]);
+    }).sort((a, b) =>
+      sort === "nome" ? a.name.localeCompare(b.name, "pt-BR")
+      : sort === "bairro" ? (a.bairro || "~").localeCompare(b.bairro || "~", "pt-BR") || b.score - a.score
+      : b.score - a.score
+    );
+  }, [results, onlyWhatsapp, minHeat, text, tracked, hideContacted, bairro, sort]);
 
   const pipeline = useMemo(() => {
     const all = Object.values(tracked).sort((a, b) => b.updatedAt - a.updatedAt);
     const counts = Object.fromEntries(STATUSES.map((s) => [s.id, all.filter((t) => t.status === s.id).length])) as Record<Status, number>;
-    const list = all.filter((t) => (statusFilter === "ativos" ? t.status !== "descartado" : t.status === statusFilter));
-    return { all, counts, list };
+    const due = all
+      .filter((t) => t.status === "contatado" && t.contactedAt && daysSince(t.contactedAt) >= FOLLOW_UP_DAYS)
+      .sort((a, b) => (a.contactedAt ?? 0) - (b.contactedAt ?? 0));
+    const list =
+      statusFilter === "cobrar" ? due
+      : statusFilter === "ativos" ? all.filter((t) => t.status !== "descartado")
+      : all.filter((t) => t.status === statusFilter);
+    return { all, counts, list, due };
   }, [tracked, statusFilter]);
 
   const exportCsv = (rows: { lead: Lead; status: Status; note: string }[]) => {
@@ -191,7 +222,7 @@ export default function LeadFinder() {
 
               <div className="mt-5 grid grid-cols-[1fr_auto] gap-3">
                 <label className="block">
-                  <span className="text-xs font-semibold text-ink-soft">Cidade</span>
+                  <span className="text-xs font-semibold text-ink-soft">Cidades (separe por vírgula)</span>
                   <input
                     value={settings.city}
                     onChange={(e) => setSettings({ ...settings, city: e.target.value })}
@@ -235,7 +266,7 @@ export default function LeadFinder() {
               <button
                 type="button"
                 onClick={search}
-                disabled={loading || cats.length === 0 || !settings.city.trim()}
+                disabled={loading || cats.length === 0 || splitCities(settings.city).length === 0}
                 className="mt-5 w-full rounded-full bg-brand px-6 py-4 font-semibold text-paper transition-opacity disabled:opacity-50"
               >
                 {loading ? "Buscando no mapa… pode levar até 1 minuto" : "Buscar leads"}
@@ -274,6 +305,39 @@ export default function LeadFinder() {
                     <option value="morno">Mornos e quentes</option>
                     <option value="quente">Só quentes</option>
                   </select>
+                  {bairros.length > 0 && (
+                    <select
+                      value={bairro}
+                      onChange={(e) => setBairro(e.target.value)}
+                      className="max-w-full rounded-full border border-line bg-paper px-3.5 py-2 text-sm"
+                      aria-label="Bairro"
+                    >
+                      <option value="">Todos os bairros</option>
+                      {bairros.map(([b, n]) => (
+                        <option key={b} value={b}>
+                          {b} ({n})
+                        </option>
+                      ))}
+                    </select>
+                  )}
+                  <select
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value as typeof sort)}
+                    className="rounded-full border border-line bg-paper px-3.5 py-2 text-sm"
+                    aria-label="Ordenar"
+                  >
+                    <option value="nota">Maior nota</option>
+                    <option value="bairro">Por bairro</option>
+                    <option value="nome">Por nome</option>
+                  </select>
+                  <button
+                    type="button"
+                    aria-pressed={hideContacted}
+                    onClick={() => setHideContacted(!hideContacted)}
+                    className={`rounded-full border px-3.5 py-2 text-sm ${hideContacted ? "border-ink bg-ink text-paper" : "border-line"}`}
+                  >
+                    Esconder já contatados
+                  </button>
                 </section>
 
                 <div className="mt-4 flex items-center justify-between text-sm text-ink-soft">
@@ -315,6 +379,23 @@ export default function LeadFinder() {
           </>
         ) : (
           <>
+            {pipeline.due.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setStatusFilter(statusFilter === "cobrar" ? "ativos" : "cobrar")}
+                className={`mb-4 flex w-full items-center justify-between gap-3 rounded-3xl p-4 text-left ${
+                  statusFilter === "cobrar" ? "bg-ink text-paper" : "bg-brand text-paper"
+                }`}
+              >
+                <span>
+                  <span className="block font-display text-lg font-bold">
+                    {pipeline.due.length} {pipeline.due.length === 1 ? "lead precisa" : "leads precisam"} de retorno
+                  </span>
+                  <span className="block text-sm opacity-80">Contatados há {FOLLOW_UP_DAYS}+ dias e ainda sem resposta</span>
+                </span>
+                <span className="shrink-0 text-sm font-semibold">{statusFilter === "cobrar" ? "Ver todos" : "Ver"}</span>
+              </button>
+            )}
             <section className="grid grid-cols-5 gap-1.5">
               {STATUSES.map((s) => (
                 <button
@@ -332,7 +413,13 @@ export default function LeadFinder() {
             </section>
 
             <div className="mt-4 flex items-center justify-between text-sm text-ink-soft">
-              <span>{statusFilter === "ativos" ? "Todos, menos descartados" : STATUSES.find((s) => s.id === statusFilter)?.label}</span>
+              <span>
+                {statusFilter === "ativos"
+                  ? "Todos, menos descartados"
+                  : statusFilter === "cobrar"
+                    ? "Para dar retorno (mais antigos primeiro)"
+                    : STATUSES.find((s) => s.id === statusFilter)?.label}
+              </span>
               {pipeline.all.length > 0 && (
                 <button type="button" onClick={() => exportCsv(pipeline.all)} className="font-semibold text-brand">
                   Baixar planilha
@@ -391,7 +478,9 @@ function LeadCard({
   onNote: (n: string) => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState(() => pitch(lead, settings.sender, settings.city));
+  const cities = splitCities(settings.city);
+  const city = lead.city || (cities.length === 1 ? cities[0] : "");
+  const [message, setMessage] = useState(() => pitch(lead, settings.sender, city));
   const [copied, setCopied] = useState(false);
   const h = heat(lead.score);
   const status = tracked?.status ?? "novo";
@@ -420,6 +509,7 @@ function LeadCard({
           <p className="mt-0.5 text-sm text-ink-soft">
             {lead.kind}
             {lead.bairro && ` · ${lead.bairro}`}
+            {lead.city && cities.length > 1 && ` · ${lead.city}`}
           </p>
           {lead.address && <p className="text-xs text-ink-faint wrap-anywhere">{lead.address}</p>}
         </div>
@@ -452,10 +542,10 @@ function LeadCard({
             <InstagramIcon className="h-4 w-4" />
           </a>
         )}
-        <a href={googleLink(lead, settings.city)} target="_blank" rel="noopener noreferrer" className={btn}>
+        <a href={googleLink(lead, city)} target="_blank" rel="noopener noreferrer" className={btn}>
           Conferir no Google
         </a>
-        <a href={mapsLink(lead, settings.city)} target="_blank" rel="noopener noreferrer" className={btn}>
+        <a href={mapsLink(lead, city)} target="_blank" rel="noopener noreferrer" className={btn}>
           Mapa
         </a>
       </div>
@@ -473,6 +563,11 @@ function LeadCard({
             </option>
           ))}
         </select>
+        {status === "contatado" && tracked?.contactedAt != null && (
+          <span className={`text-xs ${daysSince(tracked.contactedAt) >= FOLLOW_UP_DAYS ? "font-semibold text-brand" : "text-ink-faint"}`}>
+            {daysSince(tracked.contactedAt) === 0 ? "hoje" : `há ${daysSince(tracked.contactedAt)} dia${daysSince(tracked.contactedAt) > 1 ? "s" : ""}`}
+          </span>
+        )}
         <button type="button" onClick={() => setOpen(!open)} className="text-sm font-semibold text-brand">
           {open ? "Fechar" : "Ver mensagem e anotações"}
         </button>
@@ -491,7 +586,7 @@ function LeadCard({
             <button type="button" onClick={copy} className={btn}>
               {copied ? "Copiado!" : "Copiar mensagem"}
             </button>
-            <button type="button" onClick={() => setMessage(pitch(lead, settings.sender, settings.city))} className={btn}>
+            <button type="button" onClick={() => setMessage(pitch(lead, settings.sender, city))} className={btn}>
               Restaurar texto
             </button>
           </div>

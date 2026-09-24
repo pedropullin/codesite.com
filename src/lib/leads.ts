@@ -1,7 +1,7 @@
 // Lead finder: pulls businesses without a website from OpenStreetMap
 // (Overpass API, free and CORS-enabled), scores them and drafts the pitch.
 
-export type CategoryId = "comida" | "beleza" | "saude" | "fitness" | "lojas" | "pet" | "servicos";
+export type CategoryId = "comida" | "beleza" | "saude" | "fitness" | "lojas" | "pet" | "servicos" | "hospedagem" | "educacao";
 
 type Category = {
   id: CategoryId;
@@ -69,23 +69,48 @@ export const CATEGORIES: Category[] = [
     weight: 10,
     hook: "A gente faz site que mostra o trabalho de vocês e traz pedido de orçamento direto pelo WhatsApp.",
   },
+  {
+    id: "hospedagem",
+    label: "Hotéis e pousadas",
+    selectors: ['["tourism"~"^(hotel|guest_house|hostel|motel|apartment|chalet)$"]'],
+    weight: 10,
+    hook: "A gente faz site pra hotel e pousada com fotos dos quartos e reserva direta, sem pagar comissão pra plataforma.",
+  },
+  {
+    id: "educacao",
+    label: "Escolas e cursos",
+    selectors: ['["amenity"~"^(language_school|driving_school|music_school|dancing_school|prep_school|training)$"]'],
+    weight: 10,
+    hook: "A gente faz site pra escola e curso com turmas, horários e matrícula pelo WhatsApp.",
+  },
 ];
+
+export const splitCities = (raw: string) =>
+  raw
+    .split(/[,;\n]/)
+    .map((c) => c.replace(/["\\]/g, "").trim())
+    .filter(Boolean)
+    .slice(0, 6);
 
 export const categoryById = (id: CategoryId) => CATEGORIES.find((c) => c.id === id)!;
 
-export function buildQuery(city: string, categories: CategoryId[]) {
-  const safeCity = city.replace(/["\\]/g, "").trim();
+export function buildQuery(cities: string[], categories: CategoryId[]) {
+  const areas = cities
+    .map((c) => `  area["name"="${c}"]["boundary"="administrative"]["admin_level"~"^(7|8)$"];`)
+    .join("\n");
   const noSite = '["name"][!"website"][!"contact:website"][!"url"]';
   const clauses = categories
     .flatMap((id) => categoryById(id).selectors)
     .map((sel) => `  nwr${sel}${noSite}(area.a);`)
     .join("\n");
   return `[out:json][timeout:90];
-area["name"="${safeCity}"]["boundary"="administrative"]["admin_level"~"^(7|8)$"]->.a;
+(
+${areas}
+)->.a;
 (
 ${clauses}
 );
-out center tags 600;`;
+out center tags 1500;`;
 }
 
 const ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
@@ -156,6 +181,7 @@ export type Lead = {
   kind: string;
   address: string;
   bairro: string;
+  city: string;
   phone: Phone | null;
   instagram: string | null;
   facebook: string | null;
@@ -174,6 +200,9 @@ const KIND_LABELS: Record<string, string> = {
   dentist: "Dentista", clinic: "Clínica", doctors: "Consultório", physiotherapist: "Fisioterapia", psychotherapist: "Psicologia",
   alternative: "Terapias", laboratory: "Laboratório", optician: "Ótica", fitness_centre: "Academia", dojo: "Artes marciais",
   clothes: "Roupas", shoes: "Calçados", jewelry: "Joalheria", furniture: "Móveis", florist: "Floricultura", gift: "Presentes",
+  hotel: "Hotel", guest_house: "Pousada", hostel: "Hostel", motel: "Motel", apartment: "Apart-hotel", chalet: "Chalé",
+  language_school: "Escola de idiomas", driving_school: "Autoescola", music_school: "Escola de música",
+  dancing_school: "Escola de dança", prep_school: "Cursinho", training: "Cursos",
   sports: "Esportes", bicycle: "Bicicletaria", electronics: "Eletrônicos", mobile_phone: "Celulares", boutique: "Boutique",
   cosmetics: "Cosméticos", interior_decoration: "Decoração", pet: "Pet shop", pet_grooming: "Banho e tosa",
   veterinary: "Veterinária", lawyer: "Advocacia", accountant: "Contabilidade", estate_agent: "Imobiliária",
@@ -184,6 +213,8 @@ const KIND_LABELS: Record<string, string> = {
 function classify(tags: Record<string, string>): { category: CategoryId; kind: string } | null {
   const a = tags.amenity, s = tags.shop, o = tags.office, h = tags.healthcare, l = tags.leisure, c = tags.craft;
   const kind = (v: string) => (v === "hairdresser" && tags.hairdresser === "barber" ? "Barbearia" : KIND_LABELS[v] ?? v);
+  if (tags.tourism && /^(hotel|guest_house|hostel|motel|apartment|chalet)$/.test(tags.tourism)) return { category: "hospedagem", kind: kind(tags.tourism) };
+  if (/^(language_school|driving_school|music_school|dancing_school|prep_school|training)$/.test(a ?? "")) return { category: "educacao", kind: kind(a!) };
   if (/^(restaurant|cafe|bar|fast_food|pub|ice_cream|food_court)$/.test(a ?? "")) return { category: "comida", kind: kind(a!) };
   if (/^(bakery|pastry|confectionery|deli)$/.test(s ?? "")) return { category: "comida", kind: kind(s!) };
   if (/^(hairdresser|beauty|massage|tattoo)$/.test(s ?? "")) return { category: "beleza", kind: kind(s!) };
@@ -237,6 +268,7 @@ export function toLead(el: OsmElement, ddd: string): Lead | null {
     kind: cls.kind,
     address: street,
     bairro,
+    city: t["addr:city"] ?? "",
     phone,
     instagram,
     facebook,
@@ -285,13 +317,17 @@ export const STATUSES: { id: Status; label: string }[] = [
   { id: "descartado", label: "Descartado" },
 ];
 
-export type Tracked = { lead: Lead; status: Status; note: string; updatedAt: number };
+export type Tracked = { lead: Lead; status: Status; note: string; updatedAt: number; contactedAt?: number };
+
+export const FOLLOW_UP_DAYS = 3;
+
+export const daysSince = (ts: number) => Math.floor((Date.now() - ts) / 86_400_000);
 
 export function toCsv(rows: { lead: Lead; status: Status; note: string }[]) {
-  const head = ["nome", "tipo", "nota", "status", "bairro", "endereco", "telefone", "whatsapp", "instagram", "facebook", "email", "observacao"];
+  const head = ["nome", "tipo", "nota", "status", "cidade", "bairro", "endereco", "telefone", "whatsapp", "instagram", "facebook", "email", "observacao"];
   const esc = (v: string | number | null | undefined) => `"${String(v ?? "").replace(/"/g, '""')}"`;
   const lines = rows.map(({ lead: l, status, note }) =>
-    [l.name, l.kind, l.score, status, l.bairro, l.address, l.phone?.display, l.phone?.whatsapp ? `https://wa.me/${l.phone.whatsapp}` : "", l.instagram, l.facebook, l.email, note]
+    [l.name, l.kind, l.score, status, l.city, l.bairro, l.address, l.phone?.display, l.phone?.whatsapp ? `https://wa.me/${l.phone.whatsapp}` : "", l.instagram, l.facebook, l.email, note]
       .map(esc)
       .join(";")
   );
