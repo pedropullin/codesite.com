@@ -6,6 +6,7 @@ import { CodeSiteMark, InstagramIcon, WhatsAppIcon } from "@/components/icons";
 import {
   CATEGORIES,
   FOLLOW_UP_DAYS,
+  STALE_YEARS,
   STATUSES,
   buildQuery,
   daysSince,
@@ -497,6 +498,7 @@ function LeadCard({
   const [message, setMessage] = useState(() => pitch(lead, settings.sender, city));
   const [copied, setCopied] = useState(false);
   const h = heat(lead.score);
+  const stale = lead.updatedYear != null && new Date().getFullYear() - lead.updatedYear >= STALE_YEARS;
   const status = tracked?.status ?? "novo";
 
   const sendWhatsapp = () => {
@@ -563,6 +565,15 @@ function LeadCard({
           Mapa
         </a>
       </div>
+
+      {lead.phone && (
+        <p className={`mt-2 text-xs ${stale ? "font-semibold text-brand" : "text-ink-faint"}`}>
+          {lead.phone.confirmed ? "WhatsApp cadastrado pelo próprio comércio" : "Número tirado do mapa"}
+          {lead.phone.raw && ` (${lead.phone.raw})`}
+          {lead.updatedYear ? `, dados de ${lead.updatedYear}` : ""}.
+          {stale && " Pode ser antigo: confira no Google antes de mandar."}
+        </p>
+      )}
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
         <select

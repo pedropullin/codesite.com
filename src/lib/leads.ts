@@ -181,7 +181,7 @@ ${areas}
 (
 ${clauses}
 );
-out center tags 3000;`;
+out center meta 3000;`;
 }
 
 const ENDPOINTS = ["https://overpass-api.de/api/interpreter", "https://overpass.kumi.systems/api/interpreter"];
@@ -193,6 +193,7 @@ export type OsmElement = {
   lon?: number;
   center?: { lat: number; lon: number };
   tags?: Record<string, string>;
+  timestamp?: string;
 };
 
 export async function fetchOsm(query: string, signal?: AbortSignal): Promise<OsmElement[]> {
@@ -215,7 +216,8 @@ export async function fetchOsm(query: string, signal?: AbortSignal): Promise<Osm
   throw lastError;
 }
 
-export type Phone = { display: string; whatsapp: string | null; tel: string };
+// `raw` is the number exactly as written on the map; `confirmed` means the place tagged it as WhatsApp.
+export type Phone = { display: string; whatsapp: string | null; tel: string; raw?: string; confirmed?: boolean };
 
 // Brazilian numbers: DDD (2 digits) + 8-digit landline or 9-digit mobile starting with 9.
 export function parsePhone(raw: string | undefined, fallbackDdd: string, forceWhatsapp = false): Phone | null {
@@ -235,6 +237,8 @@ export function parsePhone(raw: string | undefined, fallbackDdd: string, forceWh
     display,
     whatsapp: mobile || forceWhatsapp ? `55${ddd}${num}` : null,
     tel: `+55${ddd}${num}`,
+    raw: raw.trim(),
+    confirmed: forceWhatsapp,
   };
 }
 
@@ -271,7 +275,10 @@ export type Lead = {
   lon: number | null;
   score: number;
   reasons: string[];
+  updatedYear?: number | null;
 };
+
+export const STALE_YEARS = 5;
 
 const KIND_LABELS: Record<string, string> = {
   restaurant: "Restaurante", cafe: "Café", bar: "Bar", fast_food: "Lanchonete", pub: "Pub", ice_cream: "Sorveteria",
@@ -353,7 +360,8 @@ export function toLead(el: OsmElement, ddd: string): Lead | null {
 
   const reasons: string[] = ["Sem site"];
   let score = 30;
-  if (phone?.whatsapp) { score += 35; reasons.push("Tem WhatsApp"); }
+  if (phone?.whatsapp && phone.confirmed) { score += 35; reasons.push("WhatsApp confirmado"); }
+  else if (phone?.whatsapp) { score += 30; reasons.push("Celular do mapa"); }
   else if (phone) { score += 20; reasons.push("Tem telefone"); }
   if (instagram || facebook) { score += 10; reasons.push("Ativo nas redes, sem site"); }
   if (t.opening_hours) { score += 5; reasons.push("Horário cadastrado"); }
@@ -362,6 +370,14 @@ export function toLead(el: OsmElement, ddd: string): Lead | null {
   const weight = categoryById(cls.category).weight;
   score += weight;
   if (weight >= 15) reasons.push("Nicho com portfólio");
+
+  // Old map entries often carry numbers that now belong to someone else.
+  const updatedYear = el.timestamp ? new Date(el.timestamp).getFullYear() : null;
+  if (updatedYear) {
+    const age = new Date().getFullYear() - updatedYear;
+    if (age >= STALE_YEARS) { score -= 20; reasons.push(`Dados de ${updatedYear}`); }
+    else if (age <= 2) { score += 5; reasons.push(`Atualizado em ${updatedYear}`); }
+  }
 
   return {
     id: `${el.type}/${el.id}`,
@@ -378,8 +394,9 @@ export function toLead(el: OsmElement, ddd: string): Lead | null {
     hours: t.opening_hours ?? null,
     lat: el.lat ?? el.center?.lat ?? null,
     lon: el.lon ?? el.center?.lon ?? null,
-    score: Math.min(100, score),
+    score: Math.max(0, Math.min(100, score)),
     reasons,
+    updatedYear,
   };
 }
 
