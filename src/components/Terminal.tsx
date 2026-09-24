@@ -202,13 +202,13 @@ export default function Terminal() {
   return (
     <section id="terminal" className="relative bg-ink py-24 text-paper grid-bg-dark md:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <Reveal>
+        <Reveal className="text-center">
           <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
             Fale com a gente
             <br />
             <span className="text-brand">em código.</span>
           </h2>
-          <p className="mt-6 max-w-md leading-relaxed text-paper/60">
+          <p className="mx-auto mt-6 max-w-md leading-relaxed text-paper/60">
             Um terminal de verdade: digite um comando e ele executa. Experimente <code className="text-paper">whatsapp</code>,{" "}
             <code className="text-paper">projetos</code> ou <code className="text-paper">discord</code>.
           </p>

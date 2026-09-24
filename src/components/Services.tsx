@@ -82,7 +82,7 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 export default function Services() {
   return (
     <section id="servicos" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-      <Reveal className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <Reveal className="mb-14 flex flex-col items-center gap-6 text-center">
         <div>
           <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
             Do design
@@ -90,7 +90,7 @@ export default function Services() {
             ao deploy.
           </h2>
         </div>
-        <p className="max-w-sm leading-relaxed text-ink-soft">
+        <p className="max-w-md leading-relaxed text-ink-soft">
           Um só time cuida de tudo: estratégia, interface, código e publicação. Você acompanha cada etapa.
         </p>
       </Reveal>

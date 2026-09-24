@@ -20,7 +20,7 @@ export default function Work() {
   return (
     <section id="trabalhos" className="border-t border-line bg-bg-soft py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
-        <Reveal className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <Reveal className="mb-14 flex flex-col items-center gap-6 text-center">
           <div>
             <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
               Projetos
@@ -28,7 +28,7 @@ export default function Work() {
               no ar.
             </h2>
           </div>
-          <p className="max-w-sm leading-relaxed text-ink-soft">
+          <p className="max-w-md leading-relaxed text-ink-soft">
             Cada projeto é feito do zero, com identidade própria. Clique e veja funcionando.
           </p>
         </Reveal>

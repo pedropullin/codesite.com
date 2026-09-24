@@ -26,7 +26,7 @@ const STEPS = [
 export default function Process() {
   return (
     <section id="processo" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-      <Reveal className="mb-14">
+      <Reveal className="mb-14 text-center">
         <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
           Quatro commits
           <br />
