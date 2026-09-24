@@ -242,7 +242,16 @@ export default function LeadFinder() {
               </div>
 
               <fieldset className="mt-4">
-                <legend className="text-xs font-semibold text-ink-soft">O que procurar</legend>
+                <legend className="flex w-full items-center justify-between text-xs font-semibold text-ink-soft">
+                  O que procurar
+                  <button
+                    type="button"
+                    onClick={() => setCats(cats.length === CATEGORIES.length ? [] : CATEGORIES.map((c) => c.id))}
+                    className="font-semibold text-brand"
+                  >
+                    {cats.length === CATEGORIES.length ? "Limpar" : "Marcar todos"}
+                  </button>
+                </legend>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {CATEGORIES.map((c) => {
                     const on = cats.includes(c.id);
@@ -263,6 +272,11 @@ export default function LeadFinder() {
                 </div>
               </fieldset>
 
+              {cats.length > 6 && (
+                <p className="mt-3 text-xs text-ink-faint">
+                  Com muitos ramos marcados a busca pode levar até 2 minutos e mostra no máximo 3.000 comércios.
+                </p>
+              )}
               <button
                 type="button"
                 onClick={search}
