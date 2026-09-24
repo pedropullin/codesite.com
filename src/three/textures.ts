@@ -124,8 +124,8 @@ function field(size: number, fn: (u: number, v: number) => number) {
 }
 
 export type TextureQuality = "high" | "medium" | "low";
-const sizeFor = (q: TextureQuality, high = 512) =>
-  q === "high" ? high : q === "medium" ? high / 2 : high / 4;
+const sizeFor = (q: TextureQuality, high = 768) =>
+  q === "high" ? high : q === "medium" ? high / 1.5 : high / 3;
 
 /** Cotton jersey: fine knit columns + soft irregularity. */
 export function fabricNormal(q: TextureQuality = "high", repeat = 6) {

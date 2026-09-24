@@ -22,8 +22,11 @@ export function detectDeviceTier(): DeviceTier {
   const cores = nav.hardwareConcurrency ?? 8;
   const coarse = window.matchMedia("(pointer: coarse)").matches;
   const width = window.innerWidth;
+  // Only genuinely weak hardware gets the stripped-down tier — a modern
+  // phone should render at "medium" (full textures, antialiasing, near-native
+  // pixel ratio), not the software-fallback quality.
   if (memory <= 2 || cores <= 2) return "low";
-  if (coarse && width < 768) return "low";
+  if (coarse && width < 380 && memory <= 3) return "low";
   if (coarse || width < 1100 || memory <= 4) return "medium";
   return "high";
 }

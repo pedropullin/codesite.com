@@ -34,7 +34,7 @@ const FOV = 30;
 
 export default function VaultScene(props: SceneProps) {
   const { tier, active } = props;
-  const maxDpr = tier === "high" ? 1.75 : tier === "medium" ? 1.5 : 1.25;
+  const maxDpr = tier === "high" ? 2.5 : tier === "medium" ? 2 : 1.5;
   const [dpr, setDpr] = useState<number>(() => Math.min(maxDpr, typeof window !== "undefined" ? window.devicePixelRatio : 1));
 
   return (
@@ -42,7 +42,7 @@ export default function VaultScene(props: SceneProps) {
       className="!absolute inset-0"
       dpr={dpr}
       frameloop={active ? "always" : "never"}
-      gl={{ antialias: tier !== "low", alpha: true, powerPreference: "high-performance", stencil: false }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance", stencil: false }}
       camera={{ fov: FOV, position: [0, 1.4, 6.0], near: 0.1, far: 60 }}
       shadows={false}
       onCreated={({ gl }) => {
@@ -307,7 +307,7 @@ function Experience({ progress, tier, cardTarget, reducedMotion, onReady }: Scen
     });
   });
 
-  const shadowRes = tier === "high" ? 512 : tier === "medium" ? 256 : 0;
+  const shadowRes = tier === "high" ? 768 : tier === "medium" ? 384 : 0;
 
   return (
     <>
