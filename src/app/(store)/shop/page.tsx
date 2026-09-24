@@ -49,12 +49,12 @@ export default async function ShopPage(props: PageProps<"/shop">) {
       <div className="min-h-dvh bg-paper text-ink">
         <ShopTransition>
           <div className="mx-auto max-w-[1600px] px-5 pb-32 pt-32 md:px-10 md:pt-40">
-            <div className="grid gap-6 pb-10 md:grid-cols-12 md:items-end md:pb-14">
-              <div className="md:col-span-8">
+            <div className="flex flex-col gap-6 pb-10 md:pb-14">
+              <div className="min-w-0">
                 <p className="label text-ink/50">Shop — {String(products.length).padStart(2, "0")} {products.length === 1 ? "piece" : "pieces"}</p>
                 <h1 className="display-xl mt-5">{title}</h1>
               </div>
-              <p className="text-sm leading-relaxed text-ink/60 md:col-span-4">
+              <p className="max-w-sm text-sm leading-relaxed text-ink/60 md:self-end">
                 {current?.description ?? "O arquivo completo da Vault Association. Peças numeradas, produção limitada e sem reposição garantida."}
               </p>
             </div>

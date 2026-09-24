@@ -97,7 +97,44 @@ export function ProductsManager({ products, categories }: { products: AdminProdu
             action={<Button size="sm" onClick={() => openEditor("new")}><Plus /> Novo produto</Button>}
           />
         ) : (
-          <div className="overflow-x-auto">
+          <>
+          <ul className="divide-y divide-border md:hidden">
+            {optimistic.map((p) => (
+              <li key={p.id} className={cn("px-4 py-3", !p.active && "opacity-60")}>
+                <div className="flex items-start gap-3">
+                  <button type="button" onClick={() => openEditor(p)} className="relative h-14 w-11 shrink-0 overflow-hidden rounded-md bg-[#ecebe6]" aria-label={`Editar ${p.name}`}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    {p.images[0] && <img src={p.images[0]} alt="" className="h-full w-full object-contain p-0.5" loading="lazy" />}
+                  </button>
+                  <div className="min-w-0 flex-1">
+                    <button type="button" onClick={() => openEditor(p)} className="block max-w-full truncate text-left text-sm font-medium">{p.name}</button>
+                    <p className="truncate text-xs text-muted-foreground">{p.sku} · {p.categoryName ?? "Sem categoria"}</p>
+                    <div className="mt-1 flex items-center gap-2 text-xs">
+                      <span className="font-medium tabular-nums">{formatPrice(p.salePrice ?? p.price)}</span>
+                      <button type="button" onClick={() => setStockFor(p)} className="tabular-nums">
+                        {p.stock <= 0 ? <Badge tone="danger">Esgotado</Badge> : <Badge tone={p.variants.some((v) => v.stock > 0 && v.stock <= 3) ? "warning" : "neutral"}>{p.stock} un.</Badge>}
+                      </button>
+                      <span className="text-muted-foreground">{p.sold} vendidos</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center justify-between">
+                  <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                    <label className="flex items-center gap-1.5"><Switch size="sm" checked={p.active} onChange={(v) => toggle(p, "active", v)} label={`Ativar ${p.name}`} /> Ativo</label>
+                    <label className="flex items-center gap-1.5"><Switch size="sm" checked={p.isNew} onChange={(v) => toggle(p, "isNew", v)} label={`Novidade ${p.name}`} /> Novo</label>
+                    <button type="button" aria-pressed={p.featured} aria-label={`Destacar ${p.name}`} onClick={() => toggle(p, "featured", !p.featured)} className={cn("flex items-center gap-1", p.featured ? "text-foreground" : "")}>
+                      <Star className="h-4 w-4" fill={p.featured ? "currentColor" : "none"} /> Destaque
+                    </button>
+                  </div>
+                  <div className="flex">
+                    <IconBtn label="Duplicar" onClick={async () => { const res = await duplicateProductAction(p.id); toast({ title: res.ok ? res.message ?? "Duplicado" : res.error, tone: res.ok ? "success" : "error" }); refresh(); }}><Copy /></IconBtn>
+                    <IconBtn label="Excluir" danger onClick={() => setDeleting(p)}><Trash2 /></IconBtn>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="hidden overflow-x-auto md:block">
             <table className="w-full min-w-[900px] text-sm">
               <thead className="border-b border-border text-left text-xs text-muted-foreground">
                 <tr>
@@ -176,6 +213,7 @@ export function ProductsManager({ products, categories }: { products: AdminProdu
               </tbody>
             </table>
           </div>
+          </>
         )}
       </Card>
 

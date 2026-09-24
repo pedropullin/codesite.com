@@ -34,7 +34,26 @@ export default async function CustomersPage(props: PageProps<"/admin/customers">
         {data.rows.length === 0 ? (
           <EmptyState title="Nenhum cliente encontrado" description={q ? "Tente outro termo de busca." : "Clientes são criados automaticamente no primeiro pedido."} />
         ) : (
-          <div className="overflow-x-auto">
+          <>
+          <ul className="divide-y divide-border md:hidden">
+            {data.rows.map((c) => (
+              <li key={c.id}>
+                <Link href={`/admin/customers/${c.id}`} className="block px-4 py-3 active:bg-muted/60">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-medium">{c.name}</p>
+                      <p className="truncate text-xs text-muted-foreground">{c.email}</p>
+                    </div>
+                    <p className="shrink-0 text-sm font-semibold tabular-nums">{formatPrice(c.spent)}</p>
+                  </div>
+                  <p className="mt-1.5 text-xs text-muted-foreground">
+                    {c.orderCount} {c.orderCount === 1 ? "pedido" : "pedidos"} · última compra {c.lastOrder ? formatDate(c.lastOrder) : "—"}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="hidden overflow-x-auto md:block">
             <table className="w-full min-w-[860px] text-sm">
               <thead className="border-b border-border text-left text-xs text-muted-foreground">
                 <tr>
@@ -69,6 +88,7 @@ export default async function CustomersPage(props: PageProps<"/admin/customers">
               </tbody>
             </table>
           </div>
+          </>
         )}
         {pages > 1 && (
           <div className="flex items-center justify-between border-t border-border px-4 py-3 text-xs text-muted-foreground">

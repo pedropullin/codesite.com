@@ -47,10 +47,10 @@ export function Footer({ settings, categories }: { settings: StoreSettings; cate
               <li><Link href="/shop?filter=new" className="opacity-80 hover:opacity-100">Novidades</Link></li>
             </ul>
           </div>
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <p className="label-sm text-steel">Contato</p>
             <ul className="mt-5 space-y-3 text-sm">
-              {contact.email && <li><a href={`mailto:${contact.email}`} className="break-all opacity-80 hover:opacity-100">{contact.email}</a></li>}
+              {contact.email && <li><a href={`mailto:${contact.email}`} className="break-words opacity-80 hover:opacity-100">{contact.email}</a></li>}
               {contact.phone && <li className="opacity-80">{contact.phone}</li>}
               {contact.address && <li className="opacity-60">{contact.address}</li>}
               {contact.hours && <li className="opacity-60">{contact.hours}</li>}
@@ -80,11 +80,22 @@ export function Footer({ settings, categories }: { settings: StoreSettings; cate
         </div>
       </div>
 
-      <div aria-hidden className="pointer-events-none select-none px-3 pb-3 md:px-6">
-        <p className="font-display whitespace-nowrap text-center uppercase leading-[0.78] tracking-[-0.04em] text-bone" style={{ fontSize: "clamp(3rem, 12.4vw, 15rem)" }}>
-          {first}
-          <span className="text-graphite-3"> {rest.join(" ")}</span>
-        </p>
+      {/* Full-bleed wordmark: SVG text stretched to exactly the available width. */}
+      <div aria-hidden className="pointer-events-none select-none px-3 pb-4 md:px-6 md:pb-6">
+        <svg viewBox="0 0 1000 58" className="block h-auto w-full" preserveAspectRatio="xMidYMax meet">
+          <text
+            x="0"
+            y="56"
+            textLength="1000"
+            lengthAdjust="spacingAndGlyphs"
+            fontSize="76.7"
+            className="font-display uppercase"
+            style={{ fontVariationSettings: '"wdth" 125', fontWeight: 500 }}
+          >
+            <tspan fill="#ecebe6">{first}</tspan>
+            <tspan fill="#2e2e32">{rest.length ? ` ${rest.join(" ")}` : ""}</tspan>
+          </text>
+        </svg>
       </div>
     </footer>
   );

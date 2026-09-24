@@ -33,12 +33,12 @@ export function CollectionSection({ products, title, intro, label }: { products:
   return (
     <section id="collection" className="relative scroll-mt-10 bg-bone pb-32 pt-28 text-ink md:pb-48 md:pt-40">
       <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-        <div className="grid gap-8 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-8">
+        <div className="flex flex-col gap-8">
+          <div className="min-w-0">
             <p className="label text-ink/50">{label} — {String(products.length).padStart(2, "0")} pieces</p>
             <TextReveal as="h2" text={title} className="display-xl mt-6 block" />
           </div>
-          <Reveal className="md:col-span-3 md:col-start-10" delay={0.2}>
+          <Reveal className="max-w-sm md:self-end" delay={0.2}>
             <p className="text-sm leading-relaxed text-ink/60">{intro}</p>
           </Reveal>
         </div>

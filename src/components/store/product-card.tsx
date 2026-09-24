@@ -140,14 +140,14 @@ export function ProductCard({
       ) : (
         image
       )}
-      <div className={cn("mt-4 flex items-start justify-between gap-4", tone === "light" ? "text-ink" : "text-bone")}>
+      <div className={cn("mt-4 flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between lg:gap-4", tone === "light" ? "text-ink" : "text-bone")}>
         <div className="min-w-0">
-          <p className="truncate text-[13px] uppercase tracking-[0.08em]">{product.name}</p>
+          <p className="line-clamp-2 text-[12px] uppercase leading-snug tracking-[0.08em] sm:text-[13px] lg:line-clamp-1">{product.name}</p>
           <p className="label-sm mt-1.5 opacity-50">{product.category?.name ?? "—"}</p>
         </div>
-        <div className="shrink-0 text-right">
-          <PriceTag price={product.price} salePrice={product.salePrice} className="text-[13px]" />
-          <StatusBadge status={product.status} className="mt-1.5 flex justify-end opacity-60" />
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 lg:block lg:shrink-0 lg:text-right">
+          <PriceTag price={product.price} salePrice={product.salePrice} className="text-[12px] sm:text-[13px]" />
+          <StatusBadge status={product.status} className="opacity-60 lg:mt-1.5 lg:flex lg:justify-end" />
         </div>
       </div>
     </Link>

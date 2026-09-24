@@ -20,12 +20,12 @@ export function CatalogPreview({ products, categories, title, intro }: { product
     <section ref={section} className="relative bg-ink" aria-label={title}>
       <motion.div className="bg-paper pb-28 pt-24 text-ink md:pb-40 md:pt-36" style={{ clipPath: clip }}>
         <div className="mx-auto max-w-[1600px] px-5 md:px-10">
-          <div className="grid gap-8 md:grid-cols-12 md:items-end">
-            <div className="md:col-span-7">
+          <div className="flex flex-col gap-8">
+            <div className="min-w-0">
               <p className="label text-ink/50">Archive — Complete</p>
               <TextReveal as="h2" text={title} className="display-xl mt-6 block" />
             </div>
-            <Reveal className="md:col-span-4 md:col-start-9" delay={0.15}>
+            <Reveal className="max-w-sm md:self-end" delay={0.15}>
               <p className="text-sm leading-relaxed text-ink/60">{intro}</p>
             </Reveal>
           </div>

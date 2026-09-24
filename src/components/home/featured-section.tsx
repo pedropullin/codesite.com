@@ -48,16 +48,16 @@ export function FeaturedSection({ product, label, image }: { product: ProductDet
           <p className="label-sm text-steel">{product.sku}</p>
         </div>
 
-        <motion.div className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-[6vw]" style={{ x, rotate, scale, opacity: imgOpacity }}>
-          <div className="relative h-[46svh] w-[92vw] md:h-[72svh] md:w-[64vw]">
-            {src && <Image src={src} alt={product.name} fill sizes="(max-width: 768px) 92vw, 64vw" className="object-contain drop-shadow-[0_60px_60px_rgba(0,0,0,0.55)]" />}
+        <motion.div className="absolute inset-0 flex items-start justify-center pt-[14svh] lg:items-center lg:justify-end lg:pr-[6vw] lg:pt-0" style={{ x, rotate, scale, opacity: imgOpacity }}>
+          <div className="relative h-[40svh] w-[92vw] lg:h-[72svh] lg:w-[60vw]">
+            {src && <Image src={src} alt={product.name} fill sizes="(max-width: 1024px) 92vw, 60vw" className="object-contain drop-shadow-[0_60px_60px_rgba(0,0,0,0.55)]" />}
           </div>
         </motion.div>
 
-        <div className="absolute inset-x-0 bottom-0 px-5 pb-10 md:inset-y-0 md:left-0 md:right-auto md:flex md:w-[38vw] md:flex-col md:justify-center md:pb-0 md:pl-10">
+        <div className="absolute inset-x-0 bottom-0 px-5 pb-10 md:px-10 lg:inset-y-0 lg:left-0 lg:right-auto lg:flex lg:w-[36vw] lg:flex-col lg:justify-center lg:pb-0 lg:pr-0">
           <motion.p className="label-sm text-steel" style={{ opacity: t1, y: y1 }}>{product.category?.name} — {product.label ?? "Archive"}</motion.p>
           <motion.h2 className="display-lg mt-4" style={{ opacity: t1, y: y1 }}>{product.name}</motion.h2>
-          <motion.p className="mt-6 hidden max-w-sm text-sm leading-relaxed text-bone/65 md:block" style={{ opacity: t2, y: y2 }}>{product.description}</motion.p>
+          <motion.p className="mt-6 hidden max-w-md text-sm leading-relaxed text-bone/65 md:block" style={{ opacity: t2, y: y2 }}>{product.description}</motion.p>
           <motion.ul className="mt-6 hidden space-y-2 md:block" style={{ opacity: t3, y: y3 }}>
             {product.details.slice(0, 3).map((d) => (
               <li key={d} className="label-sm flex items-center gap-3 text-bone/70"><span className="h-px w-4 chrome-line" />{d}</li>
