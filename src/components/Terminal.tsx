@@ -105,7 +105,7 @@ function run(raw: string): { output: ReactNode; kind?: "out" | "err"; clear?: bo
         <ul className="space-y-1">
           {projects.map((p) => (
             <li key={p.name}>
-              <span className="text-paper/40">{p.index}</span> <ExtLink href={p.url}>{p.name}</ExtLink>{" "}
+              <ExtLink href={p.url}>{p.name}</ExtLink>{" "}
               <span className="text-paper/50">— {p.category}</span>
             </li>
           ))}
@@ -204,7 +204,6 @@ export default function Terminal() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <Reveal>
           <span className="mb-6 inline-flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.24em] text-paper/60">
-            <span className="h-px w-6 bg-brand" />
             Interativo
           </span>
           <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">

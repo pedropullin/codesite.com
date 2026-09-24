@@ -85,7 +85,7 @@ export default function Navbar() {
         aria-hidden={!open}
       >
         <ul className="flex flex-col gap-2">
-          {navLinks.map((l, i) => (
+          {navLinks.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
@@ -93,7 +93,6 @@ export default function Navbar() {
                 tabIndex={open ? 0 : -1}
                 className="flex items-baseline gap-4 border-b border-line py-4 font-display text-4xl font-bold uppercase tracking-tight"
               >
-                <span className="font-mono text-xs font-normal text-ink-faint">0{i + 1}</span>
                 {l.label}
               </a>
             </li>

@@ -23,7 +23,6 @@ export default function Work() {
         <Reveal className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <span className="mb-6 inline-flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink-soft">
-              <span className="h-px w-6 bg-brand" />
               Trabalhos
             </span>
             <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
@@ -75,8 +74,7 @@ export default function Work() {
                 </div>
 
                 <div className="flex flex-col p-7 md:p-10">
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="font-mono text-xs text-ink-faint">{p.index}</span>
+                  <div className="flex items-start justify-end gap-4">
                     <span className="flex h-11 w-11 items-center justify-center rounded-full border border-line transition-colors duration-300 group-hover:border-brand group-hover:bg-brand group-hover:text-paper">
                       <ArrowUpRight className="h-4 w-4" />
                     </span>

@@ -85,7 +85,6 @@ export default function Services() {
       <Reveal className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div>
           <span className="mb-6 inline-flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink-soft">
-            <span className="h-px w-6 bg-brand" />
             Serviços
           </span>
           <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
@@ -104,8 +103,7 @@ export default function Services() {
           <Reveal key={s.code} delay={i * 70}>
             <TiltCard>
               <div className="relative flex h-full flex-col" style={{ transform: "translateZ(30px)" }}>
-                <div className="mb-10 flex items-center justify-between">
-                  <span className="font-mono text-xs text-ink-faint">/{s.code}</span>
+                <div className="mb-10 flex items-center justify-end">
                   <span className="font-mono text-lg text-brand transition-transform duration-300 group-hover:rotate-12">
                     {"{ }"}
                   </span>
