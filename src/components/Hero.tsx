@@ -17,9 +17,6 @@ export default function Hero() {
     <section id="topo" className="relative overflow-hidden grid-bg">
       <div className="mx-auto grid min-h-[100svh] max-w-7xl grid-cols-1 items-center gap-6 px-5 pt-24 pb-10 md:px-10 lg:grid-cols-[1.02fr_1fr] lg:gap-4 lg:pt-20">
         <div className="relative z-10 flex flex-col">
-          <span className="mb-7 inline-flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink-soft">
-            Estúdio de criação digital
-          </span>
 
           <h1 className="font-display text-[12.4vw] font-bold uppercase leading-[0.88] tracking-[-0.04em] sm:text-[10vw] lg:text-[5.4rem] xl:text-[6.2rem]">
             Código

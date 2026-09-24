@@ -203,9 +203,6 @@ export default function Terminal() {
     <section id="terminal" className="relative bg-ink py-24 text-paper grid-bg-dark md:py-32">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <Reveal>
-          <span className="mb-6 inline-flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.24em] text-paper/60">
-            Interativo
-          </span>
           <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
             Fale com a gente
             <br />

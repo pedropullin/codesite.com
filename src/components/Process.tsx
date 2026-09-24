@@ -27,9 +27,6 @@ export default function Process() {
   return (
     <section id="processo" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
       <Reveal className="mb-14">
-        <span className="mb-6 inline-flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink-soft">
-          Processo
-        </span>
         <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
           Quatro commits
           <br />

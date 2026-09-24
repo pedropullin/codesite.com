@@ -48,9 +48,6 @@ export default function Contact() {
     <section id="contato" className="relative overflow-hidden border-t border-line py-24 grid-bg md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <Reveal className="text-center">
-          <span className="mb-6 inline-flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink-soft">
-            Tem um projeto?
-          </span>
           <h2 className="mx-auto max-w-5xl font-display text-[13vw] font-bold uppercase leading-[0.9] tracking-[-0.035em] sm:text-[9vw] lg:text-[7.2rem]">
             Vamos tirar
             <br />

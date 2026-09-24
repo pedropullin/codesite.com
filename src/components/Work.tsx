@@ -22,9 +22,6 @@ export default function Work() {
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <Reveal className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <span className="mb-6 inline-flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.24em] text-ink-soft">
-              Trabalhos
-            </span>
             <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
               Projetos
               <br />
