@@ -8,7 +8,7 @@ import { social, socials, type SocialId } from "@/lib/site";
 type Line = { id: number; kind: "in" | "out" | "err"; content: ReactNode };
 
 const PROMPT = "visitante@codesite:~$";
-const SHORTCUTS = ["help", "servicos", "projetos", "whatsapp", "instagram", "discord", "github", "email"];
+const SHORTCUTS = ["help", "servicos", "projetos", "whatsapp", "instagram", "discord", "tiktok", "email"];
 
 const LINK_COMMANDS: Record<string, SocialId> = {
   whatsapp: "whatsapp",
@@ -16,8 +16,7 @@ const LINK_COMMANDS: Record<string, SocialId> = {
   instagram: "instagram",
   insta: "instagram",
   discord: "discord",
-  github: "github",
-  git: "github",
+  tiktok: "tiktok",
   email: "email",
   "e-mail": "email",
   linkedin: "linkedin",
@@ -63,7 +62,7 @@ function run(raw: string): { output: ReactNode; kind?: "out" | "err"; clear?: bo
             ["whatsapp", "abre uma conversa agora"],
             ["instagram", "abre o @codesite0"],
             ["discord", "entra no servidor"],
-            ["github", "abre o GitHub"],
+            ["tiktok", "abre o @code.site0"],
             ["email", "escreve um e-mail"],
             ["clear", "limpa o terminal"],
           ].map(([c, d]) => (

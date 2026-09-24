@@ -30,7 +30,7 @@ export type SocialId =
   | "whatsapp"
   | "instagram"
   | "discord"
-  | "github"
+  | "tiktok"
   | "email"
   | "linkedin";
 
@@ -61,10 +61,10 @@ export const socials: Social[] = [
     href: "https://discord.gg/2FMESJpwhA",
   },
   {
-    id: "github",
-    label: "GitHub",
-    handle: "@pedropullin",
-    href: "https://github.com/pedropullin",
+    id: "tiktok",
+    label: "TikTok",
+    handle: "@code.site0",
+    href: "https://www.tiktok.com/@code.site0",
   },
   {
     id: "email",

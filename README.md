@@ -11,7 +11,7 @@ npm run build   # build de produção
 
 ## Onde mudar as coisas
 
-- **Links e contato** (WhatsApp, Instagram, Discord, GitHub, e-mail, LinkedIn): `src/lib/site.ts`
+- **Links e contato** (WhatsApp, Instagram, TikTok, Discord, e-mail, LinkedIn): `src/lib/site.ts`
 - **Projetos do portfólio**: `src/lib/projects.ts`
 - **Cores** (mesma paleta do site original): variáveis no topo de `src/app/globals.css`
 - **Cena 3D do topo**: `src/components/three/CodeScene.tsx`
