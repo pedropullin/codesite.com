@@ -11,7 +11,7 @@ export const site = {
   description:
     "CODE SITE é um estúdio de criação digital especializado em web design, desenvolvimento e experiências interativas de alto nível.",
   url: "https://codesite.online",
-  email: "hello@codesite.studio",
+  email: "codesite62@gmail.com",
   phoneDisplay: "+55 41 98430-3059",
   whatsappNumber: WHATSAPP_NUMBER,
 };
