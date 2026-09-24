@@ -7,7 +7,6 @@ import { social, socials, type SocialId } from "@/lib/site";
 
 type Line = { id: number; kind: "in" | "out" | "err"; content: ReactNode };
 
-const PROMPT = "visitante@codesite:~$";
 const SHORTCUTS = ["help", "servicos", "projetos", "whatsapp", "instagram", "discord", "tiktok", "email"];
 
 const LINK_COMMANDS: Record<string, SocialId> = {
@@ -21,6 +20,14 @@ const LINK_COMMANDS: Record<string, SocialId> = {
   "e-mail": "email",
   linkedin: "linkedin",
 };
+
+function Prompt() {
+  return (
+    <span className="text-[#5ee39a]">
+      <span className="hidden sm:inline">visitante@codesite:</span>~$
+    </span>
+  );
+}
 
 function openSocial(id: SocialId) {
   const s = social(id);
@@ -113,7 +120,7 @@ function run(raw: string): { output: ReactNode; kind?: "out" | "err"; clear?: bo
         <ul className="space-y-1">
           {socials.map((s) => (
             <li key={s.id}>
-              <span className="inline-block w-24 text-paper/50">{s.label}</span>
+              <span className="inline-block w-20 text-paper/50 sm:w-24">{s.label}</span>
               <ExtLink href={s.href}>{s.handle}</ExtLink>
             </li>
           ))}
@@ -194,7 +201,7 @@ export default function Terminal() {
 
   return (
     <section id="terminal" className="relative bg-ink py-24 text-paper grid-bg-dark md:py-32">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <Reveal>
           <span className="mb-6 inline-flex items-center gap-2.5 font-mono text-[0.7rem] font-medium uppercase tracking-[0.24em] text-paper/60">
             <span className="h-px w-6 bg-brand" />
@@ -225,14 +232,14 @@ export default function Terminal() {
 
             <div
               ref={body}
-              className="h-[320px] overflow-y-auto px-5 py-4 font-mono text-[0.82rem] leading-relaxed md:h-[360px]"
+              className="h-[320px] overflow-y-auto px-4 py-4 font-mono text-[0.8rem] leading-relaxed wrap-anywhere sm:px-5 sm:text-[0.82rem] md:h-[360px]"
               aria-live="polite"
             >
               {lines.map((l) => (
                 <div key={l.id} className="mb-1.5">
                   {l.kind === "in" ? (
                     <span>
-                      <span className="text-[#5ee39a]">{PROMPT}</span> <span className="text-paper">{l.content}</span>
+                      <Prompt /> <span className="text-paper">{l.content}</span>
                     </span>
                   ) : (
                     <div className={l.kind === "err" ? "text-[#ff8a80]" : "text-paper/80"}>{l.content}</div>
@@ -241,8 +248,8 @@ export default function Terminal() {
               ))}
 
               <form onSubmit={onSubmit} className="flex items-center gap-2">
-                <label htmlFor="terminal-input" className="shrink-0 text-[#5ee39a]">
-                  {PROMPT}
+                <label htmlFor="terminal-input" className="shrink-0">
+                  <Prompt />
                 </label>
                 <input
                   id="terminal-input"
@@ -254,7 +261,7 @@ export default function Terminal() {
                   autoCapitalize="off"
                   spellCheck={false}
                   enterKeyHint="send"
-                  className="min-w-0 flex-1 bg-transparent text-paper caret-[#8fa0ff] outline-none"
+                  className="w-0 min-w-0 flex-1 bg-transparent text-paper caret-[#8fa0ff] outline-none"
                   aria-label="Digite um comando"
                 />
               </form>
