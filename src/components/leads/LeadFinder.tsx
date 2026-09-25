@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import type { Sync } from "@/lib/cloud";
 import { CodeSiteMark, InstagramIcon, WhatsAppIcon } from "@/components/icons";
 import {
   CATEGORIES,
@@ -29,6 +30,9 @@ const SETTINGS_KEY = "codesite-leads-settings";
 
 type Settings = { sender: string; city: string; ddd: string };
 const DEFAULT_SETTINGS: Settings = { sender: "Pedro", city: "Curitiba", ddd: "41" };
+
+// Only ever called from event handlers.
+const stamp = () => Date.now();
 
 function load<T>(key: string, fallback: T): T {
   try {
@@ -59,7 +63,14 @@ const STATUS_STYLES: Record<Status, string> = {
   descartado: "border-line text-ink-faint line-through",
 };
 
-export default function LeadFinder() {
+type Props = {
+  sync?: Sync;
+  brand?: ReactNode;
+  account?: { email: string; onSignOut: () => void };
+  notice?: ReactNode;
+};
+
+export default function LeadFinder({ sync, brand, account, notice }: Props = {}) {
   const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
   const [tracked, setTracked] = useState<Record<string, Tracked>>({});
   const [ready, setReady] = useState(false);
@@ -84,9 +95,25 @@ export default function LeadFinder() {
     // localStorage only exists in the browser, so state hydrates after mount.
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSettings(load(SETTINGS_KEY, DEFAULT_SETTINGS));
-    setTracked(load(TRACK_KEY, {}));
+    const local = load<Record<string, Tracked>>(TRACK_KEY, {});
+    setTracked(local);
     setReady(true);
-  }, []);
+    if (!sync) return;
+    // Merge with the cloud copy: newest edit wins, and anything newer locally is pushed up.
+    sync
+      .load()
+      .then((remote) => {
+        const merged = { ...remote };
+        for (const [id, entry] of Object.entries(local)) {
+          if (!remote[id] || remote[id].updatedAt < entry.updatedAt) {
+            merged[id] = entry;
+            sync.save(entry);
+          }
+        }
+        setTracked(merged);
+      })
+      .catch((e) => console.error("Falha ao carregar da nuvem", e));
+  }, [sync]);
 
   useEffect(() => {
     if (ready) save(SETTINGS_KEY, settings);
@@ -131,15 +158,22 @@ export default function LeadFinder() {
     }
   };
 
-  const setStatus = (lead: Lead, status: Status) =>
-    setTracked((t) => {
-      const prev = t[lead.id];
-      const contactedAt = status === "contatado" ? (prev?.status === "contatado" && prev.contactedAt ? prev.contactedAt : Date.now()) : prev?.contactedAt;
-      return { ...t, [lead.id]: { lead, note: prev?.note ?? "", status, updatedAt: Date.now(), contactedAt } };
-    });
+  const commit = (entry: Tracked) => {
+    setTracked((t) => ({ ...t, [entry.lead.id]: entry }));
+    sync?.save(entry);
+  };
 
-  const setNote = (lead: Lead, note: string) =>
-    setTracked((t) => ({ ...t, [lead.id]: { ...t[lead.id], lead, status: t[lead.id]?.status ?? "novo", note, updatedAt: Date.now() } }));
+  const setStatus = (lead: Lead, status: Status) => {
+    const prev = tracked[lead.id];
+    const contactedAt =
+      status === "contatado" ? (prev?.status === "contatado" && prev.contactedAt ? prev.contactedAt : stamp()) : prev?.contactedAt;
+    commit({ lead, note: prev?.note ?? "", status, updatedAt: stamp(), contactedAt });
+  };
+
+  const setNote = (lead: Lead, note: string) => {
+    const prev = tracked[lead.id];
+    commit({ ...prev, lead, status: prev?.status ?? "novo", note, updatedAt: stamp() });
+  };
 
   const bairros = useMemo(() => {
     const count = new Map<string, number>();
@@ -193,10 +227,12 @@ export default function LeadFinder() {
     <div className="min-h-[100svh] bg-bg pb-24 text-ink">
       <header className="sticky top-0 z-20 border-b border-line bg-bg/90 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-3">
-          <Link href="/" className="flex items-center gap-2.5 font-display text-lg font-bold">
-            <CodeSiteMark className="h-8 w-8" />
-            Leads
-          </Link>
+          {brand ?? (
+            <Link href="/" className="flex items-center gap-2.5 font-display text-lg font-bold">
+              <CodeSiteMark className="h-8 w-8" />
+              Leads
+            </Link>
+          )}
           <nav className="flex rounded-full border border-line bg-paper p-1 text-sm font-semibold">
             {(["buscar", "funil"] as const).map((t) => (
               <button
@@ -213,6 +249,7 @@ export default function LeadFinder() {
       </header>
 
       <main className="mx-auto max-w-3xl px-4 pt-6">
+        {notice}
         {tab === "buscar" ? (
           <>
             <section className="rounded-3xl border border-line bg-paper p-5">
@@ -469,9 +506,19 @@ export default function LeadFinder() {
                 className="mt-1 w-full rounded-xl border border-line bg-bg px-3 py-2.5 outline-none focus:border-brand"
               />
               <span className="mt-2 block text-xs text-ink-faint">
-                O funil fica salvo neste aparelho. Use &quot;Baixar planilha&quot; para guardar uma cópia.
+                {sync
+                  ? "O funil fica salvo na nuvem e aparece em qualquer aparelho em que você entrar."
+                  : "O funil fica salvo neste aparelho. Use \"Baixar planilha\" para guardar uma cópia."}
               </span>
             </label>
+            {account && (
+              <div className="mt-4 flex items-center justify-between gap-3 rounded-3xl border border-line bg-paper p-5 text-sm">
+                <span className="min-w-0 truncate text-ink-soft">{account.email}</span>
+                <button type="button" onClick={account.onSignOut} className="shrink-0 font-semibold text-brand">
+                  Sair
+                </button>
+              </div>
+            )}
           </>
         )}
       </main>
