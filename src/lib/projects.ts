@@ -1,7 +1,6 @@
-export type ProjectTheme = "ember" | "forest" | "graphite";
+export type ProjectTheme = "electric" | "graphite" | "gold";
 
 export type Project = {
-  index: string;
   name: string;
   category: string;
   description: string;
@@ -12,33 +11,30 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    index: "01",
-    name: "Prime Parrilla",
-    category: "Restaurante · Branding · Web Design",
+    name: "Prospecta.ai",
+    category: "SaaS · Prospecção · CRM",
     description:
-      "Uma experiência digital sofisticada para uma parrilla premium — gastronomia, identidade visual e interface em harmonia.",
-    url: "https://prime-parrilla-cwb.base44.app/",
-    theme: "ember",
-    stack: ["Web Design", "Cardápio digital", "Reservas"],
+      "Plataforma para encontrar empresas em qualquer lugar do mundo, ver quem ainda não tem site e chamar no WhatsApp em um clique, com um CRM para acompanhar cada venda.",
+    url: "https://prospecta-ai-ashy.vercel.app/",
+    theme: "electric",
+    stack: ["SaaS", "Planos", "CRM"],
   },
   {
-    index: "02",
-    name: "Jardim do Bosque",
-    category: "Restaurante · Experiência · Web Design",
+    name: "SAINT AMI",
+    category: "Moda de luxo · Landing page · Encomendas",
     description:
-      "Um refúgio natural no coração de Curitiba, traduzido em uma experiência digital calma e imersiva.",
-    url: "https://jardim-bosque-gastronomia.base44.app/",
-    theme: "forest",
-    stack: ["Experiência", "Galeria", "Eventos"],
-  },
-  {
-    index: "03",
-    name: "Chiseled Edge Barber",
-    category: "Barbearia · Identidade de Marca · Web Design",
-    description:
-      "Precisão e caráter para uma barbearia contemporânea — uma identidade forte com presença digital à altura.",
-    url: "https://chiseled-edge-barber.base44.app/",
+      "Landing para revenda de peças de grife 100% originais, sob encomenda: curadoria por categoria e pedido direto pelo WhatsApp.",
+    url: "https://saintami.vercel.app/",
     theme: "graphite",
-    stack: ["Identidade", "Agendamento", "Landing page"],
+    stack: ["Landing page", "Catálogo", "WhatsApp"],
+  },
+  {
+    name: "GarimpeAI",
+    category: "Plataforma · Inteligência territorial",
+    description:
+      "Dados, mapas e processos organizados para encontrar o que está escondido no território, com monitoramento e alertas de cada área.",
+    url: "https://garimpeai-nine.vercel.app/",
+    theme: "gold",
+    stack: ["Mapas", "Dados", "Monitoramento"],
   },
 ];

@@ -2,14 +2,13 @@ import Reveal from "./Reveal";
 import { ArrowUpRight } from "./icons";
 import { projects, type ProjectTheme } from "@/lib/projects";
 
-// Same themed gradients the original codesite.online used for project cards.
 const THEME: Record<ProjectTheme, string> = {
-  ember:
-    "radial-gradient(circle at 30% 20%, rgba(255,120,60,.35), transparent 55%), radial-gradient(circle at 75% 75%, rgba(255,60,30,.22), transparent 55%), #1a1210",
-  forest:
-    "radial-gradient(circle at 25% 25%, rgba(90,200,140,.28), transparent 55%), radial-gradient(circle at 78% 70%, rgba(40,150,100,.24), transparent 55%), #0d1712",
+  electric:
+    "radial-gradient(circle at 30% 20%, rgba(80,110,255,.45), transparent 55%), radial-gradient(circle at 75% 75%, rgba(43,70,255,.3), transparent 55%), #0b0e24",
   graphite:
     "radial-gradient(circle at 30% 25%, rgba(180,180,190,.22), transparent 55%), radial-gradient(circle at 75% 75%, rgba(90,90,100,.24), transparent 55%), #16171a",
+  gold:
+    "radial-gradient(circle at 28% 22%, rgba(230,180,70,.35), transparent 55%), radial-gradient(circle at 76% 74%, rgba(170,110,30,.25), transparent 55%), #17130b",
 };
 
 function hostname(url: string) {
