@@ -1,4 +1,4 @@
-export type ProjectTheme = "electric" | "graphite";
+export type ProjectTheme = "electric" | "graphite" | "gold";
 
 export type Project = {
   name: string;
@@ -27,5 +27,14 @@ export const projects: Project[] = [
     url: "https://prospecta-ai-ashy.vercel.app/",
     theme: "electric",
     stack: ["SaaS", "Planos", "CRM"],
+  },
+  {
+    name: "GarimpeAI",
+    category: "Plataforma · Inteligência territorial",
+    description:
+      "Dados, mapas e processos organizados para encontrar o que está escondido no território, com monitoramento e alertas de cada área.",
+    url: "https://garimpeai-nine.vercel.app/",
+    theme: "gold",
+    stack: ["Mapas", "Dados", "Monitoramento"],
   },
 ];

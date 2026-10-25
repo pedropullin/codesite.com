@@ -7,6 +7,8 @@ const THEME: Record<ProjectTheme, string> = {
     "radial-gradient(circle at 30% 20%, rgba(80,110,255,.45), transparent 55%), radial-gradient(circle at 75% 75%, rgba(43,70,255,.3), transparent 55%), #0b0e24",
   graphite:
     "radial-gradient(circle at 30% 25%, rgba(180,180,190,.22), transparent 55%), radial-gradient(circle at 75% 75%, rgba(90,90,100,.24), transparent 55%), #16171a",
+  gold:
+    "radial-gradient(circle at 28% 22%, rgba(230,180,70,.35), transparent 55%), radial-gradient(circle at 76% 74%, rgba(170,110,30,.25), transparent 55%), #17130b",
 };
 
 function hostname(url: string) {
