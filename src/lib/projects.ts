@@ -1,4 +1,4 @@
-export type ProjectTheme = "electric" | "graphite" | "gold";
+export type ProjectTheme = "electric" | "graphite" | "ember";
 
 export type Project = {
   name: string;
@@ -29,12 +29,12 @@ export const projects: Project[] = [
     stack: ["SaaS", "Planos", "CRM"],
   },
   {
-    name: "GarimpeAI",
-    category: "Plataforma · Inteligência territorial",
+    name: "BRASA 41",
+    category: "Conceito · Hamburgueria · Landing page",
     description:
-      "Dados, mapas e processos organizados para encontrar o que está escondido no território, com monitoramento e alertas de cada área.",
-    url: "https://garimpeai-nine.vercel.app/",
-    theme: "gold",
-    stack: ["Mapas", "Dados", "Monitoramento"],
+      "Landing conceito para uma smash burger fictícia: o hambúrguer se desmonta camada por camada na rolagem, com cardápio em abas e brasas animadas no topo.",
+    url: "https://codesite.online/projetos/brasa41",
+    theme: "ember",
+    stack: ["Landing page", "Animação", "Cardápio"],
   },
 ];

@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BRASA 41 — Smash Burger · Projeto conceito CODE SITE</title>
+<meta name="description" content="BRASA 41 é uma hamburgueria fictícia: um projeto conceito de landing page desenhado e programado pela CODE SITE." />
+<meta name="theme-color" content="#0e0b09" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff5a1f'/%3E%3Cpath d='M7 15c0-5 4-8 9-8s9 3 9 8z' fill='%23fff1df'/%3E%3Crect x='6' y='17' width='20' height='4' rx='2' fill='%230e0b09'/%3E%3Crect x='7' y='22' width='18' height='3' rx='1.5' fill='%23fff1df'/%3E%3C/svg%3E" />
+<style>
+@font-face { font-family: Anton; src: url(/projetos/brasa41/fonts/anton.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: Archivo; font-weight: 400; src: url(/projetos/brasa41/fonts/archivo-400.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: Archivo; font-weight: 600; src: url(/projetos/brasa41/fonts/archivo-600.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: Archivo; font-weight: 800; src: url(/projetos/brasa41/fonts/archivo-800.woff2) format("woff2"); font-display: swap; }
+
+:root {
+  --coal: #0e0b09;
+  --coal-2: #17120e;
+  --coal-3: #221a14;
+  --cream: #f4ecdf;
+  --smoke: #9a8d80;
+  --ember: #ff5a1f;
+  --amber: #ffb020;
+  --line: rgba(244, 236, 223, 0.12);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+html, body { overflow-x: clip; }
+body { background: var(--coal); color: var(--cream); font-family: Archivo, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.wrap { width: min(1200px, 100% - 40px); margin-inline: auto; }
+.display { font-family: Anton, Impact, sans-serif; font-weight: 400; text-transform: uppercase; line-height: 0.92; letter-spacing: 0.005em; }
+.ember { color: var(--ember); }
+.btn { display: inline-flex; align-items: center; gap: 12px; border-radius: 999px; padding: 18px 30px; font-weight: 800; font-size: 16px; letter-spacing: 0.02em; transition: transform .25s ease, background .25s ease, color .25s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn-fire { background: var(--ember); color: var(--coal); box-shadow: 0 10px 40px -10px rgba(255, 90, 31, .8); }
+.btn-fire:hover { background: var(--amber); }
+.btn-ghost { border: 2px solid var(--line); }
+.btn-ghost:hover { border-color: var(--cream); }
+
+/* ribbon + nav */
+.ribbon { background: var(--ember); color: var(--coal); text-align: center; font-size: 13px; font-weight: 800; letter-spacing: .04em; padding: 9px 16px; }
+.ribbon a { text-decoration: underline; text-underline-offset: 3px; }
+nav { position: sticky; top: 0; z-index: 50; background: rgba(14, 11, 9, .8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo { font-family: Anton, sans-serif; font-size: 28px; letter-spacing: .02em; display: flex; align-items: center; gap: 10px; }
+.logo b { width: 12px; height: 12px; border-radius: 50%; background: var(--ember); box-shadow: 0 0 18px var(--ember); display: inline-block; }
+.links { display: flex; gap: 32px; font-weight: 600; font-size: 15px; color: var(--smoke); }
+.links a:hover { color: var(--cream); }
+nav .btn { padding: 12px 22px; font-size: 14px; }
+@media (max-width: 760px) { .links { display: none; } }
+
+/* hero */
+.hero { position: relative; min-height: calc(100svh - 110px); display: grid; align-items: center; overflow: hidden; }
+#embers { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero::after { content: ""; position: absolute; left: 50%; bottom: -30%; width: 120%; height: 70%; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(255, 90, 31, .28), transparent); pointer-events: none; }
+.hero .wrap { position: relative; z-index: 2; display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; padding: 60px 0; }
+.hero h1 { font-size: clamp(64px, 10vw, 150px); }
+.hero h1 span { display: block; }
+.hero p { margin-top: 26px; max-width: 460px; font-size: 19px; line-height: 1.55; color: var(--smoke); }
+.hero .ctas { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 14px; }
+.hero .stage { position: relative; height: 460px; display: grid; place-items: center; }
+.hero .glow { position: absolute; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 176, 32, .25), transparent 65%); filter: blur(10px); }
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: 1fr; padding: 40px 0 70px; }
+  .hero .stage { height: 330px; order: -1; }
+}
+
+/* burger */
+.burger { position: relative; width: 400px; height: 360px; transform-origin: center; }
+.burger .layer { position: absolute; left: 0; width: 400px; will-change: transform; }
+.burger svg { display: block; width: 100%; height: auto; overflow: visible; }
+.float { animation: float 5s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-14px) rotate(-2deg); } }
+
+/* ticker */
+.ticker { border-block: 1px solid var(--line); background: var(--coal-2); overflow: hidden; }
+.ticker .track { display: flex; gap: 48px; width: max-content; padding: 22px 0; animation: tick 30s linear infinite; }
+.ticker span { font-family: Anton, sans-serif; font-size: 34px; text-transform: uppercase; white-space: nowrap; display: flex; align-items: center; gap: 48px; }
+.ticker span::after { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--ember); }
+@keyframes tick { to { transform: translateX(-50%); } }
+
+/* exploded view */
+.explode { position: relative; height: 320vh; }
+.explode .pin { position: sticky; top: 0; height: 100svh; display: grid; place-items: center; overflow: hidden; }
+.explode .head { position: absolute; top: 9vh; left: 0; right: 0; text-align: center; padding: 0 20px; }
+.explode .head h2 { font-size: clamp(44px, 7vw, 96px); }
+.explode .head p { margin-top: 12px; color: var(--smoke); font-size: 17px; }
+.explode .scene { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
+.explode .holder { position: relative; margin-top: 16vh; }
+.tag { position: absolute; width: 260px; opacity: 0; transition: opacity .3s; }
+.tag b { display: block; font-family: Anton, sans-serif; font-size: 30px; text-transform: uppercase; color: var(--cream); }
+.tag small { display: block; margin-top: 4px; color: var(--smoke); font-size: 15px; }
+.tag i { position: absolute; top: 18px; height: 2px; width: 70px; background: linear-gradient(90deg, var(--ember), transparent); }
+.tag.left { right: calc(100% + 40px); text-align: right; }
+.tag.left i { left: calc(100% + 12px); transform: scaleX(-1); }
+.tag.right { left: calc(100% + 40px); }
+.tag.right i { right: calc(100% + 12px); background: linear-gradient(270deg, var(--ember), transparent); }
+.caption { display: none; position: absolute; bottom: 5vh; left: 0; right: 0; text-align: center; padding: 0 20px; }
+.caption b { display: block; font-family: Anton, sans-serif; font-size: 34px; text-transform: uppercase; }
+.caption small { color: var(--smoke); font-size: 15px; }
+@media (max-width: 1000px) {
+  .tag { display: none; }
+  .explode .holder { margin-top: 6vh; }
+  .caption { display: block; }
+}
+
+/* menu */
+section.block { padding: 120px 0; }
+.block .title { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 48px; }
+.block .title h2 { font-size: clamp(56px, 8vw, 110px); }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.tabs button { font: inherit; font-weight: 800; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; color: var(--smoke); background: transparent; border: 2px solid var(--line); border-radius: 999px; padding: 12px 20px; cursor: pointer; transition: all .2s; }
+.tabs button[aria-selected="true"] { background: var(--cream); color: var(--coal); border-color: var(--cream); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.item { position: relative; background: var(--coal-2); border: 1px solid var(--line); border-radius: 28px; padding: 30px; min-height: 230px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; transition: transform .3s ease, border-color .3s; }
+.item:hover { transform: translateY(-4px); border-color: rgba(255, 90, 31, .5); }
+.item::before { content: ""; position: absolute; right: -60px; top: -60px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 90, 31, .18), transparent 70%); }
+.item h3 { font-family: Anton, sans-serif; font-weight: 400; font-size: 34px; text-transform: uppercase; line-height: 1; }
+.item p { margin-top: 12px; color: var(--smoke); line-height: 1.5; font-size: 15px; }
+.item .price { margin-top: 24px; font-family: Anton, sans-serif; font-size: 30px; color: var(--amber); }
+.item.in { animation: pop .5s both; }
+@keyframes pop { from { opacity: 0; transform: translateY(20px); } }
+
+/* process */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.step { border-top: 2px solid var(--ember); padding-top: 26px; }
+.step h3 { font-family: Anton, sans-serif; font-weight: 400; font-size: 40px; text-transform: uppercase; line-height: 1; }
+.step p { margin-top: 14px; color: var(--smoke); line-height: 1.6; }
+@media (max-width: 800px) { .steps { grid-template-columns: 1fr; gap: 40px; } }
+
+/* final */
+.final { position: relative; overflow: hidden; text-align: center; padding: 150px 0; background: radial-gradient(80% 60% at 50% 100%, rgba(255, 90, 31, .35), transparent), var(--coal); border-top: 1px solid var(--line); }
+.final h2 { font-size: clamp(60px, 11vw, 170px); }
+.final p { margin: 26px auto 0; max-width: 560px; color: var(--smoke); font-size: 18px; line-height: 1.6; }
+.final .ctas { margin-top: 40px; display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+footer { border-top: 1px solid var(--line); padding: 34px 0; color: var(--smoke); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+
+/* reveal */
+.rv { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s ease; }
+.rv.on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .rv { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="ribbon">Projeto conceito · Marca fictícia criada para mostrar o que a <a href="https://codesite.online" target="_blank" rel="noopener">CODE SITE</a> faz</div>
+<nav>
+  <div class="wrap">
+    <a href="#topo" class="logo"><b></b>BRASA 41</a>
+    <div class="links"><a href="#montagem">O burger</a><a href="#cardapio">Cardápio</a><a href="#processo">Como fazemos</a></div>
+    <a href="#pedir" class="btn btn-fire">Pedir agora</a>
+  </div>
+</nav>
+
+<header class="hero" id="topo">
+  <canvas id="embers"></canvas>
+  <div class="wrap">
+    <div>
+      <h1 class="display"><span class="rv">Smash na chapa.</span><span class="rv ember">Fumaça</span><span class="rv">na alma.</span></h1>
+      <p class="rv">Carne prensada até caramelizar a borda, brioche tostado na manteiga e brisket defumado devagar. Sem frescura, com muito sabor.</p>
+      <div class="ctas rv"><a href="#cardapio" class="btn btn-fire">Ver cardápio</a><a href="#montagem" class="btn btn-ghost">Desmontar o burger ↓</a></div>
+    </div>
+    <div class="stage"><div class="glow"></div><div id="heroBurger" class="float"></div></div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<section class="explode" id="montagem">
+  <div class="pin">
+    <div class="head"><h2 class="display">Camada <span class="ember">por camada.</span></h2><p>Role a página e veja o que vai dentro.</p></div>
+    <div class="scene"><div class="holder" id="holder"></div></div>
+    <div class="caption" id="caption"><b></b><small></small></div>
+  </div>
+</section>
+
+<section class="block" id="cardapio">
+  <div class="wrap">
+    <div class="title rv"><h2 class="display">Cardá<span class="ember">pio</span></h2>
+      <div class="tabs" role="tablist" id="tabs"></div></div>
+    <div class="grid" id="grid" role="tabpanel"></div>
+  </div>
+</section>
+
+<section class="block" id="processo" style="background: var(--coal-2); border-top: 1px solid var(--line)">
+  <div class="wrap">
+    <div class="title rv"><h2 class="display">Do carvão<br /><span class="ember">ao balcão.</span></h2></div>
+    <div class="steps">
+      <div class="step rv"><h3>Defumado devagar</h3><p>O brisket passa a noite no carvão com lenha de árvore frutífera até desmanchar no garfo.</p></div>
+      <div class="step rv"><h3>Smash na chapa</h3><p>A bolinha de carne é prensada na chapa bem quente. A borda carameliza e o meio fica suculento.</p></div>
+      <div class="step rv"><h3>Montado na hora</h3><p>Nada fica esperando no balcão: sai da chapa direto pro pão e do pão direto pra você.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="pedir">
+  <div class="wrap">
+    <h2 class="display rv">Fome de um<br /><span class="ember">site assim?</span></h2>
+    <p class="rv">A BRASA 41 não existe, mas o seu negócio pode ter uma página dessas: rápida, bonita no celular e feita pra vender.</p>
+    <div class="ctas rv">
+      <a class="btn btn-fire" target="_blank" rel="noopener" href="https://wa.me/5541984303059?text=Ol%C3%A1!%20Vi%20o%20projeto%20BRASA%2041%20e%20quero%20um%20site%20assim%20para%20o%20meu%20neg%C3%B3cio.">Quero um site assim</a>
+      <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://codesite.online">Ver mais da CODE SITE</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>BRASA 41 é uma marca fictícia. Nomes, pratos e preços são ilustrativos.</span><span>Desenhado e programado pela <a href="https://codesite.online" target="_blank" rel="noopener" style="color: var(--cream)">CODE SITE</a></span></div></footer>
+
+<script>
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = (x) => 1 - Math.pow(1 - x, 3);
+
+// Burger layers, top to bottom. `y` is where each layer sits in the assembled burger.
+const LAYERS = [
+  { id: "top", y: 0, label: "Brioche na manteiga", note: "Tostado na chapa na hora", svg: `<svg viewBox="0 0 400 170"><defs><radialGradient id="bunG" cx="40%" cy="25%" r="80%"><stop offset="0" stop-color="#f4b867"/><stop offset=".55" stop-color="#d98a35"/><stop offset="1" stop-color="#9a5418"/></radialGradient></defs><path d="M18 150 C18 50 100 14 200 14 C300 14 382 50 382 150 Q382 166 366 166 L34 166 Q18 166 18 150Z" fill="url(#bunG)"/><path d="M60 70 Q120 40 190 38" stroke="#ffe0ad" stroke-width="10" stroke-linecap="round" opacity=".35" fill="none"/>${Array.from({ length: 14 }, (_, i) => { const x = 70 + ((i * 53) % 260), y = 50 + ((i * 37) % 70); return `<ellipse cx="${x}" cy="${y}" rx="7" ry="3.5" fill="#fff4dc" transform="rotate(${(i * 29) % 60 - 30} ${x} ${y})"/>`; }).join("")}</svg>` },
+  { id: "lettuce", y: 150, label: "Alface americana", note: "Crocante, na medida", svg: `<svg viewBox="0 0 400 48"><path d="M8 18 Q30 2 52 18 T96 18 T140 18 T184 18 T228 18 T272 18 T316 18 T360 18 T396 16 L392 34 Q370 46 348 32 T304 32 T260 32 T216 32 T172 32 T128 32 T84 32 T40 32 Q20 44 8 32Z" fill="#7cc443"/><path d="M20 24 Q60 16 100 24 T180 24 T260 24 T340 24" stroke="#a6e06a" stroke-width="3" fill="none" opacity=".7"/></svg>` },
+  { id: "tomato", y: 176, label: "Tomate fresco", note: "Fatiado no dia", svg: `<svg viewBox="0 0 400 36"><rect x="26" y="6" width="170" height="24" rx="12" fill="#e2412f"/><rect x="204" y="6" width="170" height="24" rx="12" fill="#d23526"/><rect x="40" y="10" width="60" height="6" rx="3" fill="#ff8a70" opacity=".6"/><rect x="220" y="10" width="60" height="6" rx="3" fill="#ff8a70" opacity=".6"/></svg>` },
+  { id: "cheese", y: 198, label: "Cheddar derretido", note: "Duas fatias em cada smash", svg: `<svg viewBox="0 0 400 66"><path d="M14 8 H386 V24 L360 24 L352 52 Q348 60 342 52 L334 24 L262 24 L250 62 Q246 70 240 62 L228 24 L150 24 L140 46 Q136 54 130 46 L120 24 L60 24 L52 40 Q48 48 42 40 L34 24 L14 24Z" fill="#ffc22e"/><rect x="14" y="8" width="372" height="6" fill="#ffe08a" opacity=".7"/></svg>` },
+  { id: "patty", y: 214, label: "Blend 100% bovino", note: "Prensado até caramelizar", svg: `<svg viewBox="0 0 400 84"><defs><linearGradient id="pG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b3418"/><stop offset=".5" stop-color="#4a2210"/><stop offset="1" stop-color="#2c1408"/></linearGradient></defs><rect x="12" y="4" width="376" height="76" rx="34" fill="url(#pG)"/>${Array.from({ length: 22 }, (_, i) => `<circle cx="${30 + ((i * 67) % 340)}" cy="${18 + ((i * 23) % 50)}" r="${2 + (i % 3)}" fill="#1a0b04" opacity=".7"/>`).join("")}<path d="M40 16 Q200 4 360 16" stroke="#a0582c" stroke-width="4" fill="none" opacity=".6"/></svg>` },
+  { id: "bottom", y: 286, label: "Base de brioche", note: "Segura o molho até o fim", svg: `<svg viewBox="0 0 400 74"><defs><linearGradient id="bG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9a250"/><stop offset="1" stop-color="#a65e1e"/></linearGradient></defs><path d="M18 8 H382 Q392 8 390 22 L380 54 Q374 70 356 70 H44 Q26 70 20 54 L10 22 Q8 8 18 8Z" fill="url(#bG)"/><rect x="18" y="8" width="364" height="8" rx="4" fill="#f6c27e" opacity=".6"/></svg>` },
+];
+
+function buildBurger(el) {
+  el.classList.add("burger");
+  LAYERS.forEach((l, i) => {
+    const d = document.createElement("div");
+    d.className = "layer";
+    d.style.top = l.y + "px";
+    d.style.zIndex = String(10 + LAYERS.length - i);
+    d.innerHTML = l.svg.replace(/id="(\w+)"/g, `id="$1-${el.id}"`).replace(/url\(#(\w+)\)/g, `url(#$1-${el.id})`);
+    el.appendChild(d);
+  });
+  return [...el.children];
+}
+
+// hero burger, scaled to its stage
+const hero = document.getElementById("heroBurger");
+buildBurger(hero);
+const fitHero = () => (hero.style.scale = String(innerWidth < 900 ? 0.72 : 1));
+fitHero();
+addEventListener("resize", fitHero);
+
+// ticker
+const words = ["Smash burger", "Brisket defumado", "Brioche na manteiga", "Cheddar derretido", "Fritas rústicas", "Montado na hora"];
+document.getElementById("track").innerHTML = [...words, ...words].map((w) => `<span>${w}</span>`).join("");
+
+// exploded view
+const holder = document.getElementById("holder");
+holder.id = "exp";
+const parts = buildBurger(holder);
+const tags = LAYERS.map((l, i) => {
+  const t = document.createElement("div");
+  t.className = "tag " + (i % 2 ? "right" : "left");
+  t.innerHTML = `<i></i><b>${l.label}</b><small>${l.note}</small>`;
+  holder.appendChild(t);
+  return t;
+});
+const caption = document.getElementById("caption");
+const section = document.getElementById("montagem");
+const SPREAD = [-150, -70, -20, 30, 90, 170];
+function onScroll() {
+  const r = section.getBoundingClientRect();
+  const total = section.offsetHeight - innerHeight;
+  const prog = clamp(-r.top / total);
+  const k = ease(clamp(prog / 0.6));
+  // The fully exploded burger is ~680px tall; keep it clear of the heading on short screens.
+  const scale = Math.min(innerWidth < 600 ? 0.6 : innerWidth < 1000 ? 0.85 : 1, (innerHeight * 0.6) / 680);
+  holder.style.scale = String(scale);
+  parts.forEach((p, i) => {
+    p.style.transform = `translateY(${SPREAD[i] * k}px) rotate(${(i % 2 ? 1 : -1) * 3 * k}deg)`;
+    const tag = tags[i];
+    tag.style.top = `${LAYERS[i].y + SPREAD[i] * k + 10}px`;
+    tag.style.opacity = String(clamp((k - i * 0.1) * 3));
+  });
+  const active = Math.min(LAYERS.length - 1, Math.floor(clamp((prog - 0.05) / 0.85) * LAYERS.length));
+  caption.querySelector("b").textContent = LAYERS[active].label;
+  caption.querySelector("small").textContent = LAYERS[active].note;
+}
+addEventListener("scroll", onScroll, { passive: true });
+addEventListener("resize", onScroll);
+onScroll();
+
+// menu
+const MENU = {
+  Burgers: [
+    ["Smash Clássico", "Dois smash de 80g, cheddar, cebola na chapa e molho da casa.", "R$ 32"],
+    ["Brasa Bacon", "Smash duplo, bacon defumado, cheddar e barbecue de rapadura.", "R$ 38"],
+    ["Fumaça Brisket", "Brisket defumado, queijo prato, picles da casa e maionese de alho.", "R$ 44"],
+    ["Verde Fogo", "Smash de grão-de-bico, queijo coalho, rúcula e geleia de pimenta.", "R$ 34"],
+  ],
+  Acompanhamentos: [
+    ["Fritas da Brasa", "Batata rústica com páprica defumada e sal de ervas.", "R$ 18"],
+    ["Onion Rings", "Anéis de cebola empanados na cerveja, com maionese verde.", "R$ 22"],
+    ["Cheddar & Bacon", "Fritas com cheddar cremoso e farofa de bacon.", "R$ 26"],
+  ],
+  Bebidas: [
+    ["Limonada da Brasa", "Limão tostado na grelha, hortelã e rapadura.", "R$ 14"],
+    ["Shake de Doce de Leite", "400 ml com calda quente e farofa de paçoca.", "R$ 24"],
+    ["Cerveja da Casa", "Rótulos artesanais da região, sempre gelados.", "R$ 21"],
+  ],
+};
+const tabs = document.getElementById("tabs");
+const grid = document.getElementById("grid");
+function showTab(name) {
+  [...tabs.children].forEach((b) => b.setAttribute("aria-selected", String(b.textContent === name)));
+  grid.innerHTML = MENU[name].map(([n, d, p], i) => `<article class="item in" style="animation-delay:${i * 70}ms"><div><h3>${n}</h3><p>${d}</p></div><div class="price">${p}</div></article>`).join("");
+}
+Object.keys(MENU).forEach((name) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.role = "tab"; b.textContent = name;
+  b.addEventListener("click", () => showTab(name));
+  tabs.appendChild(b);
+});
+showTab("Burgers");
+
+// reveal on scroll
+const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }), { threshold: 0.15 });
+document.querySelectorAll(".rv").forEach((el, i) => { el.style.transitionDelay = `${(i % 4) * 90}ms`; io.observe(el); });
+
+// embers rising from the grill
+const cv = document.getElementById("embers");
+const ctx = cv.getContext("2d");
+let W = 0, H = 0, sparks = [];
+function size() {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  W = cv.clientWidth; H = cv.clientHeight;
+  cv.width = W * dpr; cv.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  sparks = Array.from({ length: Math.round(W / 14) }, () => spawn(true));
+}
+function spawn(any) {
+  return { x: Math.random() * W, y: any ? Math.random() * H : H + 10, r: 0.6 + Math.random() * 2.2, vy: 0.3 + Math.random() * 1.1, vx: (Math.random() - 0.5) * 0.4, life: Math.random() };
+}
+function tick() {
+  ctx.clearRect(0, 0, W, H);
+  for (const s of sparks) {
+    s.y -= s.vy; s.x += s.vx + Math.sin((s.y + s.life * 100) / 40) * 0.3; s.life += 0.004;
+    if (s.y < -10) Object.assign(s, spawn(false));
+    const a = clamp(s.y / H) * (0.5 + 0.5 * Math.sin(s.life * 20));
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255, ${120 + Math.round(s.r * 30)}, 40, ${a})`;
+    ctx.shadowColor = "#ff5a1f"; ctx.shadowBlur = 8;
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  requestAnimationFrame(tick);
+}
+size();
+addEventListener("resize", size);
+if (!reduce) tick();
+</script>
+</body>
+</html>
