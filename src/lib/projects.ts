@@ -1,4 +1,4 @@
-export type ProjectTheme = "electric" | "graphite" | "gold";
+export type ProjectTheme = "electric" | "graphite";
 
 export type Project = {
   name: string;
@@ -11,15 +11,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: "Prospecta.ai",
-    category: "SaaS · Prospecção · CRM",
-    description:
-      "Plataforma para encontrar empresas em qualquer lugar do mundo, ver quem ainda não tem site e chamar no WhatsApp em um clique, com um CRM para acompanhar cada venda.",
-    url: "https://prospecta-ai-ashy.vercel.app/",
-    theme: "electric",
-    stack: ["SaaS", "Planos", "CRM"],
-  },
-  {
     name: "SAINT AMI",
     category: "Moda de luxo · Landing page · Encomendas",
     description:
@@ -29,12 +20,12 @@ export const projects: Project[] = [
     stack: ["Landing page", "Catálogo", "WhatsApp"],
   },
   {
-    name: "GarimpeAI",
-    category: "Plataforma · Inteligência territorial",
+    name: "Prospecta.ai",
+    category: "SaaS · Prospecção · CRM",
     description:
-      "Dados, mapas e processos organizados para encontrar o que está escondido no território, com monitoramento e alertas de cada área.",
-    url: "https://garimpeai-nine.vercel.app/",
-    theme: "gold",
-    stack: ["Mapas", "Dados", "Monitoramento"],
+      "Plataforma para encontrar empresas em qualquer lugar do mundo, ver quem ainda não tem site e chamar no WhatsApp em um clique, com um CRM para acompanhar cada venda.",
+    url: "https://prospecta-ai-ashy.vercel.app/",
+    theme: "electric",
+    stack: ["SaaS", "Planos", "CRM"],
   },
 ];
