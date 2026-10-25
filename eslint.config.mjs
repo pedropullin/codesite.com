@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Bundled output of concepts/*, served as-is.
+    "public/projetos/**",
   ]),
 ]);
 

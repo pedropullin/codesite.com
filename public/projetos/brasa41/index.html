@@ -71,6 +71,13 @@ nav .btn { padding: 12px 22px; font-size: 14px; }
 .burger .layer { position: absolute; left: 0; width: 400px; will-change: transform; }
 .burger svg { display: block; width: 100%; height: auto; overflow: visible; }
 .float { animation: float 5s ease-in-out infinite; }
+/* 3D burger: SVG layers stay hidden while three.js loads and come back only if it fails */
+.loading3d #heroBurger, .loading3d #exp { visibility: hidden; }
+#heroBurger.burger3d { position: absolute; inset: 0; animation: none; }
+.burger3d canvas, .scene3d canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.explode .scene.scene3d { position: absolute; top: 22vh; bottom: 0; left: 0; right: 0; height: auto; display: block; }
+.scene3d .tag { z-index: 2; transition: none; }
+@media (max-width: 1000px) { .explode .scene.scene3d { top: 20vh; bottom: 14vh; } }
 @keyframes float { 50% { transform: translateY(-14px) rotate(-2deg); } }
 
 /* ticker */
@@ -221,7 +228,7 @@ const LAYERS = [
   { id: "lettuce", y: 150, label: "Alface americana", note: "Crocante, na medida", svg: `<svg viewBox="0 0 400 48"><path d="M8 18 Q30 2 52 18 T96 18 T140 18 T184 18 T228 18 T272 18 T316 18 T360 18 T396 16 L392 34 Q370 46 348 32 T304 32 T260 32 T216 32 T172 32 T128 32 T84 32 T40 32 Q20 44 8 32Z" fill="#7cc443"/><path d="M20 24 Q60 16 100 24 T180 24 T260 24 T340 24" stroke="#a6e06a" stroke-width="3" fill="none" opacity=".7"/></svg>` },
   { id: "tomato", y: 176, label: "Tomate fresco", note: "Fatiado no dia", svg: `<svg viewBox="0 0 400 36"><rect x="26" y="6" width="170" height="24" rx="12" fill="#e2412f"/><rect x="204" y="6" width="170" height="24" rx="12" fill="#d23526"/><rect x="40" y="10" width="60" height="6" rx="3" fill="#ff8a70" opacity=".6"/><rect x="220" y="10" width="60" height="6" rx="3" fill="#ff8a70" opacity=".6"/></svg>` },
   { id: "cheese", y: 198, label: "Cheddar derretido", note: "Duas fatias em cada smash", svg: `<svg viewBox="0 0 400 66"><path d="M14 8 H386 V24 L360 24 L352 52 Q348 60 342 52 L334 24 L262 24 L250 62 Q246 70 240 62 L228 24 L150 24 L140 46 Q136 54 130 46 L120 24 L60 24 L52 40 Q48 48 42 40 L34 24 L14 24Z" fill="#ffc22e"/><rect x="14" y="8" width="372" height="6" fill="#ffe08a" opacity=".7"/></svg>` },
-  { id: "patty", y: 214, label: "Blend 100% bovino", note: "Prensado até caramelizar", svg: `<svg viewBox="0 0 400 84"><defs><linearGradient id="pG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b3418"/><stop offset=".5" stop-color="#4a2210"/><stop offset="1" stop-color="#2c1408"/></linearGradient></defs><rect x="12" y="4" width="376" height="76" rx="34" fill="url(#pG)"/>${Array.from({ length: 22 }, (_, i) => `<circle cx="${30 + ((i * 67) % 340)}" cy="${18 + ((i * 23) % 50)}" r="${2 + (i % 3)}" fill="#1a0b04" opacity=".7"/>`).join("")}<path d="M40 16 Q200 4 360 16" stroke="#a0582c" stroke-width="4" fill="none" opacity=".6"/></svg>` },
+  { id: "patty", y: 214, label: "Blend 100% bovino", note: "Smash duplo, prensado até caramelizar", svg: `<svg viewBox="0 0 400 84"><defs><linearGradient id="pG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b3418"/><stop offset=".5" stop-color="#4a2210"/><stop offset="1" stop-color="#2c1408"/></linearGradient></defs><rect x="12" y="4" width="376" height="76" rx="34" fill="url(#pG)"/>${Array.from({ length: 22 }, (_, i) => `<circle cx="${30 + ((i * 67) % 340)}" cy="${18 + ((i * 23) % 50)}" r="${2 + (i % 3)}" fill="#1a0b04" opacity=".7"/>`).join("")}<path d="M40 16 Q200 4 360 16" stroke="#a0582c" stroke-width="4" fill="none" opacity=".6"/></svg>` },
   { id: "bottom", y: 286, label: "Base de brioche", note: "Segura o molho até o fim", svg: `<svg viewBox="0 0 400 74"><defs><linearGradient id="bG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9a250"/><stop offset="1" stop-color="#a65e1e"/></linearGradient></defs><path d="M18 8 H382 Q392 8 390 22 L380 54 Q374 70 356 70 H44 Q26 70 20 54 L10 22 Q8 8 18 8Z" fill="url(#bG)"/><rect x="18" y="8" width="364" height="8" rx="4" fill="#f6c27e" opacity=".6"/></svg>` },
 ];
 
@@ -241,7 +248,8 @@ function buildBurger(el) {
 // hero burger, scaled to its stage
 const hero = document.getElementById("heroBurger");
 buildBurger(hero);
-const fitHero = () => (hero.style.scale = String(innerWidth < 900 ? 0.72 : 1));
+let use3d = false;
+const fitHero = () => (hero.style.scale = use3d ? "" : String(innerWidth < 900 ? 0.72 : 1));
 fitHero();
 addEventListener("resize", fitHero);
 
@@ -264,6 +272,7 @@ const caption = document.getElementById("caption");
 const section = document.getElementById("montagem");
 const SPREAD = [-150, -70, -20, 30, 90, 170];
 function onScroll() {
+  if (use3d) return;
   const r = section.getBoundingClientRect();
   const total = section.offsetHeight - innerHeight;
   const prog = clamp(-r.top / total);
@@ -284,6 +293,37 @@ function onScroll() {
 addEventListener("scroll", onScroll, { passive: true });
 addEventListener("resize", onScroll);
 onScroll();
+
+// Realistic three.js burger; the SVG version above is the fallback.
+document.documentElement.classList.add("loading3d");
+const showSvg = () => document.documentElement.classList.remove("loading3d");
+const svgTimer = setTimeout(showSvg, 6000);
+import("/projetos/brasa41/vendor/burger3d.js")
+  .then(({ start }) => {
+    const scene = holder.parentElement;
+    use3d = true;
+    hero.className = "burger3d";
+    hero.style.scale = "";
+    holder.style.display = "none";
+    scene.classList.add("scene3d");
+    tags.forEach((t) => scene.appendChild(t));
+    start({ heroEl: hero, explodeEl: scene, sectionEl: section, tags, caption, labels: LAYERS });
+  })
+  .catch((err) => {
+    console.warn("3D burger unavailable, using SVG", err);
+    use3d = false;
+    const scene = holder.parentElement;
+    scene.querySelectorAll("canvas").forEach((c) => c.remove());
+    scene.classList.remove("scene3d");
+    holder.style.display = "";
+    tags.forEach((t) => { t.removeAttribute("style"); holder.appendChild(t); });
+    hero.replaceChildren();
+    hero.className = "float";
+    buildBurger(hero);
+    fitHero();
+    onScroll();
+  })
+  .finally(() => { clearTimeout(svgTimer); showSvg(); });
 
 // menu
 const MENU = {

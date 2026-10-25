@@ -32,9 +32,9 @@ export const projects: Project[] = [
     name: "BRASA 41",
     category: "Conceito · Hamburgueria · Landing page",
     description:
-      "Landing conceito para uma smash burger fictícia: o hambúrguer se desmonta camada por camada na rolagem, com cardápio em abas e brasas animadas no topo.",
+      "Landing conceito para uma smash burger fictícia: um hambúrguer em 3D realista gira no topo e se desmonta camada por camada na rolagem, com cardápio em abas e brasas animadas.",
     url: "https://codesite.online/projetos/brasa41",
     theme: "ember",
-    stack: ["Landing page", "Animação", "Cardápio"],
+    stack: ["Landing page", "3D", "Cardápio"],
   },
 ];
