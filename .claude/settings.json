@@ -1,5 +1,5 @@
 {
   "env": {
-    "CHROME_PATH": "/opt/pw-browsers/chromium"
+    "CHROME_PATH": "/home/user/codesite.com/.claude/chrome-no-sandbox.sh"
   }
 }

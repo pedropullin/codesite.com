@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Esse hambúrguer não é foto</title>
+<meta name="viewport" content="width=1080, height=1920">
+<!-- Runtime from the motionmaxxing skill in this repo. Render with:
+     node .claude/skills/motionmaxxing/scripts/render.mjs marketing/reel-hamburguer/index.html marketing/reel-hamburguer/final.mp4 -->
+<style>
+@font-face { font-family: Bricolage; font-weight: 800; src: url(assets/fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2"); }
+@font-face { font-family: Bricolage; font-weight: 700; src: url(assets/fonts/bricolage-grotesque-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: Plex; font-weight: 500; src: url(assets/fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2"); }
+/* ACCENT = code, i.e. what CODE SITE writes. Used on the typed functions and on "Pede o seu." only. */
+:root {
+  --coal: #0e0b09;
+  --cream: #f4ecdf;
+  --paper: #f5f3ee;
+  --ink: #0b0b0c;
+  --accent-dark: #7d90ff;
+  --accent: #2b46ff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#main { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; background: var(--coal); font-family: Bricolage, sans-serif; }
+.scene { position: absolute; inset: 0; }
+#hook { position: absolute; inset: 0; z-index: 3; }
+#touchPos { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 4; }
+
+/* BRASA's world: coal ground, a warm pool of light behind the hero, embers */
+#world { background:
+  radial-gradient(ellipse 70% 42% at 50% 56%, rgba(255, 128, 48, .26), rgba(255, 96, 32, .08) 55%, transparent 75%),
+  radial-gradient(ellipse 120% 40% at 50% 108%, rgba(255, 90, 31, .22), transparent 70%),
+  radial-gradient(ellipse 90% 70% at 50% 50%, transparent 55%, rgba(0, 0, 0, .55)),
+  var(--coal); }
+#embers i { position: absolute; border-radius: 50%; background: #ffb020; box-shadow: 0 0 10px 2px rgba(255, 140, 40, .55); }
+#gl { position: absolute; inset: 0; width: 1080px; height: 1920px; z-index: 2; }
+
+.say { position: absolute; left: 0; width: 1080px; text-align: center; color: var(--cream); font-weight: 800; letter-spacing: -0.035em; white-space: pre; z-index: 3; }
+#hook1, #hook2 { font-size: 112px; line-height: 124px; }
+#hook1 { top: 262px; }
+#hook2 { top: 386px; }
+
+.code { position: absolute; left: 228px; top: 268px; font-family: Plex, monospace; font-weight: 500; font-size: 76px; line-height: 96px; color: var(--cream); white-space: pre; z-index: 3; }
+.code b { font-weight: 500; color: var(--accent-dark); }
+.caret { position: absolute; left: 228px; top: 280px; width: 8px; height: 76px; background: var(--accent-dark); z-index: 3; }
+
+#site { font-size: 112px; line-height: 120px; top: 250px; }
+
+/* the real BRASA 41 mobile page, in a phone, in the same world */
+#phoneRig { position: absolute; left: 240px; top: 470px; width: 600px; height: 1271px; z-index: 1; transform-origin: 300px 482px; }
+.phone { position: absolute; inset: 0; border-radius: 74px; padding: 12px; background: #151210; box-shadow: 0 0 0 2px rgba(255, 255, 255, .06) inset, 0 60px 120px -30px rgba(0, 0, 0, .8), 0 0 140px rgba(255, 110, 40, .12); }
+.screen { position: relative; width: 576px; height: 1247px; border-radius: 62px; overflow: hidden; background: var(--coal); }
+.screen img { display: block; width: 576px; }
+#btn { position: absolute; left: 359px; top: 92px; width: 188px; height: 58px; border-radius: 29px; background: url(assets/brasa-mobile.png) -359px -92px / 576px auto no-repeat; }
+#touch { position: absolute; left: -42px; top: -42px; width: 84px; height: 84px; border-radius: 50%; background: rgba(255, 255, 255, .32); box-shadow: 0 0 0 3px rgba(255, 255, 255, .55); }
+
+/* CODE SITE's world for the call to action */
+#cta { background:
+  radial-gradient(ellipse 90% 50% at 50% 18%, #fffdf8, rgba(255, 253, 248, 0) 70%),
+  radial-gradient(ellipse 100% 80% at 50% 50%, transparent 60%, rgba(60, 50, 30, .12)),
+  #efebe2; color: var(--ink); }
+#ctaCam { position: absolute; inset: 0; }
+#cta .say { color: var(--ink); font-size: 122px; line-height: 128px; }
+#q1 { top: 452px; }
+#q2 { top: 580px; }
+#q3 { top: 708px; color: var(--accent) !important; }
+#num { position: absolute; left: 0; width: 1080px; top: 968px; display: flex; justify-content: center; }
+#num span { display: inline-flex; align-items: center; gap: 26px; padding: 26px 50px 26px 34px; border-radius: 999px; background: #fff; box-shadow: 0 40px 80px -40px rgba(30, 25, 10, .45); font-weight: 800; font-size: 84px; letter-spacing: -0.03em; }
+#num svg { width: 84px; height: 84px; fill: #25d366; }
+#mark { position: absolute; left: 0; width: 1080px; top: 1236px; display: flex; justify-content: center; align-items: center; gap: 20px; font-weight: 700; font-size: 46px; letter-spacing: -0.01em; }
+#mark svg { width: 66px; height: 66px; }
+</style>
+</head>
+<body>
+<div id="main">
+
+  <section id="world" class="scene">
+    <div id="embers" class="scene"></div>
+
+    <!-- BEAT 3: the real BRASA 41 page on a phone (under the 3D canvas, so the burger lands in its hero slot) -->
+    <div id="phoneRig"><div class="phone"><div class="screen"><img src="assets/brasa-mobile.png" alt=""><div id="btn"></div></div></div></div>
+    <div id="touchPos"><div id="touch"></div></div>
+
+    <canvas id="gl" width="1080" height="1920"></canvas>
+
+    <!-- BEAT 1 -->
+    <div id="hook">
+      <div id="hook1" class="say">Esse hambúrguer</div>
+      <div id="hook2" class="say">não é foto.</div>
+    </div>
+
+    <!-- BEAT 2: the functions in concepts/brasa41/burger3d.js that draw each layer -->
+    <div id="c0" class="code">makeTopBun<b>()</b></div><div id="k0" class="caret"></div>
+    <div id="c1" class="code">makeLettuce<b>()</b></div><div id="k1" class="caret"></div>
+    <div id="c2" class="code">makeTomatoes<b>()</b></div><div id="k2" class="caret"></div>
+    <div id="c3" class="code">makeCheese<b>()</b></div><div id="k3" class="caret"></div>
+    <div id="c4" class="code">makePatty<b>()</b></div><div id="k4" class="caret"></div>
+    <div id="c5" class="code">makeBottomBun<b>()</b></div><div id="k5" class="caret"></div>
+
+    <div id="site" class="say">É um site.</div>
+  </section>
+
+  <!-- BEAT 4 -->
+  <section id="cta" class="scene">
+    <div id="ctaCam">
+      <div id="q1" class="say">Quer um site</div>
+      <div id="q2" class="say">assim?</div>
+      <div id="q3" class="say">Pede o seu.</div>
+      <div id="num"><span><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.07-.13-.27-.2-.57-.35M12.05 21.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.48-8.41"/></svg>(41) 98430-3059</span></div>
+      <div id="mark"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#0b0b0c"/><path d="M12.5 10.5 7 16l5.5 5.5M19.5 10.5 25 16l-5.5 5.5" fill="none" stroke="#f5f3ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 9 14.4 23" stroke="#2b46ff" stroke-width="2.6" stroke-linecap="round"/></svg>CODE SITE</div>
+    </div>
+  </section>
+
+</div>
+
+<script src="../../.claude/skills/motionmaxxing/runtime/vendor/gsap.min.js"></script>
+<script src="../../.claude/skills/motionmaxxing/runtime/motion.js"></script>
+<script src="burger-kit.js"></script>
+<script>
+/* SEEK CONTRACT: everything visible is a pure function of t. */
+const M = Motion.film({ fps: 30, duration: 13, width: 1080, height: 1920, clock: 'smooth' });
+const E = Motion.ease;
+const ACCENT_DARK = '#7d90ff', ACCENT = '#2b46ff';
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const seg = (f, a, b, e = 'softLand') => E[e](clamp01((f - a) / (b - a)));
+const lerp = (a, b, x) => a + (b - a) * x;
+
+/* Frame plan (see STORYBOARD.md) */
+const CUT_CTA = 295;
+const TYPE_AT = [80, 92, 104, 116, 128, 140];       // each function starts typing here
+const LIFT_AT = TYPE_AT.map((f) => f + 8);           // its layer answers 2 f after the typing lands
+const COLLAPSE = [172, 190];                          // layers fall back together while flying to the phone
+const PHONE_IN = [176, 199];
+const LIFT = [1.87, 1.44, 1.12, 0.84, 0.44, 0];      // per-layer rise when unstacked (bottom bun stays on the floor)
+const BASE_Y = [0.85, 0.81, 0.725, 0.715, 0.28, 0];  // assembled heights, as in makeBurger()
+const PUSH = 0.1;                                      // the phone and the 3D camera push in 10 % about the burger slot
+const pushAt = (f) => 1 + PUSH * clamp01((f - PHONE_IN[1]) / (CUT_CTA - PHONE_IN[1]));
+const SLOT = { x: 540, y: 952 };                       // burger slot of the BRASA 41 hero on the phone, in frame px
+
+/* camera framings: target height, distance, elevation (degrees) */
+function framing(f) {
+  let ty = 1.25, d = lerp(9.4, 9.0, clamp01(f / 50)), e = 9;
+  const b = seg(f, 84, 112, 'glide');                 // pull back to fit the unstacked burger
+  ty = lerp(ty, 1.85, b); d = lerp(d, 12.0, b); e = lerp(e, 12, b);
+  const c = seg(f, PHONE_IN[0], PHONE_IN[1], 'softLand');   // same frames and ease as the phone, so the burger lands in its slot
+  ty = lerp(ty, 0.8, c); d = lerp(d, 27.1, c); e = lerp(e, 16, c);
+  d /= pushAt(f);                                     // the camera pushes in with the phone (size ~ 1/d)
+  const r = (e * Math.PI) / 180;
+  return { position: [0, ty + d * Math.sin(r), d * Math.cos(r)], target: [0, ty, 0], fov: 30 };
+}
+
+const hero = M.hero3d('#gl', {
+  width: 1080, height: 1920,
+  envMap: 'room', toneMapping: 'aces', exposure: 0.95, envIntensity: 0.42,
+  key: { position: [3, 6, 4], intensity: 2.6, color: '#ffe2b8' },
+  rim: { position: [-4, 2.5, -3.5], intensity: 3.2, color: '#ff5a1f' },
+  ground: { y: -0.01, opacity: 0.4 },
+  camera: { fov: 30, position: [0, 2.7, 9.3], target: [0, 1.25, 0] },
+  build: (THREE, scene) => {
+    scene.add(new THREE.HemisphereLight('#ffd9a8', '#2a160c', 0.45));
+    const b = BurgerKit(THREE).makeBurger();
+    const out = { burger: b.root };
+    b.stack.forEach((s, i) => { out['l' + i] = s.obj; });
+    return out;
+  },
+  state: (t, o, ctx) => {
+    const f = ctx.f;
+    if (f >= CUT_CTA) return { objects: { burger: { visible: false } } };
+    const fall = 1 - seg(f, COLLAPSE[0], COLLAPSE[1], 'softInOut');
+    const objects = {};
+    LIFT.forEach((lift, i) => {
+      const k = seg(f, LIFT_AT[i], LIFT_AT[i] + 16, 'softLand') * fall;
+      objects['l' + i] = { position: [0, BASE_Y[i] + lift * k, 0] };
+    });
+    // a held "photo" angle, then a full whip turn with a tilt, then the slow turn the live site has
+    let ry = 0.5 + seg(f, 50, 80, 'whip') * Math.PI * 2 + Math.max(0, f - 80) * (0.32 / 30);
+    const rx = 0.3 * seg(f, 50, 64, 'softInOut') - 0.18 * seg(f, 64, 82, 'softLand');
+    objects.burger = { rotation: [rx, ry, 0] };
+    return { camera: framing(f), objects };
+  },
+});
+
+/* embers: seeded, linear drift (BRASA's hero motif) */
+(function embers() {
+  let s = 41;
+  const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+  const box = document.getElementById('embers');
+  for (let i = 0; i < 18; i++) {
+    const el = document.createElement('i');
+    const size = 3 + rnd() * 4;
+    Object.assign(el.style, { width: size + 'px', height: size + 'px', left: Math.round(rnd() * 1080) + 'px', top: '0px', opacity: (0.35 + rnd() * 0.5).toFixed(2) });
+    box.appendChild(el);
+    const y0 = 600 + rnd() * 1500, rise = 700 + rnd() * 900, sway = (rnd() - 0.5) * 80;
+    M.kf(el, 'y', [[0, y0], [CUT_CTA, y0 - rise]]);
+    M.kf(el, 'x', [[0, 0], [CUT_CTA, sway]], { ease: 'softInOut' });
+  }
+})();
+
+/* BEAT 1  HOOK: words at a fast speech rhythm, then they leave while the burger is already turning */
+M.words('#hook1', { at: 3, mech: 'rise', gaps: [4], dist: 90, frames: 12, smear: true });
+M.words('#hook2', { at: 14, mech: 'rise', gaps: [3, 4], dist: 90, frames: 12, smear: true });
+M.exit('#hook', { at: 54, frames: 10, ease: 'accelExit', to: { y: -140, blur: 6 }, smear: true, hide: true });
+
+/* BEAT 2  the code that draws each layer: typed, and the layer answers */
+TYPE_AT.forEach((at, i) => {
+  const until = i < 5 ? TYPE_AT[i + 1] : 170;
+  M.show('#c' + i, at, until);
+  M.type('#c' + i, { at, style: 'fast', seed: 3 + i, caret: '#k' + i, caretOff: until, accentNewest: { color: ACCENT_DARK, frames: 2 } });
+});
+M.mark(LIFT_AT[0], 'show', 'first layer lifts');
+
+/* BEAT 3  into the site */
+M.show('#phoneRig', PHONE_IN[0], CUT_CTA);
+M.kf('#phoneRig', 'y', [[0, 1500], [PHONE_IN[0], 1500], [PHONE_IN[1], 0, 'softLand']]);
+M.kf('#phoneRig', 'scale', [[PHONE_IN[1], 1], [CUT_CTA, 1 + PUSH]]);
+M.words('#site', { at: 198, mech: 'rise', gaps: [4, 5], dist: 80, frames: 12, smear: true });
+// the thumb parks on "Pedir agora", presses, and the film cuts at the deepest point
+const BTN0 = { x: 240 + 12 + 359 + 94, y: 470 + 12 + 92 + 29 };
+const BTN = { x: SLOT.x + (BTN0.x - SLOT.x) * pushAt(282), y: SLOT.y + (BTN0.y - SLOT.y) * pushAt(282) };   // where the push has taken it
+M.kf('#touchPos', 'x', [[0, BTN.x + 60], [270, BTN.x + 60], [282, BTN.x, 'softLand'], [CUT_CTA, BTN.x]]);
+M.kf('#touchPos', 'y', [[0, BTN.y + 260], [270, BTN.y + 260], [282, BTN.y - 26, 'softLand'], [CUT_CTA, BTN.y - 30]]);
+M.kf('#touchPos', 'scale', [[284, 1], [287, 0.82, 'gentleIn']]);
+M.enter('#touch', { at: 270, frames: 10, ease: 'softLand', from: { scale: 2.2, opacity: 0 } });
+M.kf('#btn', 'scale', [[285, 1], [288, 0.9, 'gentleIn']]);
+M.mark(288, 'press', 'Pedir agora');
+
+/* BEAT 4  CTA: BRASA's world becomes CODE SITE's */
+M.cut(CUT_CTA, { hide: ['#world'], show: ['#cta'] });
+M.words('#q1', { at: CUT_CTA, mech: 'rise', gaps: [3, 4], dist: 90, frames: 12, smear: true });
+M.words('#q2', { at: CUT_CTA + 10, mech: 'rise', dist: 90, frames: 12, smear: true });
+M.words('#q3', { at: CUT_CTA + 22, mech: 'rise', gaps: [4, 5], dist: 90, frames: 12, smear: true });
+M.enter('#num', { at: CUT_CTA + 40, frames: 14, ease: 'snapSettle', from: { scale: 1.6, blur: 10 } });
+M.enter('#mark', { at: CUT_CTA + 52, frames: 12, ease: 'softLand', from: { y: 60 }, smear: { axis: 'y', px: 24, frames: 3 } });
+M.kf('#ctaCam', 'scale', [[CUT_CTA + 40, 1.03], [389, 0.96, 'gentleIn']]);
+
+window.__ready = Motion.loaded().then(() => { if (/selftest/.test(location.search)) Motion.selfTest(M, { samples: 24 }); });
+</script>
+</body>
+</html>
