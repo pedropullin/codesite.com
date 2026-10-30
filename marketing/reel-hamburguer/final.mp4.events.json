@@ -1,0 +1,338 @@
+[
+ {
+  "t": 0.1,
+  "frame": 3,
+  "type": "enter",
+  "label": "Esse"
+ },
+ {
+  "t": 0.1,
+  "frame": 3,
+  "type": "word",
+  "label": "Esse"
+ },
+ {
+  "t": 0.2333,
+  "frame": 7,
+  "type": "enter",
+  "label": "hambúrguer"
+ },
+ {
+  "t": 0.2333,
+  "frame": 7,
+  "type": "word",
+  "label": "hambúrguer"
+ },
+ {
+  "t": 0.4667,
+  "frame": 14,
+  "type": "enter",
+  "label": "não"
+ },
+ {
+  "t": 0.4667,
+  "frame": 14,
+  "type": "word",
+  "label": "não"
+ },
+ {
+  "t": 0.5667,
+  "frame": 17,
+  "type": "enter",
+  "label": "é"
+ },
+ {
+  "t": 0.5667,
+  "frame": 17,
+  "type": "word",
+  "label": "é"
+ },
+ {
+  "t": 0.7,
+  "frame": 21,
+  "type": "enter",
+  "label": "foto."
+ },
+ {
+  "t": 0.7,
+  "frame": 21,
+  "type": "word",
+  "label": "foto."
+ },
+ {
+  "t": 1.8,
+  "frame": 54,
+  "type": "exit",
+  "label": "#hook"
+ },
+ {
+  "t": 2.6667,
+  "frame": 80,
+  "type": "show",
+  "label": "#c0"
+ },
+ {
+  "t": 2.6667,
+  "frame": 80,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 2.9333,
+  "frame": 88,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 2.9333,
+  "frame": 88,
+  "type": "show",
+  "label": "first layer lifts"
+ },
+ {
+  "t": 3.0333,
+  "frame": 91,
+  "type": "show",
+  "label": "#c1"
+ },
+ {
+  "t": 3.0333,
+  "frame": 91,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 3.2667,
+  "frame": 98,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 3.4,
+  "frame": 102,
+  "type": "show",
+  "label": "#c2"
+ },
+ {
+  "t": 3.4,
+  "frame": 102,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 3.6333,
+  "frame": 109,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 3.7667,
+  "frame": 113,
+  "type": "show",
+  "label": "#c3"
+ },
+ {
+  "t": 3.7667,
+  "frame": 113,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 3.9667,
+  "frame": 119,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 4.1333,
+  "frame": 124,
+  "type": "show",
+  "label": "#c4"
+ },
+ {
+  "t": 4.1333,
+  "frame": 124,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 4.3,
+  "frame": 129,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 4.5,
+  "frame": 135,
+  "type": "show",
+  "label": "#c5"
+ },
+ {
+  "t": 4.5,
+  "frame": 135,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 4.8,
+  "frame": 144,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 6.0667,
+  "frame": 182,
+  "type": "show",
+  "label": "#phoneRig"
+ },
+ {
+  "t": 6.6667,
+  "frame": 200,
+  "type": "enter",
+  "label": "É"
+ },
+ {
+  "t": 6.6667,
+  "frame": 200,
+  "type": "word",
+  "label": "É"
+ },
+ {
+  "t": 6.8,
+  "frame": 204,
+  "type": "enter",
+  "label": "um"
+ },
+ {
+  "t": 6.8,
+  "frame": 204,
+  "type": "word",
+  "label": "um"
+ },
+ {
+  "t": 6.9667,
+  "frame": 209,
+  "type": "enter",
+  "label": "site."
+ },
+ {
+  "t": 6.9667,
+  "frame": 209,
+  "type": "word",
+  "label": "site."
+ },
+ {
+  "t": 8.2667,
+  "frame": 248,
+  "type": "enter",
+  "label": "#touch"
+ },
+ {
+  "t": 8.9,
+  "frame": 267,
+  "type": "press",
+  "label": "Pedir agora"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "cut",
+  "label": "hide #world show #cta"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "enter",
+  "label": "Quer"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "word",
+  "label": "Quer"
+ },
+ {
+  "t": 9.1,
+  "frame": 273,
+  "type": "enter",
+  "label": "um"
+ },
+ {
+  "t": 9.1,
+  "frame": 273,
+  "type": "word",
+  "label": "um"
+ },
+ {
+  "t": 9.2333,
+  "frame": 277,
+  "type": "enter",
+  "label": "site"
+ },
+ {
+  "t": 9.2333,
+  "frame": 277,
+  "type": "word",
+  "label": "site"
+ },
+ {
+  "t": 9.3333,
+  "frame": 280,
+  "type": "enter",
+  "label": "assim?"
+ },
+ {
+  "t": 9.3333,
+  "frame": 280,
+  "type": "word",
+  "label": "assim?"
+ },
+ {
+  "t": 9.7333,
+  "frame": 292,
+  "type": "enter",
+  "label": "Pede"
+ },
+ {
+  "t": 9.7333,
+  "frame": 292,
+  "type": "word",
+  "label": "Pede"
+ },
+ {
+  "t": 9.8667,
+  "frame": 296,
+  "type": "enter",
+  "label": "o"
+ },
+ {
+  "t": 9.8667,
+  "frame": 296,
+  "type": "word",
+  "label": "o"
+ },
+ {
+  "t": 10.0333,
+  "frame": 301,
+  "type": "enter",
+  "label": "seu."
+ },
+ {
+  "t": 10.0333,
+  "frame": 301,
+  "type": "word",
+  "label": "seu."
+ },
+ {
+  "t": 10.3333,
+  "frame": 310,
+  "type": "enter",
+  "label": "#num"
+ },
+ {
+  "t": 10.7333,
+  "frame": 322,
+  "type": "enter",
+  "label": "#mark"
+ }
+]
