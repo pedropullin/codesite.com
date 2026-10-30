@@ -118,7 +118,7 @@ html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; backgro
 <script src="burger-kit.js"></script>
 <script>
 /* SEEK CONTRACT: everything visible is a pure function of t. */
-const M = Motion.film({ fps: 30, duration: 13, width: 1080, height: 1920, clock: 'smooth' });
+const M = Motion.film({ fps: 30, duration: 12, width: 1080, height: 1920, clock: 'smooth' });
 const E = Motion.ease;
 const ACCENT_DARK = '#7d90ff', ACCENT = '#2b46ff';
 const clamp01 = (x) => Math.min(1, Math.max(0, x));
@@ -126,11 +126,11 @@ const seg = (f, a, b, e = 'softLand') => E[e](clamp01((f - a) / (b - a)));
 const lerp = (a, b, x) => a + (b - a) * x;
 
 /* Frame plan (see STORYBOARD.md) */
-const CUT_CTA = 295;
-const TYPE_AT = [80, 92, 104, 116, 128, 140];       // each function starts typing here
+const CUT_CTA = 270;
+const TYPE_AT = [80, 91, 102, 113, 124, 135];       // each function starts typing here
 const LIFT_AT = TYPE_AT.map((f) => f + 8);           // its layer answers 2 f after the typing lands
-const COLLAPSE = [172, 190];                          // layers fall back together while flying to the phone
-const PHONE_IN = [176, 199];
+const COLLAPSE = [166, 182];                          // layers fall back together and the burger recentres
+const PHONE_IN = [182, 206];                          // dolly out: the coal ground turns out to be the site's own hero
 const LIFT = [1.87, 1.44, 1.12, 0.84, 0.44, 0];      // per-layer rise when unstacked (bottom bun stays on the floor)
 const BASE_Y = [0.85, 0.81, 0.725, 0.715, 0.28, 0];  // assembled heights, as in makeBurger()
 const PUSH = 0.1;                                      // the phone and the 3D camera push in 10 % about the burger slot
@@ -142,8 +142,9 @@ function framing(f) {
   let ty = 1.25, d = lerp(9.4, 9.0, clamp01(f / 50)), e = 9;
   const b = seg(f, 84, 112, 'glide');                 // pull back to fit the unstacked burger
   ty = lerp(ty, 1.85, b); d = lerp(d, 12.0, b); e = lerp(e, 12, b);
-  const c = seg(f, PHONE_IN[0], PHONE_IN[1], 'softLand');   // same frames and ease as the phone, so the burger lands in its slot
-  ty = lerp(ty, 0.8, c); d = lerp(d, 27.1, c); e = lerp(e, 16, c);
+  ty = lerp(ty, 0.8, seg(f, COLLAPSE[0], COLLAPSE[1], 'softInOut'));   // the reassembled burger moves to the frame centre (the slot)
+  const c = seg(f, PHONE_IN[0], PHONE_IN[1], 'softInOut');
+  d = lerp(d, 27.1, c); e = lerp(e, 16, c);
   d /= pushAt(f);                                     // the camera pushes in with the phone (size ~ 1/d)
   const r = (e * Math.PI) / 180;
   return { position: [0, ty + d * Math.sin(r), d * Math.cos(r)], target: [0, ty, 0], fov: 30 };
@@ -203,26 +204,28 @@ M.exit('#hook', { at: 54, frames: 10, ease: 'accelExit', to: { y: -140, blur: 6 
 
 /* BEAT 2  the code that draws each layer: typed, and the layer answers */
 TYPE_AT.forEach((at, i) => {
-  const until = i < 5 ? TYPE_AT[i + 1] : 170;
+  const until = i < 5 ? TYPE_AT[i + 1] : COLLAPSE[0];
   M.show('#c' + i, at, until);
   M.type('#c' + i, { at, style: 'fast', seed: 3 + i, caret: '#k' + i, caretOff: until, accentNewest: { color: ACCENT_DARK, frames: 2 } });
 });
 M.mark(LIFT_AT[0], 'show', 'first layer lifts');
 
 /* BEAT 3  into the site */
+// The phone is scaled about the burger slot so its burger always matches the 3D burger's size (scale = 27.1 / camera distance).
 M.show('#phoneRig', PHONE_IN[0], CUT_CTA);
-M.kf('#phoneRig', 'y', [[0, 1500], [PHONE_IN[0], 1500], [PHONE_IN[1], 0, 'softLand']]);
-M.kf('#phoneRig', 'scale', [[PHONE_IN[1], 1], [CUT_CTA, 1 + PUSH]]);
-M.words('#site', { at: 198, mech: 'rise', gaps: [4, 5], dist: 80, frames: 12, smear: true });
+const phoneScale = [];
+for (let f = PHONE_IN[0]; f <= CUT_CTA; f++) phoneScale.push([f, 27.1 / Math.hypot(...framing(f).position.map((v, i) => v - framing(f).target[i]))]);
+M.kf('#phoneRig', 'scale', phoneScale);
+M.words('#site', { at: 200, mech: 'rise', gaps: [4, 5], dist: 80, frames: 12, smear: true });
 // the thumb parks on "Pedir agora", presses, and the film cuts at the deepest point
 const BTN0 = { x: 240 + 12 + 359 + 94, y: 470 + 12 + 92 + 29 };
-const BTN = { x: SLOT.x + (BTN0.x - SLOT.x) * pushAt(282), y: SLOT.y + (BTN0.y - SLOT.y) * pushAt(282) };   // where the push has taken it
-M.kf('#touchPos', 'x', [[0, BTN.x + 60], [270, BTN.x + 60], [282, BTN.x, 'softLand'], [CUT_CTA, BTN.x]]);
-M.kf('#touchPos', 'y', [[0, BTN.y + 260], [270, BTN.y + 260], [282, BTN.y - 26, 'softLand'], [CUT_CTA, BTN.y - 30]]);
-M.kf('#touchPos', 'scale', [[284, 1], [287, 0.82, 'gentleIn']]);
-M.enter('#touch', { at: 270, frames: 10, ease: 'softLand', from: { scale: 2.2, opacity: 0 } });
-M.kf('#btn', 'scale', [[285, 1], [288, 0.9, 'gentleIn']]);
-M.mark(288, 'press', 'Pedir agora');
+const BTN = { x: SLOT.x + (BTN0.x - SLOT.x) * pushAt(260), y: SLOT.y + (BTN0.y - SLOT.y) * pushAt(260) };   // where the push has taken it
+M.kf('#touchPos', 'x', [[0, BTN.x + 60], [248, BTN.x + 60], [259, BTN.x, 'softLand'], [CUT_CTA, BTN.x + 3]]);
+M.kf('#touchPos', 'y', [[0, BTN.y + 260], [248, BTN.y + 260], [259, BTN.y - 26, 'softLand'], [CUT_CTA, BTN.y - 29]]);
+M.kf('#touchPos', 'scale', [[263, 1], [266, 0.82, 'gentleIn']]);
+M.enter('#touch', { at: 248, frames: 10, ease: 'softLand', from: { scale: 2.2, opacity: 0 } });
+M.kf('#btn', 'scale', [[264, 1], [267, 0.9, 'gentleIn']]);
+M.mark(267, 'press', 'Pedir agora');
 
 /* BEAT 4  CTA: BRASA's world becomes CODE SITE's */
 M.cut(CUT_CTA, { hide: ['#world'], show: ['#cta'] });
@@ -231,7 +234,7 @@ M.words('#q2', { at: CUT_CTA + 10, mech: 'rise', dist: 90, frames: 12, smear: tr
 M.words('#q3', { at: CUT_CTA + 22, mech: 'rise', gaps: [4, 5], dist: 90, frames: 12, smear: true });
 M.enter('#num', { at: CUT_CTA + 40, frames: 14, ease: 'snapSettle', from: { scale: 1.6, blur: 10 } });
 M.enter('#mark', { at: CUT_CTA + 52, frames: 12, ease: 'softLand', from: { y: 60 }, smear: { axis: 'y', px: 24, frames: 3 } });
-M.kf('#ctaCam', 'scale', [[CUT_CTA + 40, 1.03], [389, 0.96, 'gentleIn']]);
+M.kf('#ctaCam', 'scale', [[CUT_CTA + 40, 1.03], [359, 0.96, 'gentleIn']]);
 
 window.__ready = Motion.loaded().then(() => { if (/selftest/.test(location.search)) Motion.selfTest(M, { samples: 24 }); });
 </script>

@@ -1,6 +1,6 @@
 # Reel: "Esse hambúrguer não é foto"
 
-1080x1920, 30 fps, 13.0 s (390 f), clock smooth, blur grammar = per-element smear on type only. No voice or music (no ElevenLabs key): the owner adds a trending Instagram sound on top.
+1080x1920, 30 fps, 12.0 s (360 f), clock smooth, blur grammar = per-element smear on type only. No voice or music (no ElevenLabs key): the owner adds a trending Instagram sound on top.
 
 ## PAGE
 - **Problem:** small businesses lose customers who search before they buy and find no site, or a site that looks like everybody's template.
@@ -38,12 +38,12 @@
 | f | role | buys | copy | what moves | handoff |
 |---|---|---|---|---|---|
 | 0-66 | hook | the viewer takes it for a food photo and reads the claim | "Esse hambúrguer / não é foto." | camera creeps in; words rise 3-4 f apart; at f50 the burger whips a full turn with a tilt | the spin is already moving when the type leaves (cut on motion) |
-| 66-172 | turn/proof | the viewer sees it is built from code | `makeTopBun()` ... `makeBottomBun()` | each function is typed, and 2 f after its `()` lands that layer lifts off; slow orbit | the fanned burger collapses and flies toward the frame centre |
-| 172-295 | proof | the viewer sees it is a real site, made for a business | "É um site." | the phone rises while the burger shrinks into the hero slot of the real BRASA 41 mobile page; burger keeps turning like on the site; phone drifts; the thumb parks and presses "Pedir agora" | cut on the press, at max compression |
-| 295-390 | cta | the viewer knows what to do next | "Quer um site assim? / Pede o seu." + WhatsApp number + CODE SITE | words rise; the number lands from 1.6x; the mark rises; the whole lockup keeps contracting | ends in motion |
+| 66-182 | turn/proof | the viewer sees it is built from code | `makeTopBun()` ... `makeBottomBun()` | each function is typed, and 2 f after its `()` lands that layer lifts off; slow orbit; at f166 the layers fall back and the burger moves to the frame centre | the burger, centred, is the carried object |
+| 182-270 | proof | the viewer sees it is a real site, made for a business | "É um site." | the coal ground turns out to be the BRASA 41 hero: the real mobile page appears around the burger at 2.3x and the camera dollies out to the whole phone (phone scale = 27.1 / camera distance, so the 3D burger stays in the page's burger slot); slow push-in; the thumb parks and presses "Pedir agora" | cut on the press, at max compression |
+| 270-360 | cta | the viewer knows what to do next | "Quer um site assim? / Pede o seu." + WhatsApp number + CODE SITE | words rise; the number lands from 1.6x; the mark rises; the whole lockup keeps contracting | ends in motion |
 
-Importance: the turn (f50-80) and the unstacking are "the point" (2 of 4 beats share it, the explode is the one hero). CTA = 95 f = 24 % of the film.
+Importance: the turn (f50-80) and the unstacking are "the point" (2 of 4 beats share it, the explode is the one hero). CTA = 90 f = 25 % of the film.
 
 Picture with the text covered: a burger that spins, unstacks and drops into a phone showing a burger site; then a phone number. It still tells the story.
 
-Gates planned: G1 code at 76 px (0.040 H), the phone screen 0.53 W; G3 CTA 24 %, resolved hold short because the lockup keeps contracting; G4 one hero per frame (burger, then phone with the burger in it, then the number).
+Gates planned: G1 code at 76 px (0.040 H), the phone screen 0.53 W; G3 CTA 25 %, resolved hold short because the lockup keeps contracting; G4 one hero per frame (burger, then phone with the burger in it, then the number).
