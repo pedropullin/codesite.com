@@ -204,7 +204,7 @@ M.exit('#hook', { at: 54, frames: 10, ease: 'accelExit', to: { y: -140, blur: 6 
 
 /* BEAT 2  the code that draws each layer: typed, and the layer answers */
 TYPE_AT.forEach((at, i) => {
-  const until = i < 5 ? TYPE_AT[i + 1] : COLLAPSE[0];
+  const until = i < 5 ? TYPE_AT[i + 1] - 1 : COLLAPSE[0];   // the next caret parks 1 f early, so this line leaves first
   M.show('#c' + i, at, until);
   M.type('#c' + i, { at, style: 'fast', seed: 3 + i, caret: '#k' + i, caretOff: until, accentNewest: { color: ACCENT_DARK, frames: 2 } });
 });
