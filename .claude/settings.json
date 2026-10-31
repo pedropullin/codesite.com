@@ -1,5 +1,15 @@
 {
   "env": {
-    "CHROME_PATH": "/home/user/codesite.com/.claude/chrome-no-sandbox.sh"
+    "CHROME_PATH": "/home/user/codesite.com/.claude/chrome-no-sandbox.sh",
+    "CLAUDE_MEM_ONLINE_OPTIN": "false",
+    "CLAUDE_MEM_PROVIDER": "claude"
+  },
+  "extraKnownMarketplaces": {
+    "thedotmack": {
+      "source": { "source": "github", "repo": "thedotmack/claude-mem" }
+    }
+  },
+  "enabledPlugins": {
+    "claude-mem@thedotmack": true
   }
 }
