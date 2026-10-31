@@ -4,7 +4,7 @@ const STEPS = [
   {
     cmd: "git init",
     title: "Descoberta",
-    text: "Entendemos o seu negócio, público e objetivos numa conversa rápida — sem enrolação.",
+    text: "Entendemos o seu negócio, público e objetivos numa conversa rápida, sem enrolação.",
   },
   {
     cmd: "design --figma",
@@ -19,35 +19,39 @@ const STEPS = [
   {
     cmd: "deploy --prod",
     title: "Lançamento",
-    text: "Publicamos com domínio, SEO e analytics configurados — e seguimos dando suporte.",
+    text: "Publicamos com domínio, SEO e analytics configurados, e seguimos dando suporte.",
   },
 ];
 
 export default function Process() {
   return (
-    <section id="processo" className="mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-      <Reveal className="mb-14 text-center">
-        <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
-          Quatro commits
-          <br />
-          até o ar.
-        </h2>
-      </Reveal>
+    <section id="processo" className="bg-bg-soft">
+      <div className="mx-auto max-w-7xl px-5 py-28 md:px-10 md:py-36">
+        <Reveal>
+          <h2 className="font-display text-[clamp(2.6rem,7vw,6.5rem)] font-bold leading-[0.95] tracking-[-0.04em]">
+            Quatro commits
+            <br />
+            até o ar.
+          </h2>
+        </Reveal>
 
-      <ol className="grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-2 lg:grid-cols-4">
-        {STEPS.map((s, i) => (
-          <li key={s.title} className="bg-bg">
-            <Reveal delay={i * 90} className="flex h-full flex-col p-7 md:p-8">
-              <code className="inline-flex w-fit rounded-md bg-ink px-2.5 py-1 font-mono text-[0.72rem] text-paper">
-                <span className="mr-1.5 text-brand">$</span>
-                {s.cmd}
-              </code>
-              <h3 className="mt-5 font-display text-2xl font-bold tracking-tight">{s.title}</h3>
-              <p className="mt-3 leading-relaxed text-ink-soft">{s.text}</p>
-            </Reveal>
-          </li>
-        ))}
-      </ol>
+        <ol className="mt-16 grid gap-3 md:mt-24 md:grid-cols-2 lg:grid-cols-4">
+          {STEPS.map((s, i) => (
+            <li key={s.title}>
+              <Reveal delay={i * 80} className="flex h-full flex-col rounded-3xl bg-paper p-7 md:p-8">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
+                  <h3 className="font-display text-3xl font-bold tracking-[-0.02em]">{s.title}</h3>
+                  <code className="whitespace-nowrap rounded-md bg-ink px-2 py-0.5 font-mono text-[0.9rem] text-paper">
+                    <span className="mr-1.5 text-[#8fa0ff]">$</span>
+                    {s.cmd}
+                  </code>
+                </div>
+                <p className="mt-3 text-[1.05rem] leading-relaxed text-ink">{s.text}</p>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }

@@ -26,7 +26,7 @@ export default function Navbar() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-          scrolled || open ? "border-b border-line bg-bg/85 backdrop-blur-md" : "border-b border-transparent"
+          scrolled || open ? "bg-bg" : "bg-transparent"
         }`}
       >
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-20 md:px-10">
@@ -40,7 +40,7 @@ export default function Navbar() {
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="font-mono text-[0.72rem] uppercase tracking-[0.16em] text-ink-soft transition-colors hover:text-ink"
+                  className="text-[0.95rem] font-medium text-ink transition-colors hover:text-brand"
                 >
                   {l.label}
                 </a>
@@ -53,7 +53,7 @@ export default function Navbar() {
               href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center gap-2 rounded-full bg-ink px-5 py-2.5 font-mono text-[0.72rem] font-medium uppercase tracking-[0.14em] text-paper transition-colors hover:bg-brand sm:inline-flex"
+              className="hidden items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-[0.95rem] font-semibold text-paper transition-[background-color,transform] duration-200 hover:bg-brand active:scale-[0.97] sm:inline-flex"
             >
               <WhatsAppIcon className="h-4 w-4" />
               Orçamento
@@ -61,7 +61,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="relative flex h-11 w-11 items-center justify-center rounded-full border border-line md:hidden"
+              className="relative flex h-11 w-11 items-center justify-center rounded-full bg-bg-soft md:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Fechar menu" : "Abrir menu"}
@@ -79,8 +79,8 @@ export default function Navbar() {
 
       <div
         id="mobile-menu"
-        className={`fixed inset-0 z-40 flex flex-col bg-bg px-5 pt-24 pb-10 transition-[opacity,transform] duration-300 md:hidden ${
-          open ? "opacity-100" : "pointer-events-none -translate-y-3 opacity-0"
+        className={`fixed inset-0 z-40 flex flex-col bg-bg px-5 pt-24 pb-10 transition-[opacity,transform,visibility] duration-300 md:hidden ${
+          open ? "visible opacity-100" : "pointer-events-none invisible -translate-y-3 opacity-0"
         }`}
         aria-hidden={!open}
       >
@@ -91,7 +91,7 @@ export default function Navbar() {
                 href={l.href}
                 onClick={() => setOpen(false)}
                 tabIndex={open ? 0 : -1}
-                className="flex items-baseline gap-4 border-b border-line py-4 font-display text-4xl font-bold uppercase tracking-tight"
+                className="flex items-baseline gap-4 py-3 font-display text-5xl font-bold tracking-[-0.03em]"
               >
                 {l.label}
               </a>
@@ -110,7 +110,7 @@ export default function Navbar() {
                   target={s.id === "email" ? undefined : "_blank"}
                   rel="noopener noreferrer"
                   tabIndex={open ? 0 : -1}
-                  className="flex flex-col items-center gap-2 rounded-2xl border border-line py-4 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-ink-soft"
+                  className="flex flex-col items-center gap-2 rounded-2xl bg-bg-soft py-4 text-sm font-medium text-ink"
                 >
                   <Icon className="h-5 w-5 text-ink" />
                   {s.label}

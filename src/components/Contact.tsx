@@ -45,19 +45,19 @@ export default function Contact() {
   const channels = socials.filter((s) => s.id !== "linkedin");
 
   return (
-    <section id="contato" className="relative overflow-hidden border-t border-line py-24 grid-bg md:py-32">
+    <section id="contato" className="relative overflow-hidden bg-bg py-28 md:py-36">
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <Reveal className="text-center">
-          <h2 className="mx-auto max-w-5xl font-display text-[13vw] font-bold uppercase leading-[0.9] tracking-[-0.035em] sm:text-[9vw] lg:text-[7.2rem]">
+          <h2 className="mx-auto max-w-5xl font-display text-[clamp(2.8rem,9vw,8rem)] font-bold leading-[0.92] tracking-[-0.045em]">
             Vamos tirar
             <br />
-            <span className="text-brand">do papel.</span>
+            do papel.
           </h2>
           <a
             href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-10 inline-flex items-center gap-3 rounded-full bg-ink px-9 py-5 font-mono text-[0.8rem] font-medium uppercase tracking-[0.16em] text-paper transition-colors duration-300 hover:bg-brand"
+            className="group mt-10 inline-flex items-center gap-3 rounded-full bg-ink px-9 py-5 text-lg font-semibold text-paper transition-[background-color,transform] duration-200 hover:bg-brand active:scale-[0.97]"
           >
             <WhatsAppIcon className="h-5 w-5" />
             Vamos criar
@@ -76,15 +76,13 @@ export default function Contact() {
                       href={s.href}
                       target={s.id === "email" ? undefined : "_blank"}
                       rel="noopener noreferrer"
-                      className={`group flex items-center gap-4 rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-0.5 ${
-                        s.id === "whatsapp"
-                          ? "border-brand bg-brand text-paper hover:shadow-[0_20px_40px_-20px_rgba(43,70,255,0.8)]"
-                          : "border-line bg-paper hover:border-ink"
+                      className={`group flex items-center gap-4 rounded-2xl p-5 transition-[background-color,transform] duration-200 hover:-translate-y-0.5 ${
+                        s.id === "whatsapp" ? "bg-brand text-paper hover:bg-[#2238e0]" : "bg-bg-soft hover:bg-[#dededa]"
                       }`}
                     >
                       <span
                         className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${
-                          s.id === "whatsapp" ? "bg-paper/15" : "bg-bg-soft"
+                          s.id === "whatsapp" ? "bg-paper/15" : "bg-paper"
                         }`}
                       >
                         <Icon className="h-6 w-6" />
@@ -92,7 +90,7 @@ export default function Contact() {
                       <span className="min-w-0 flex-1">
                         <span className="block font-display text-lg font-bold">{s.label}</span>
                         <span
-                          className={`block truncate font-mono text-[0.72rem] ${
+                          className={`block truncate text-[0.95rem] ${
                             s.id === "whatsapp" ? "text-paper/75" : "text-ink-soft"
                           }`}
                         >
@@ -108,19 +106,19 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={120}>
-            <form onSubmit={sendWhatsApp} className="rounded-3xl border border-line bg-paper p-6 md:p-8" noValidate>
+            <form onSubmit={sendWhatsApp} className="rounded-3xl bg-bg-soft p-6 md:p-8" noValidate>
               <h3 className="font-display text-2xl font-bold tracking-tight">Conte sobre o projeto</h3>
-              <p className="mt-1 text-sm text-ink-soft">
-                A mensagem já vai pronta para o WhatsApp ou e-mail — é só enviar.
+              <p className="mt-1 text-[0.95rem] text-ink-soft">
+                A mensagem já vai pronta para o WhatsApp ou e-mail, é só enviar.
               </p>
 
               <label className="mt-6 block">
-                <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-ink-soft">Seu nome</span>
+                <span className="text-[0.95rem] font-semibold text-ink">Seu nome</span>
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   autoComplete="name"
-                  className="mt-2 w-full rounded-xl border border-line bg-bg px-4 py-3 outline-none transition-colors focus:border-brand"
+                  className="mt-2 w-full rounded-xl border border-line bg-paper px-4 py-3 outline-none transition-colors focus:border-brand"
                   placeholder="Como podemos te chamar?"
                   aria-invalid={Boolean(error)}
                   aria-describedby={error ? "contact-error" : undefined}
@@ -128,7 +126,7 @@ export default function Contact() {
               </label>
 
               <fieldset className="mt-5">
-                <legend className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-ink-soft">
+                <legend className="text-[0.95rem] font-semibold text-ink">
                   Tipo de projeto
                 </legend>
                 <div className="mt-2 flex flex-wrap gap-2">
@@ -142,7 +140,7 @@ export default function Contact() {
                         onChange={() => setType(t)}
                         className="peer sr-only"
                       />
-                      <span className="block rounded-full border border-line px-3.5 py-2 text-sm transition-colors peer-checked:border-ink peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:outline-brand hover:border-ink">
+                      <span className="block rounded-full bg-paper px-3.5 py-2 text-[0.95rem] transition-colors peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:outline-brand hover:bg-[#dededa]">
                         {t}
                       </span>
                     </label>
@@ -151,14 +149,14 @@ export default function Contact() {
               </fieldset>
 
               <label className="mt-5 block">
-                <span className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-ink-soft">
+                <span className="text-[0.95rem] font-semibold text-ink">
                   Mensagem (opcional)
                 </span>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   rows={4}
-                  className="mt-2 w-full resize-none rounded-xl border border-line bg-bg px-4 py-3 outline-none transition-colors focus:border-brand"
+                  className="mt-2 w-full resize-none rounded-xl border border-line bg-paper px-4 py-3 outline-none transition-colors focus:border-brand"
                   placeholder="Prazo, referências, o que você imagina…"
                 />
               </label>
@@ -172,7 +170,7 @@ export default function Contact() {
               <div className="mt-6 grid gap-2 sm:grid-cols-2">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-4 font-mono text-[0.74rem] font-medium uppercase tracking-[0.14em] text-paper transition-colors hover:bg-brand"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-4 text-base font-semibold text-paper transition-[background-color,transform] duration-200 hover:bg-brand active:scale-[0.97]"
                 >
                   <WhatsAppIcon className="h-4 w-4" />
                   Enviar no WhatsApp
@@ -180,7 +178,7 @@ export default function Contact() {
                 <button
                   type="button"
                   onClick={sendEmail}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-line px-6 py-4 font-mono text-[0.74rem] font-medium uppercase tracking-[0.14em] transition-colors hover:border-ink"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-paper px-6 py-4 text-base font-semibold transition-[background-color,transform] duration-200 hover:bg-[#dededa] active:scale-[0.97]"
                 >
                   <MailIcon className="h-4 w-4" />
                   Enviar por e-mail

@@ -136,7 +136,7 @@ function run(raw: string): { output: ReactNode; kind?: "out" | "err"; clear?: bo
     return {
       output: (
         <span>
-          <span className="text-[#5ee39a]">✓</span> abrindo {s.label}… se nada abriu,{" "}
+          <span className="text-[#5ee39a]" /* taste-skill-ignore: shell output glyph */>✓</span> abrindo {s.label}… se nada abriu,{" "}
           <ExtLink href={s.href}>clique aqui</ExtLink>.
         </span>
       ),
@@ -200,15 +200,15 @@ export default function Terminal() {
   };
 
   return (
-    <section id="terminal" className="relative bg-ink py-24 text-paper grid-bg-dark md:py-32">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-        <Reveal className="text-center">
-          <h2 className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-[-0.03em] md:text-7xl">
+    <section id="terminal" className="relative bg-ink py-28 text-paper md:py-36">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+        <Reveal>
+          <h2 className="font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-bold leading-[0.95] tracking-[-0.04em]">
             Fale com a gente
             <br />
-            <span className="text-brand">em código.</span>
+            em código.
           </h2>
-          <p className="mx-auto mt-6 max-w-md leading-relaxed text-paper/60">
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-paper/85">
             Um terminal de verdade: digite um comando e ele executa. Experimente <code className="text-paper">whatsapp</code>,{" "}
             <code className="text-paper">projetos</code> ou <code className="text-paper">discord</code>.
           </p>
@@ -216,19 +216,20 @@ export default function Terminal() {
 
         <Reveal delay={120}>
           <div
-            className="overflow-hidden rounded-2xl border border-paper/10 bg-[#111114] shadow-[0_40px_120px_-40px_rgba(43,70,255,0.55)]"
+            data-ui
+            className="overflow-hidden rounded-2xl border border-paper/10 bg-[#111114]"
             onClick={() => input.current?.focus({ preventScroll: true })}
           >
             <div className="flex items-center gap-2 border-b border-paper/10 px-4 py-3">
               <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
               <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
               <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-              <span className="ml-3 font-mono text-[0.7rem] text-paper/40">codesite — zsh</span>
+              <span className="ml-3 font-mono text-[0.7rem] text-paper/40" /* taste-skill-ignore: a working shell keeps its terminal styling */>codesite — zsh</span>
             </div>
 
             <div
               ref={body}
-              className="h-[320px] overflow-y-auto px-4 py-4 font-mono text-[0.8rem] leading-relaxed wrap-anywhere sm:px-5 sm:text-[0.82rem] md:h-[360px]"
+              className="h-[320px] overflow-y-auto px-4 py-4 font-mono text-[0.8rem] leading-relaxed wrap-anywhere sm:px-5 sm:text-[0.82rem] md:h-[360px]" /* taste-skill-ignore: a working shell keeps its terminal styling */
               aria-live="polite"
             >
               {lines.map((l) => (
@@ -263,7 +264,7 @@ export default function Terminal() {
               </form>
             </div>
 
-            <div className="flex flex-wrap gap-2 border-t border-paper/10 px-4 py-3">
+            <div className="flex flex-wrap gap-2 border-t border-paper/10 px-4 py-3" /* taste-skill-ignore: a working shell keeps its terminal styling */>
               {SHORTCUTS.map((c) => (
                 <button
                   key={c}
@@ -272,7 +273,7 @@ export default function Terminal() {
                     e.stopPropagation();
                     exec(c);
                   }}
-                  className="rounded-full border border-paper/15 px-3 py-1.5 font-mono text-[0.7rem] text-paper/70 transition-colors hover:border-brand hover:bg-brand hover:text-paper"
+                  className="rounded-full border border-paper/15 px-3 py-1.5 font-mono text-[0.7rem] text-paper/70 transition-colors hover:border-brand hover:bg-brand hover:text-paper" /* taste-skill-ignore: a working shell keeps its terminal styling */
                 >
                   {c}
                 </button>

@@ -7,6 +7,10 @@ export type Project = {
   url: string;
   theme: ProjectTheme;
   stack: string[];
+  /** Real screenshots of the live project, in public/work. */
+  shots: { desktop: string; mobile: string };
+  /** Optional muted loop shown in place of the phone screenshot. */
+  clip?: string;
 };
 
 export const projects: Project[] = [
@@ -18,6 +22,7 @@ export const projects: Project[] = [
     url: "https://saintami.vercel.app/",
     theme: "graphite",
     stack: ["Landing page", "Catálogo", "WhatsApp"],
+    shots: { desktop: "/work/saintami-desktop.jpg", mobile: "/work/saintami-mobile.jpg" },
   },
   {
     name: "Prospecta.ai",
@@ -27,6 +32,7 @@ export const projects: Project[] = [
     url: "https://prospecta-ai-ashy.vercel.app/",
     theme: "electric",
     stack: ["SaaS", "Planos", "CRM"],
+    shots: { desktop: "/work/prospecta-desktop.jpg", mobile: "/work/prospecta-mobile.jpg" },
   },
   {
     name: "BRASA 41",
@@ -36,5 +42,7 @@ export const projects: Project[] = [
     url: "https://codesite.online/projetos/brasa41",
     theme: "ember",
     stack: ["Landing page", "3D", "Cardápio"],
+    shots: { desktop: "/work/brasa41-desktop.jpg", mobile: "/work/brasa41-mobile.jpg" },
+    clip: "/work/brasa41-reel.mp4",
   },
 ];

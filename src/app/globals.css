@@ -5,16 +5,16 @@
 
 /* CODE SITE palette — same tokens as codesite.online. */
 :root {
-  --bg: #f5f3ee;
-  --bg-soft: #eeeae1;
+  --bg: #f6f6f4;
+  --bg-soft: #ebebe8;
   --ink: #0b0b0c;
-  --ink-soft: #6b675e;
-  --ink-faint: #a8a498;
+  --ink-soft: #45454a;
+  --ink-faint: #8a8a8f;
   --line: rgba(11, 11, 12, 0.13);
   --line-soft: rgba(11, 11, 12, 0.07);
   --brand: #2b46ff;
   --brand-soft: rgba(43, 70, 255, 0.08);
-  --paper: #fbfaf7;
+  --paper: #fcfcfc;
 
   /* shadcn/ui tokens mapped onto the palette so src/components/ui still fits. */
   --radius: 0.75rem;
@@ -104,21 +104,6 @@
     outline: 2px solid var(--brand);
     outline-offset: 3px;
   }
-}
-
-/* Faint engineering grid behind the hero and dark panels. */
-.grid-bg {
-  background-image:
-    linear-gradient(var(--line-soft) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-.grid-bg-dark {
-  background-image:
-    linear-gradient(rgba(251, 250, 247, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(251, 250, 247, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
 }
 
 /* Scroll reveal, toggled by <Reveal>. */
