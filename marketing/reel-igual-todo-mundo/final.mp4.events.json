@@ -1,0 +1,302 @@
+[
+ {
+  "t": 0.1333,
+  "frame": 4,
+  "type": "enter",
+  "label": "Seu"
+ },
+ {
+  "t": 0.1333,
+  "frame": 4,
+  "type": "word",
+  "label": "Seu"
+ },
+ {
+  "t": 0.2667,
+  "frame": 8,
+  "type": "enter",
+  "label": "site"
+ },
+ {
+  "t": 0.2667,
+  "frame": 8,
+  "type": "word",
+  "label": "site"
+ },
+ {
+  "t": 0.4,
+  "frame": 12,
+  "type": "enter",
+  "label": "é"
+ },
+ {
+  "t": 0.4,
+  "frame": 12,
+  "type": "word",
+  "label": "é"
+ },
+ {
+  "t": 0.5333,
+  "frame": 16,
+  "type": "enter",
+  "label": "igual"
+ },
+ {
+  "t": 0.5333,
+  "frame": 16,
+  "type": "word",
+  "label": "igual"
+ },
+ {
+  "t": 0.6,
+  "frame": 18,
+  "type": "enter",
+  "label": "a"
+ },
+ {
+  "t": 0.6,
+  "frame": 18,
+  "type": "word",
+  "label": "a"
+ },
+ {
+  "t": 0.7333,
+  "frame": 22,
+  "type": "enter",
+  "label": "esse?"
+ },
+ {
+  "t": 0.7333,
+  "frame": 22,
+  "type": "word",
+  "label": "esse?"
+ },
+ {
+  "t": 2.3333,
+  "frame": 70,
+  "type": "exit",
+  "label": "#aBox"
+ },
+ {
+  "t": 2.8667,
+  "frame": 86,
+  "type": "enter",
+  "label": "Template"
+ },
+ {
+  "t": 2.8667,
+  "frame": 86,
+  "type": "word",
+  "label": "Template"
+ },
+ {
+  "t": 3,
+  "frame": 90,
+  "type": "enter",
+  "label": "deixa"
+ },
+ {
+  "t": 3,
+  "frame": 90,
+  "type": "word",
+  "label": "deixa"
+ },
+ {
+  "t": 3.2,
+  "frame": 96,
+  "type": "enter",
+  "label": "todo"
+ },
+ {
+  "t": 3.2,
+  "frame": 96,
+  "type": "word",
+  "label": "todo"
+ },
+ {
+  "t": 3.3333,
+  "frame": 100,
+  "type": "enter",
+  "label": "mundo"
+ },
+ {
+  "t": 3.3333,
+  "frame": 100,
+  "type": "word",
+  "label": "mundo"
+ },
+ {
+  "t": 3.4667,
+  "frame": 104,
+  "type": "enter",
+  "label": "igual."
+ },
+ {
+  "t": 3.4667,
+  "frame": 104,
+  "type": "word",
+  "label": "igual."
+ },
+ {
+  "t": 5,
+  "frame": 150,
+  "type": "exit",
+  "label": "#bBox"
+ },
+ {
+  "t": 5.7333,
+  "frame": 172,
+  "type": "cut",
+  "label": "template -> burger (match on the spin)"
+ },
+ {
+  "t": 6.3333,
+  "frame": 190,
+  "type": "enter",
+  "label": "Do"
+ },
+ {
+  "t": 6.3333,
+  "frame": 190,
+  "type": "word",
+  "label": "Do"
+ },
+ {
+  "t": 6.4667,
+  "frame": 194,
+  "type": "enter",
+  "label": "zero,"
+ },
+ {
+  "t": 6.4667,
+  "frame": 194,
+  "type": "word",
+  "label": "zero,"
+ },
+ {
+  "t": 6.6667,
+  "frame": 200,
+  "type": "enter",
+  "label": "com"
+ },
+ {
+  "t": 6.6667,
+  "frame": 200,
+  "type": "word",
+  "label": "com"
+ },
+ {
+  "t": 6.8,
+  "frame": 204,
+  "type": "enter",
+  "label": "a"
+ },
+ {
+  "t": 6.8,
+  "frame": 204,
+  "type": "word",
+  "label": "a"
+ },
+ {
+  "t": 6.9333,
+  "frame": 208,
+  "type": "enter",
+  "label": "sua"
+ },
+ {
+  "t": 6.9333,
+  "frame": 208,
+  "type": "word",
+  "label": "sua"
+ },
+ {
+  "t": 7.0667,
+  "frame": 212,
+  "type": "enter",
+  "label": "cara."
+ },
+ {
+  "t": 7.0667,
+  "frame": 212,
+  "type": "word",
+  "label": "cara."
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "cut",
+  "label": "hide #world show #cta"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "enter",
+  "label": "Quer"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "word",
+  "label": "Quer"
+ },
+ {
+  "t": 9.1,
+  "frame": 273,
+  "type": "enter",
+  "label": "o"
+ },
+ {
+  "t": 9.1,
+  "frame": 273,
+  "type": "word",
+  "label": "o"
+ },
+ {
+  "t": 9.2333,
+  "frame": 277,
+  "type": "enter",
+  "label": "seu"
+ },
+ {
+  "t": 9.2333,
+  "frame": 277,
+  "type": "word",
+  "label": "seu"
+ },
+ {
+  "t": 9.3333,
+  "frame": 280,
+  "type": "enter",
+  "label": "do"
+ },
+ {
+  "t": 9.3333,
+  "frame": 280,
+  "type": "word",
+  "label": "do"
+ },
+ {
+  "t": 9.4667,
+  "frame": 284,
+  "type": "enter",
+  "label": "zero?"
+ },
+ {
+  "t": 9.4667,
+  "frame": 284,
+  "type": "word",
+  "label": "zero?"
+ },
+ {
+  "t": 10,
+  "frame": 300,
+  "type": "enter",
+  "label": "#num"
+ },
+ {
+  "t": 10.4,
+  "frame": 312,
+  "type": "enter",
+  "label": "#mark"
+ }
+]
