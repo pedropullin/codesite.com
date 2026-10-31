@@ -1,0 +1,236 @@
+[
+ {
+  "t": 0.1333,
+  "frame": 4,
+  "type": "enter",
+  "label": "Cartão"
+ },
+ {
+  "t": 0.1333,
+  "frame": 4,
+  "type": "word",
+  "label": "Cartão"
+ },
+ {
+  "t": 0.2667,
+  "frame": 8,
+  "type": "enter",
+  "label": "de"
+ },
+ {
+  "t": 0.2667,
+  "frame": 8,
+  "type": "word",
+  "label": "de"
+ },
+ {
+  "t": 0.4,
+  "frame": 12,
+  "type": "enter",
+  "label": "visita"
+ },
+ {
+  "t": 0.4,
+  "frame": 12,
+  "type": "word",
+  "label": "visita"
+ },
+ {
+  "t": 0.5333,
+  "frame": 16,
+  "type": "enter",
+  "label": "acaba"
+ },
+ {
+  "t": 0.5333,
+  "frame": 16,
+  "type": "word",
+  "label": "acaba"
+ },
+ {
+  "t": 0.6667,
+  "frame": 20,
+  "type": "enter",
+  "label": "na"
+ },
+ {
+  "t": 0.6667,
+  "frame": 20,
+  "type": "word",
+  "label": "na"
+ },
+ {
+  "t": 0.8333,
+  "frame": 25,
+  "type": "enter",
+  "label": "gaveta."
+ },
+ {
+  "t": 0.8333,
+  "frame": 25,
+  "type": "word",
+  "label": "gaveta."
+ },
+ {
+  "t": 3.0667,
+  "frame": 92,
+  "type": "exit",
+  "label": "#hook"
+ },
+ {
+  "t": 5,
+  "frame": 150,
+  "type": "cut",
+  "label": "QR -> homepage (black on cream)"
+ },
+ {
+  "t": 6.2,
+  "frame": 186,
+  "type": "enter",
+  "label": "Site"
+ },
+ {
+  "t": 6.2,
+  "frame": 186,
+  "type": "word",
+  "label": "Site"
+ },
+ {
+  "t": 6.3333,
+  "frame": 190,
+  "type": "enter",
+  "label": "fica"
+ },
+ {
+  "t": 6.3333,
+  "frame": 190,
+  "type": "word",
+  "label": "fica"
+ },
+ {
+  "t": 6.4667,
+  "frame": 194,
+  "type": "enter",
+  "label": "no"
+ },
+ {
+  "t": 6.4667,
+  "frame": 194,
+  "type": "word",
+  "label": "no"
+ },
+ {
+  "t": 6.5333,
+  "frame": 196,
+  "type": "enter",
+  "label": "bolso"
+ },
+ {
+  "t": 6.5333,
+  "frame": 196,
+  "type": "word",
+  "label": "bolso"
+ },
+ {
+  "t": 6.6667,
+  "frame": 200,
+  "type": "enter",
+  "label": "do"
+ },
+ {
+  "t": 6.6667,
+  "frame": 200,
+  "type": "word",
+  "label": "do"
+ },
+ {
+  "t": 6.8,
+  "frame": 204,
+  "type": "enter",
+  "label": "cliente."
+ },
+ {
+  "t": 6.8,
+  "frame": 204,
+  "type": "word",
+  "label": "cliente."
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "cut",
+  "label": "hide #world show #cta"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "enter",
+  "label": "Site"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "word",
+  "label": "Site"
+ },
+ {
+  "t": 9.1,
+  "frame": 273,
+  "type": "enter",
+  "label": "não"
+ },
+ {
+  "t": 9.1,
+  "frame": 273,
+  "type": "word",
+  "label": "não"
+ },
+ {
+  "t": 9.2333,
+  "frame": 277,
+  "type": "enter",
+  "label": "vai"
+ },
+ {
+  "t": 9.2333,
+  "frame": 277,
+  "type": "word",
+  "label": "vai"
+ },
+ {
+  "t": 9.3333,
+  "frame": 280,
+  "type": "enter",
+  "label": "pra"
+ },
+ {
+  "t": 9.3333,
+  "frame": 280,
+  "type": "word",
+  "label": "pra"
+ },
+ {
+  "t": 9.4667,
+  "frame": 284,
+  "type": "enter",
+  "label": "gaveta."
+ },
+ {
+  "t": 9.4667,
+  "frame": 284,
+  "type": "word",
+  "label": "gaveta."
+ },
+ {
+  "t": 10,
+  "frame": 300,
+  "type": "enter",
+  "label": "#num"
+ },
+ {
+  "t": 10.4,
+  "frame": 312,
+  "type": "enter",
+  "label": "#mark"
+ }
+]
