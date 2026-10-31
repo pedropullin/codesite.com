@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Cartão de visita</title>
+<meta name="viewport" content="width=1080, height=1920">
+<!-- Render with:
+     node .claude/skills/motionmaxxing/scripts/render.mjs marketing/reel-cartao/index.html marketing/reel-cartao/final.mp4 --grain 0.03 -->
+<style>
+@font-face { font-family: Bricolage; font-weight: 800; src: url(../reel-hamburguer/assets/fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2"); }
+@font-face { font-family: Bricolage; font-weight: 700; src: url(../reel-hamburguer/assets/fonts/bricolage-grotesque-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: Plex; font-weight: 500; src: url(../reel-hamburguer/assets/fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2"); }
+/* ACCENT = CODE SITE: the slash of the mark and "gaveta." in the CTA */
+:root { --ink: #0b0b0c; --cream: #f4f1ea; --accent: #2b46ff; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#main { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; background: #120d09; font-family: Bricolage, sans-serif; }
+.scene { position: absolute; inset: 0; }
+#world { background:
+  radial-gradient(ellipse 70% 40% at 60% 30%, rgba(255, 196, 130, .22), transparent 70%),
+  radial-gradient(ellipse 90% 70% at 50% 50%, transparent 50%, rgba(0, 0, 0, .65)),
+  #17110c; }
+#gl { position: absolute; inset: 0; width: 1080px; height: 1920px; z-index: 2; }
+.say { position: absolute; left: 0; width: 1080px; text-align: center; color: var(--cream); font-weight: 800; letter-spacing: -0.035em; white-space: pre; z-index: 3; text-shadow: 0 6px 40px rgba(0, 0, 0, .4); }
+#h1, #h2, #p1, #p2 { font-size: 112px; line-height: 120px; }
+#h1, #p1 { top: 230px; }
+#h2, #p2 { top: 350px; }
+#hook, #pocket { position: absolute; inset: 0; z-index: 3; }
+
+#cta { background:
+  radial-gradient(ellipse 90% 50% at 50% 18%, #fffdf8, rgba(255, 253, 248, 0) 70%),
+  radial-gradient(ellipse 100% 80% at 50% 50%, transparent 60%, rgba(60, 50, 30, .12)),
+  #efebe2; color: var(--ink); }
+#ctaCam { position: absolute; inset: 0; }
+#cta .say { color: var(--ink); font-size: 122px; line-height: 128px; text-shadow: none; }
+#q1 { top: 516px; }
+#q2 { top: 644px; }
+#q2 b { color: var(--accent); font-weight: 800; }
+#num { position: absolute; left: 0; width: 1080px; top: 900px; display: flex; justify-content: center; }
+#num span { display: inline-flex; align-items: center; gap: 26px; padding: 26px 50px 26px 34px; border-radius: 999px; background: #fff; box-shadow: 0 40px 80px -40px rgba(30, 25, 10, .45); font-weight: 800; font-size: 84px; letter-spacing: -0.03em; }
+#num svg { width: 84px; height: 84px; fill: #25d366; }
+#mark { position: absolute; left: 0; width: 1080px; top: 1168px; display: flex; justify-content: center; align-items: center; gap: 20px; font-weight: 700; font-size: 46px; letter-spacing: -0.01em; }
+#mark svg { width: 66px; height: 66px; }
+</style>
+</head>
+<body>
+<div id="main">
+
+  <section id="world" class="scene">
+    <canvas id="gl" width="1080" height="1920"></canvas>
+    <div id="hook"><div id="h1" class="say">Cartão de visita</div><div id="h2" class="say">acaba na gaveta.</div></div>
+    <div id="pocket"><div id="p1" class="say">Site fica no</div><div id="p2" class="say">bolso do cliente.</div></div>
+  </section>
+
+  <section id="cta" class="scene">
+    <div id="ctaCam">
+      <div id="q1" class="say">Site não vai</div>
+      <div id="q2" class="say">pra <b>gaveta.</b></div>
+      <div id="num"><span><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.07-.13-.27-.2-.57-.35M12.05 21.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.48-8.41"/></svg>(41) 98430-3059</span></div>
+      <div id="mark"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#0b0b0c"/><path d="M12.5 10.5 7 16l5.5 5.5M19.5 10.5 25 16l-5.5 5.5" fill="none" stroke="#f5f3ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 9 14.4 23" stroke="#2b46ff" stroke-width="2.6" stroke-linecap="round"/></svg>CODE SITE</div>
+    </div>
+  </section>
+
+</div>
+
+<script src="../../.claude/skills/motionmaxxing/runtime/vendor/gsap.min.js"></script>
+<script src="../../.claude/skills/motionmaxxing/runtime/motion.js"></script>
+<script>
+/* SEEK CONTRACT: everything visible is a pure function of t. */
+const M = Motion.film({ fps: 30, duration: 12, width: 1080, height: 1920, clock: 'smooth' });
+const E = Motion.ease;
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const seg = (f, a, b, e = 'softLand') => E[e](clamp01((f - a) / (b - a)));
+const lerp = (a, b, x) => a + (b - a) * x;
+const lerp3 = (a, b, x) => a.map((v, i) => lerp(v, b[i], x));
+const RUNTIME = new URL('../../.claude/skills/motionmaxxing/runtime/', location.href).href;
+
+/* Frame plan (STORYBOARD.md) */
+const LAND = 66;              // the falling card reaches the table
+const FLIP = [74, 98];        // it flips to show the QR
+const DIVE = [100, 150];      // the camera goes top-down and dives into the QR
+const MATCH = 150;            // match cut: black on cream QR -> black on cream homepage, then dolly out
+const OUT = [150, 180];
+const SCROLL = [186, 262];    // the page scrolls in the phone
+const CUT_CTA = 270;
+const CW = 2.0, CH = 1.143, CT = 0.03;      // a 90 x 51 mm card
+const VIEW = 844 / 2500;                       // the phone shows one viewport of the 2500 px capture
+
+function roundedRect(THREE, w, h, r) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+function faceGeometry(THREE, w, h, r) {
+  const g = new THREE.ShapeGeometry(roundedRect(THREE, w, h, r), 10);
+  const uv = g.attributes.uv, p = g.attributes.position;
+  for (let i = 0; i < uv.count; i++) uv.setXY(i, p.getX(i) / w + 0.5, p.getY(i) / h + 0.5);
+  return g;
+}
+async function cardFront(THREE) {
+  const c = document.createElement('canvas'); c.width = 1400; c.height = 800;
+  const g = c.getContext('2d');
+  g.fillStyle = '#0f0f11'; g.fillRect(0, 0, 1400, 800);
+  // the mark from icons.tsx, big, without its tile (the card is the tile)
+  g.save(); g.translate(130, 230); g.scale(11, 11);
+  g.lineCap = 'round'; g.lineJoin = 'round'; g.lineWidth = 2.6;
+  g.strokeStyle = '#f4f1ea'; g.stroke(new Path2D('M12.5 10.5 7 16l5.5 5.5M19.5 10.5 25 16l-5.5 5.5'));
+  g.strokeStyle = '#2b46ff'; g.stroke(new Path2D('M17.6 9 14.4 23'));
+  g.restore();
+  g.fillStyle = '#f4f1ea'; g.font = '700 92px Bricolage'; g.textBaseline = 'alphabetic';
+  g.fillText('CODE SITE', 520, 420);
+  g.fillStyle = 'rgba(244,241,234,.6)'; g.font = '500 40px Plex';
+  g.fillText('codesite.online', 524, 490);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  return t;
+}
+async function cardBack(THREE) {
+  const qr = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = 'assets/qr-codesite.png'; });
+  const c = document.createElement('canvas'); c.width = 2800; c.height = 1600;
+  const g = c.getContext('2d');
+  g.imageSmoothingEnabled = false;
+  g.fillStyle = '#f4f1ea'; g.fillRect(0, 0, 2800, 1600);
+  g.drawImage(qr, 1400 - 700, 800 - 700, 1400, 1400);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  t.magFilter = THREE.NearestFilter; t.minFilter = THREE.LinearMipmapLinearFilter; t.anisotropy = 8;
+  return t;
+}
+function woodTexture(THREE) {
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 1024;
+  const g = c.getContext('2d');
+  g.fillStyle = '#3a2516'; g.fillRect(0, 0, 1024, 1024);
+  let s = 11; const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+  for (let i = 0; i < 260; i++) {
+    const y = rnd() * 1024, w = 1 + rnd() * 5;
+    g.strokeStyle = rnd() > 0.5 ? `rgba(20,10,4,${0.15 + rnd() * 0.3})` : `rgba(120,78,44,${0.1 + rnd() * 0.25})`;
+    g.lineWidth = w; g.beginPath(); g.moveTo(0, y);
+    for (let x = 0; x <= 1024; x += 64) g.lineTo(x, y + Math.sin(x / 140 + i) * 6 + (rnd() - 0.5) * 3);
+    g.stroke();
+  }
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(3, 3); t.anisotropy = 8;
+  return t;
+}
+
+/* camera: angled over the table, then top-down into the QR, then the phone */
+function camFor(f) {
+  // A: over the table, following the fall
+  // the target sits above the card, so the card stays in the lower half, clear of the type
+  const ty = lerp(2.55, 0.42, seg(f, 0, LAND, 'gentleIn')) - 0.12 * seg(f, LAND, DIVE[0], 'softInOut');
+  let pos = [0.5, ty + 4.2, 4.6], tgt = [0, ty, 0];
+  // B: top-down, then the dive into the middle of the QR (accelerating)
+  const top = seg(f, DIVE[0], DIVE[0] + 22, 'softInOut');
+  pos = lerp3(pos, [0, 3.1, 0.02], top); tgt = lerp3(tgt, [0, 0, 0], top);
+  const dive = Math.pow(clamp01((f - (DIVE[0] + 18)) / (DIVE[1] - DIVE[0] - 18)), 2.2);
+  pos = lerp3(pos, [0, 0.45, 0.003], dive);   // stops at ~4 modules across: big black and cream squares, never a flat frame
+  return { position: pos, target: tgt, fov: 30 };
+}
+function phoneCam(f) {
+  // starts nose-to-glass on the top of the page (black type on cream, like the QR) and pulls out to the whole phone
+  const out = seg(f, OUT[0], OUT[1], 'softInOut');
+  const d = lerp(0.9, 12.6, Math.pow(out, 1.6));
+  const ty = lerp(1.55, 0.9, out), tx = lerp(-0.3, 0, out);   // ends with the phone low in frame, under the type
+  const push = 1 - 0.06 * seg(f, OUT[1], CUT_CTA, 'cruise');
+  return { position: [tx, ty, 50 + d * push], target: [tx, ty, 50], fov: 30 };
+}
+
+M.hero3d('#gl', {
+  width: 1080, height: 1920,
+  envMap: 'room', toneMapping: 'aces', exposure: 1.0, envIntensity: 0.45,
+  key: { position: [3, 7, 2], intensity: 2.8, color: '#ffd9a8' },
+  rim: { position: [-4, 3, -4], intensity: 1.6, color: '#9fb0ff' },
+  ground: { y: -0.002, opacity: 0 },
+  camera: { fov: 30, position: [0.5, 5.8, 4.6], target: [0, 1.6, 0] },
+  build: async (THREE, scene) => {
+    await Promise.all([document.fonts.load('700 92px Bricolage'), document.fonts.load('500 40px Plex')]);
+    const { RoundedBoxGeometry } = await import(RUNTIME + 'hero3d/vendor/addons/geometries/RoundedBoxGeometry.js');
+    // the card: a thick black body, a printed front, the QR on the back
+    const card = new THREE.Group();
+    card.add(new THREE.Mesh(new RoundedBoxGeometry(CW, CH, CT, 4, 0.012), new THREE.MeshPhysicalMaterial({ color: '#141416', roughness: 0.6 })));
+    const fg = faceGeometry(THREE, CW - 0.004, CH - 0.004, 0.05);
+    const front = new THREE.Mesh(fg, new THREE.MeshPhysicalMaterial({ map: await cardFront(THREE), roughness: 0.55, clearcoat: 0.35, clearcoatRoughness: 0.4 }));
+    front.position.z = CT / 2 + 0.0008;
+    const back = new THREE.Mesh(fg, new THREE.MeshStandardMaterial({ map: await cardBack(THREE), roughness: 0.8 }));
+    back.position.z = -CT / 2 - 0.0008; back.rotation.y = Math.PI;
+    card.add(front, back);
+    // the table
+    const table = new THREE.Mesh(new THREE.PlaneGeometry(24, 24), new THREE.MeshStandardMaterial({ map: woodTexture(THREE), roughness: 0.45 }));
+    table.rotation.x = -Math.PI / 2; table.receiveShadow = true;
+    // the phone, far away at z = 50 so its shots never see the table
+    const phone = new THREE.Group();
+    const PW = 1, PH = 2.11, PD = 0.11, PR = 0.14;
+    phone.add(new THREE.Mesh(new RoundedBoxGeometry(PW, PH, PD, 8, PR), new THREE.MeshPhysicalMaterial({ color: '#141418', roughness: 0.35, metalness: 0.6, clearcoat: 0.6 })));
+    const SW = PW * 0.94, SH = PH * 0.965;
+    const tx = await new THREE.TextureLoader().loadAsync('assets/codesite-tall.png');
+    tx.colorSpace = THREE.SRGBColorSpace; tx.anisotropy = 8; tx.repeat.set(1, VIEW); tx.offset.set(0, 1 - VIEW);
+    const screen = new THREE.Mesh(faceGeometry(THREE, SW, SH, PR * 0.85), new THREE.MeshPhysicalMaterial({ color: '#000000', roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03, emissive: '#ffffff', emissiveIntensity: 1, emissiveMap: tx }));
+    screen.position.z = PD / 2 + 0.001;
+    phone.add(screen);
+    phone.scale.setScalar(2); phone.position.set(0, 0.35, 50);
+    scene.add(card, table, phone);
+    return { card, table, phone, screen };
+  },
+  state: (t, o, ctx) => {
+    const f = ctx.f;
+    if (f >= CUT_CTA) return { objects: { card: { visible: false }, table: { visible: false }, phone: { visible: false } } };
+    if (f >= MATCH) {
+      // the phone, lit on its own; the page scrolls a little, like a thumb would
+      const sc = seg(f, SCROLL[0], SCROLL[1], 'softInOut') * 0.36;
+      o.screen.material.emissiveMap.offset.y = 1 - VIEW - sc * (1 - VIEW);
+      const tilt = seg(f, OUT[0], OUT[1] + 20, 'softLand');
+      return {
+        camera: phoneCam(f),
+        objects: { card: { visible: false }, table: { visible: false }, phone: { position: [0, 0.35, 50], rotation: [0.03 * tilt, lerp(0, -0.14, tilt) * (1 - seg(f, OUT[1] + 20, CUT_CTA, 'softInOut') * 0.6), 0], scale: 2 } },
+        keyPosition: [3, 7, 52], rimPosition: [-4, 3, 46], keyIntensity: 1.6,
+      };
+    }
+    o.screen.material.emissiveMap.offset.y = 1 - VIEW;
+    // the fall: slow tumble, one small bounce on landing, front face up
+    const fall = seg(f, 0, LAND, 'gentleIn');
+    const bounce = f > LAND ? 0.12 * Math.exp(-(f - LAND) / 4) * Math.abs(Math.sin((f - LAND) * 0.45)) : 0;
+    let y = lerp(2.2, CT / 2, fall) + bounce;
+    let rx = lerp(-Math.PI / 2 + 2.6, -Math.PI / 2, seg(f, 0, LAND + 4, 'softLand'));
+    let rz = lerp(0.9, 0.12, seg(f, 0, LAND + 4, 'softLand'));
+    let ry = lerp(1.2, 0, seg(f, 0, LAND + 4, 'softLand'));
+    // the flip: up, over its long axis, back down showing the QR
+    const fl = seg(f, FLIP[0], FLIP[1], 'softInOut');
+    y += 0.55 * Math.sin(Math.PI * fl);
+    rx -= Math.PI * fl;
+    rz = lerp(rz, 0, fl);
+    return {
+      camera: camFor(f),
+      objects: { card: { position: [0, y, 0], rotation: [rx, ry, rz] }, phone: { visible: false } },
+    };
+  },
+});
+
+/* type */
+M.words('#h1', { at: 4, mech: 'rise', gaps: [4, 4], dist: 90, frames: 12, smear: true });
+M.words('#h2', { at: 16, mech: 'rise', gaps: [4, 5], dist: 90, frames: 12, smear: true });
+M.exit('#hook', { at: 92, frames: 10, ease: 'accelExit', to: { y: -140, blur: 6 }, smear: true, hide: true });
+M.mark(MATCH, 'cut', 'QR -> homepage (black on cream)');
+M.words('#p1', { at: 186, mech: 'rise', gaps: [4, 4], dist: 90, frames: 12, smear: true });
+M.words('#p2', { at: 196, mech: 'rise', gaps: [4, 4], dist: 90, frames: 12, smear: true });
+
+/* CTA */
+M.cut(CUT_CTA, { hide: ['#world'], show: ['#cta'] });
+M.words('#q1', { at: CUT_CTA, mech: 'rise', gaps: [3, 4], dist: 90, frames: 12, smear: true });
+M.words('#q2', { at: CUT_CTA + 10, mech: 'rise', gaps: [4], dist: 90, frames: 12, smear: true });
+M.enter('#num', { at: CUT_CTA + 30, frames: 14, ease: 'snapSettle', from: { scale: 1.6, blur: 10 } });
+M.enter('#mark', { at: CUT_CTA + 42, frames: 12, ease: 'softLand', from: { y: 60 }, smear: { axis: 'y', px: 24, frames: 3 } });
+M.kf('#ctaCam', 'scale', [[CUT_CTA + 30, 1.04], [359, 0.9, 'cruise']]);
+
+window.__ready = Motion.loaded().then(() => { if (/selftest/.test(location.search)) Motion.selfTest(M, { samples: 24 }); });
+</script>
+</body>
+</html>
