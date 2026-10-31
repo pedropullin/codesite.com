@@ -98,7 +98,7 @@ const RUNTIME = new URL('../../.claude/skills/motionmaxxing/runtime/', location.
 
 /* Frame plan (STORYBOARD.md): the phone is the cause, the bag the effect, cut against each other */
 const PHONE = [[54, 80], [104, 128], [150, 172]];     // phone shots
-const ARRIVE = [58, 108, 154];                          // a notification rolls up in each
+const ARRIVE = [56, 104, 150];                          // a notification rolls up in each
 const DROP = [82, 130, 174];                            // ...and the next bag shot opens on its box falling in
 const DAWN = [196, 244];                                // the light turns to morning
 const CUT_CTA = 270;
@@ -108,7 +108,7 @@ const inPhone = (f) => PHONE.some(([a, b]) => f >= a && f < b);
 const moon = NativeUI.appIcon({ bg: 'linear-gradient(180deg,#1f2233,#0d0f18)', glyph: '<svg viewBox="0 0 38 38"><path d="M23.5 9.5a10 10 0 1 0 5 17.5A11 11 0 0 1 23.5 9.5z" fill="#f3d48a"/></svg>' });
 const WALL = 'radial-gradient(90% 50% at 70% 18%, rgba(140,160,255,.35), rgba(140,160,255,0) 60%), radial-gradient(120% 70% at 20% 90%, #1a1f3d, rgba(26,31,61,0) 70%), linear-gradient(170deg,#0e1430,#05060c)';
 document.getElementById('ui').innerHTML = NativeUI.phone(NativeUI.lockScreen({
-  time: '3:14', date: 'sexta-feira, 30 de outubro', wallpaper: WALL,
+  time: '3:14', wallpaper: WALL,
   notifs: [
     { icon: moon, title: 'lua. · Novo pedido #1042', time: '2 min', body: 'Vestido Linho Areia · R$ 189,90 · pago no Pix' },
     { icon: moon, title: 'lua. · Novo pedido #1043', time: '1 min', body: 'Bolsa de Palha Natural · R$ 129,00 · pago no Pix' },
@@ -212,9 +212,9 @@ M.hero3d('#gl', {
 const notif = (i) => `#ui .nu-notif:nth-child(${i + 1})`;
 // opacity, not visibility: the notifications set their own visibility when they arrive, which would show through a hidden parent
 M.kf('#phoneShot', 'opacity', [[0, 0], ...PHONE.flatMap(([a, b]) => [[a, 0], [a, 1], [b, 1], [b, 0]])]);
-NativeUI.arrive(M, notif(0), { at: ARRIVE[0], dir: 'up', frames: 14 });
-NativeUI.arrive(M, notif(1), { at: ARRIVE[1], dir: 'up', frames: 14 });
-NativeUI.arrive(M, notif(2), { at: ARRIVE[2], dir: 'up', frames: 14 });
+NativeUI.arrive(M, notif(0), { at: ARRIVE[0], dir: 'up', frames: 8 });
+NativeUI.arrive(M, notif(1), { at: ARRIVE[1], dir: 'up', frames: 8 });
+NativeUI.arrive(M, notif(2), { at: ARRIVE[2], dir: 'up', frames: 8 });
 M.drift('#cam', { prop: 'scale', from: 1, to: 1.06, start: PHONE[0][0], end: PHONE[2][1] });
 
 /* type on the bag shots only */
