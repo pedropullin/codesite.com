@@ -226,6 +226,7 @@ M.kf('#touchPos', 'scale', [[263, 1], [266, 0.82, 'gentleIn']]);
 M.enter('#touch', { at: 248, frames: 10, ease: 'softLand', from: { scale: 2.2, opacity: 0 } });
 M.kf('#btn', 'scale', [[264, 1], [267, 0.9, 'gentleIn']]);
 M.mark(267, 'press', 'Pedir agora');
+M.hide('#touch', CUT_CTA);   // its own visibility track would otherwise outlive the hidden scene
 
 /* BEAT 4  CTA: BRASA's world becomes CODE SITE's */
 M.cut(CUT_CTA, { hide: ['#world'], show: ['#cta'] });

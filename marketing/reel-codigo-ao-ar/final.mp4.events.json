@@ -1,0 +1,260 @@
+[
+ {
+  "t": 0.1,
+  "frame": 3,
+  "type": "enter",
+  "label": "Todo"
+ },
+ {
+  "t": 0.1,
+  "frame": 3,
+  "type": "word",
+  "label": "Todo"
+ },
+ {
+  "t": 0.2333,
+  "frame": 7,
+  "type": "enter",
+  "label": "site"
+ },
+ {
+  "t": 0.2333,
+  "frame": 7,
+  "type": "word",
+  "label": "site"
+ },
+ {
+  "t": 0.4,
+  "frame": 12,
+  "type": "enter",
+  "label": "começa"
+ },
+ {
+  "t": 0.4,
+  "frame": 12,
+  "type": "word",
+  "label": "começa"
+ },
+ {
+  "t": 0.5333,
+  "frame": 16,
+  "type": "enter",
+  "label": "assim."
+ },
+ {
+  "t": 0.5333,
+  "frame": 16,
+  "type": "word",
+  "label": "assim."
+ },
+ {
+  "t": 1.2,
+  "frame": 36,
+  "type": "exit",
+  "label": "#hook"
+ },
+ {
+  "t": 1.5333,
+  "frame": 46,
+  "type": "show",
+  "label": "#c0"
+ },
+ {
+  "t": 1.5333,
+  "frame": 46,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 1.7333,
+  "frame": 52,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 1.8,
+  "frame": 54,
+  "type": "show",
+  "label": "chevrons land"
+ },
+ {
+  "t": 2.8,
+  "frame": 84,
+  "type": "show",
+  "label": "#c1"
+ },
+ {
+  "t": 2.8,
+  "frame": 84,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 3.1333,
+  "frame": 94,
+  "type": "show",
+  "label": "tile rises"
+ },
+ {
+  "t": 3.2,
+  "frame": 96,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 4.2,
+  "frame": 126,
+  "type": "show",
+  "label": "#c2"
+ },
+ {
+  "t": 4.2,
+  "frame": 126,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 4.5333,
+  "frame": 136,
+  "type": "show",
+  "label": "slash drops"
+ },
+ {
+  "t": 4.6333,
+  "frame": 139,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 5.5333,
+  "frame": 166,
+  "type": "show",
+  "label": "#c3"
+ },
+ {
+  "t": 5.5333,
+  "frame": 166,
+  "type": "type",
+  "label": "start"
+ },
+ {
+  "t": 5.8,
+  "frame": 174,
+  "type": "type",
+  "label": "end"
+ },
+ {
+  "t": 5.8667,
+  "frame": 176,
+  "type": "show",
+  "label": "flip"
+ },
+ {
+  "t": 6.7333,
+  "frame": 202,
+  "type": "enter",
+  "label": "No"
+ },
+ {
+  "t": 6.7333,
+  "frame": 202,
+  "type": "word",
+  "label": "No"
+ },
+ {
+  "t": 6.8667,
+  "frame": 206,
+  "type": "enter",
+  "label": "ar."
+ },
+ {
+  "t": 6.8667,
+  "frame": 206,
+  "type": "word",
+  "label": "ar."
+ },
+ {
+  "t": 8.7667,
+  "frame": 263,
+  "type": "press",
+  "label": "Vamos criar"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "cut",
+  "label": "hide #world show #cta"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "enter",
+  "label": "Quer"
+ },
+ {
+  "t": 9,
+  "frame": 270,
+  "type": "word",
+  "label": "Quer"
+ },
+ {
+  "t": 9.1,
+  "frame": 273,
+  "type": "enter",
+  "label": "o"
+ },
+ {
+  "t": 9.1,
+  "frame": 273,
+  "type": "word",
+  "label": "o"
+ },
+ {
+  "t": 9.2333,
+  "frame": 277,
+  "type": "enter",
+  "label": "seu"
+ },
+ {
+  "t": 9.2333,
+  "frame": 277,
+  "type": "word",
+  "label": "seu"
+ },
+ {
+  "t": 9.3333,
+  "frame": 280,
+  "type": "enter",
+  "label": "no"
+ },
+ {
+  "t": 9.3333,
+  "frame": 280,
+  "type": "word",
+  "label": "no"
+ },
+ {
+  "t": 9.4667,
+  "frame": 284,
+  "type": "enter",
+  "label": "ar?"
+ },
+ {
+  "t": 9.4667,
+  "frame": 284,
+  "type": "word",
+  "label": "ar?"
+ },
+ {
+  "t": 10,
+  "frame": 300,
+  "type": "enter",
+  "label": "#num"
+ },
+ {
+  "t": 10.4,
+  "frame": 312,
+  "type": "enter",
+  "label": "#mark"
+ }
+]

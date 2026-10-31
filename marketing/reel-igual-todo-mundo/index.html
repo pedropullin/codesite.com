@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Igual a todo mundo</title>
+<meta name="viewport" content="width=1080, height=1920">
+<!-- Render with:
+     node .claude/skills/motionmaxxing/scripts/render.mjs marketing/reel-igual-todo-mundo/index.html marketing/reel-igual-todo-mundo/final.mp4 --grain 0.03 -->
+<style>
+@font-face { font-family: Bricolage; font-weight: 800; src: url(../reel-hamburguer/assets/fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2"); }
+@font-face { font-family: Bricolage; font-weight: 700; src: url(../reel-hamburguer/assets/fonts/bricolage-grotesque-latin-700-normal.woff2) format("woff2"); }
+/* ACCENT = made from scratch: "do zero" in the CTA only */
+:root { --ink: #0b0b0c; --cream: #f4f1ea; --accent: #2b46ff; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#main { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; background: #1b1c20; font-family: Bricolage, sans-serif; }
+.scene { position: absolute; inset: 0; }
+/* the template world: flat grey fog, a ceiling light; the warm layer takes over when the burger arrives */
+#world { background:
+  radial-gradient(ellipse 120% 50% at 50% 0%, rgba(210, 212, 220, .28), transparent 70%),
+  linear-gradient(180deg, #2a2b30 0%, #1d1e22 55%, #141518 100%); }
+#warm { position: absolute; inset: 0; opacity: 0; background:
+  radial-gradient(ellipse 70% 40% at 50% 50%, rgba(255, 128, 48, .30), rgba(255, 96, 32, .08) 55%, transparent 75%),
+  radial-gradient(ellipse 90% 70% at 50% 50%, transparent 55%, rgba(0, 0, 0, .6)),
+  #0e0b09; }
+#gl { position: absolute; inset: 0; width: 1080px; height: 1920px; z-index: 2; }
+/* low ceiling of fog over the template field, so the type reads */
+#fog { position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(22, 23, 27, .96) 0%, rgba(22, 23, 27, .85) 19%, rgba(22, 23, 27, 0) 36%); }
+.say { position: absolute; left: 0; width: 1080px; text-align: center; color: var(--cream); font-weight: 800; letter-spacing: -0.035em; white-space: pre; z-index: 3; text-shadow: 0 6px 40px rgba(0, 0, 0, .45); }
+#a1, #a2, #b1, #b2, #c1, #c2 { font-size: 112px; line-height: 120px; }
+#a1, #b1, #c1 { top: 230px; }
+#a2, #b2, #c2 { top: 350px; }
+#aBox, #bBox, #cBox { position: absolute; inset: 0; z-index: 3; }
+
+#cta { background:
+  radial-gradient(ellipse 90% 50% at 50% 18%, #fffdf8, rgba(255, 253, 248, 0) 70%),
+  radial-gradient(ellipse 100% 80% at 50% 50%, transparent 60%, rgba(60, 50, 30, .12)),
+  #efebe2; color: var(--ink); }
+#ctaCam { position: absolute; inset: 0; }
+#cta .say { color: var(--ink); font-size: 122px; line-height: 128px; text-shadow: none; }
+#q1 { top: 516px; }
+#q2 { top: 644px; color: var(--accent) !important; }
+#num { position: absolute; left: 0; width: 1080px; top: 900px; display: flex; justify-content: center; }
+#num span { display: inline-flex; align-items: center; gap: 26px; padding: 26px 50px 26px 34px; border-radius: 999px; background: #fff; box-shadow: 0 40px 80px -40px rgba(30, 25, 10, .45); font-weight: 800; font-size: 84px; letter-spacing: -0.03em; }
+#num svg { width: 84px; height: 84px; fill: #25d366; }
+#mark { position: absolute; left: 0; width: 1080px; top: 1168px; display: flex; justify-content: center; align-items: center; gap: 20px; font-weight: 700; font-size: 46px; letter-spacing: -0.01em; }
+#mark svg { width: 66px; height: 66px; }
+</style>
+</head>
+<body>
+<div id="main">
+
+  <section id="world" class="scene">
+    <div id="warm"></div>
+    <canvas id="gl" width="1080" height="1920"></canvas>
+    <div id="fog"></div>
+    <div id="aBox"><div id="a1" class="say">Seu site é igual</div><div id="a2" class="say">a esse?</div></div>
+    <div id="bBox"><div id="b1" class="say">Template deixa</div><div id="b2" class="say">todo mundo igual.</div></div>
+    <div id="cBox"><div id="c1" class="say">Do zero,</div><div id="c2" class="say">com a sua cara.</div></div>
+  </section>
+
+  <section id="cta" class="scene">
+    <div id="ctaCam">
+      <div id="q1" class="say">Quer o seu</div>
+      <div id="q2" class="say">do zero?</div>
+      <div id="num"><span><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.07-.13-.27-.2-.57-.35M12.05 21.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.48-8.41"/></svg>(41) 98430-3059</span></div>
+      <div id="mark"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#0b0b0c"/><path d="M12.5 10.5 7 16l5.5 5.5M19.5 10.5 25 16l-5.5 5.5" fill="none" stroke="#f5f3ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 9 14.4 23" stroke="#2b46ff" stroke-width="2.6" stroke-linecap="round"/></svg>CODE SITE</div>
+    </div>
+  </section>
+
+</div>
+
+<script src="../../.claude/skills/motionmaxxing/runtime/vendor/gsap.min.js"></script>
+<script src="../../.claude/skills/motionmaxxing/runtime/motion.js"></script>
+<script src="../reel-hamburguer/burger-kit.js"></script>
+<script>
+/* SEEK CONTRACT: everything visible is a pure function of t. */
+const M = Motion.film({ fps: 30, duration: 12, width: 1080, height: 1920, clock: 'smooth' });
+const E = Motion.ease;
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const seg = (f, a, b, e = 'softLand') => E[e](clamp01((f - a) / (b - a)));
+const lerp = (a, b, x) => a + (b - a) * x;
+const RUNTIME = new URL('../../.claude/skills/motionmaxxing/runtime/', location.href).href;
+
+/* Frame plan (STORYBOARD.md) */
+const FLY = [0, 112];          // down the corridor of identical templates
+const PULSE = [120, 150];      // they all light up the same way
+const RISE = [150, 168];       // one leaves the grid
+const SPIN = 158;              // ...and spins
+const MATCH = 172;             // match cut on the spin: the template is now the burger
+const CUT_CTA = 270;
+const SW = 0.56, SH = 1.0, SD = 0.05, DX = 0.8, DZ = 1.4;   // a template slab and the grid pitch
+
+function templateTexture(THREE) {
+  const c = document.createElement('canvas'); c.width = 280; c.height = 500;
+  const g = c.getContext('2d');
+  g.fillStyle = '#d6d6d8'; g.fillRect(0, 0, 280, 500);
+  g.fillStyle = '#bfc0c4'; g.fillRect(0, 0, 280, 34);
+  ['#a7a8ad', '#a7a8ad', '#a7a8ad'].forEach((col, i) => { g.fillStyle = col; g.beginPath(); g.arc(20 + i * 18, 17, 6, 0, 7); g.fill(); });
+  g.fillStyle = '#c4c5c9'; g.fillRect(20, 56, 240, 150);
+  g.fillStyle = '#a3a4a9'; g.fillRect(20, 230, 190, 22);
+  g.fillStyle = '#b5b6bb'; [266, 290, 314].forEach((y, i) => g.fillRect(20, y, 240 - i * 40, 12));
+  g.fillStyle = '#9c9da2'; g.beginPath(); g.roundRect(20, 352, 120, 40, 20); g.fill();
+  g.fillStyle = '#c4c5c9'; g.fillRect(20, 420, 112, 62); g.fillRect(148, 420, 112, 62);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  return t;
+}
+
+function framing(f) {
+  // fly: from far back and high, decelerating to stand in front of the centre slab
+  const fly = seg(f, FLY[0], FLY[1], 'glide');
+  let cz = lerp(15.5, 3.4, fly), cy = lerp(2.4, 1.05, fly), tz = cz - lerp(7, 3.4, fly), ty = lerp(0.7, 0.6, fly);
+  // after the match cut: pull back and up to frame the burger above the dimmed grid
+  const out = seg(f, RISE[0], MATCH + 26, 'softInOut');   // pulls back while the template rises, so its spin is in frame
+  cz = lerp(cz, 5.4, out); cy = lerp(cy, 2.5, out); tz = lerp(tz, 0, out); ty = lerp(ty, 1.45, out);
+  const orbit = 0.18 * seg(f, MATCH + 30, CUT_CTA, 'cruise');
+  const r = Math.hypot(cz, 0);
+  return { position: [Math.sin(orbit) * r, cy, Math.cos(orbit) * r], target: [0, ty, tz * (1 - out)], fov: 30 };
+}
+
+M.hero3d('#gl', {
+  width: 1080, height: 1920,
+  envMap: 'room', toneMapping: 'aces', exposure: 0.95, envIntensity: 0.5,
+  key: { position: [3, 7, 5], intensity: 2.2, color: '#e9ecf5' },
+  rim: { position: [-4, 2.5, -3.5], intensity: 2.2, color: '#b8bfd6' },
+  ground: { y: 0, opacity: 0.35 },
+  camera: { fov: 30, position: [0, 2.4, 15.5], target: [0, 0.7, 8.5] },
+  build: async (THREE, scene) => {
+    const { RoundedBoxGeometry } = await import(RUNTIME + 'hero3d/vendor/addons/geometries/RoundedBoxGeometry.js');
+    const tex = templateTexture(THREE);
+    const side = new THREE.MeshStandardMaterial({ color: '#b9babf', roughness: 0.6 });
+    const face = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.55, emissive: '#ffffff', emissiveIntensity: 0, emissiveMap: tex });
+    const geo = new THREE.BoxGeometry(SW, SH, SD);
+    const mats = [side, side, side, side, face, side];
+    // the grid of identical templates, with a corridor down x = 0 in front of the hero
+    const spots = [];
+    for (let ix = -7; ix <= 7; ix++) for (let iz = -9; iz <= 12; iz++) {
+      if (ix === 0 && iz >= 0) continue;
+      spots.push([ix * DX, SH / 2, -iz * DZ + 0]);
+    }
+    const grid = new THREE.InstancedMesh(geo, mats, spots.length);
+    const m4 = new THREE.Matrix4();
+    spots.forEach(([x, y, z], i) => { m4.makeTranslation(x, y, -z); grid.setMatrixAt(i, m4); });
+    grid.castShadow = grid.receiveShadow = true;
+    // the one that leaves (same look as the rest until it moves)
+    const hero = new THREE.Mesh(geo, mats);
+    hero.position.set(0, SH / 2, 0);
+    // the burger it turns into (match cut)
+    const b = BurgerKit(THREE).makeBurger();
+    b.root.scale.setScalar(0.5);
+    b.root.position.set(0, 1.1, 0);
+    const hemi = new THREE.HemisphereLight('#ffd9a8', '#1a120c', 0);
+    scene.add(hemi, grid, hero, b.root);
+    return { grid, hero, burger: b.root, hemi };
+  },
+  state: (t, o, ctx) => {
+    const f = ctx.f;
+    if (f >= CUT_CTA) return { objects: { grid: { visible: false }, hero: { visible: false }, burger: { visible: false } } };
+    // every template lights up the same way at the same time
+    const pulse = Math.exp(-(((f - 132) / 7) ** 2)) * 0.55;
+    const dim = seg(f, MATCH, MATCH + 24, 'softInOut');
+    o.grid.material[4].emissiveIntensity = pulse * (1 - dim);
+    o.grid.material[4].color.setScalar(lerp(1, 0.18, dim));
+    o.grid.material[0].color.set('#b9babf').multiplyScalar(lerp(1, 0.18, dim));
+    // the hero slab rises and whips; at the match cut the burger carries the spin
+    const rise = seg(f, RISE[0], RISE[1], 'softLand');
+    const spin = (x) => x * x * 2.2;                    // accelerating turn (radians) for the template
+    const heroRot = f >= SPIN ? spin((f - SPIN) / 6) : 0;
+    const burgerRot = f >= MATCH ? spin((MATCH - SPIN) / 6) + (1 - Math.exp(-(f - MATCH) / 9)) * 9 : 0;
+    ctx.keyLight.color.set(f >= MATCH ? '#ffe2b8' : '#e9ecf5');
+    if (ctx.rimLight) ctx.rimLight.color.set(f >= MATCH ? '#ff5a1f' : '#b8bfd6');
+    o.hemi.intensity = f >= MATCH ? 0.45 : 0;
+    return {
+      camera: framing(f),
+      objects: {
+        hero: { position: [0, lerp(SH / 2, 1.25, rise), 0], rotation: [0, heroRot, 0], visible: f < MATCH },
+        burger: { position: [0, 1.1, 0], rotation: [0, burgerRot, 0], scale: 0.5, visible: f >= MATCH },
+      },
+      keyIntensity: f >= MATCH ? 2.6 : 2.2,
+      rimIntensity: f >= MATCH ? 3.2 : 2.2,
+    };
+  },
+});
+
+/* type: three short statements, each leaves while the picture is moving */
+M.words('#a1', { at: 4, mech: 'rise', gaps: [4, 4, 4], dist: 90, frames: 12, smear: true });
+M.words('#a2', { at: 18, mech: 'rise', gaps: [4], dist: 90, frames: 12, smear: true });
+M.exit('#aBox', { at: 70, frames: 10, ease: 'accelExit', to: { y: -140, blur: 6 }, smear: true, hide: true });
+M.words('#b1', { at: 86, mech: 'rise', gaps: [4], dist: 90, frames: 12, smear: true });
+M.words('#b2', { at: 96, mech: 'rise', gaps: [4, 4], dist: 90, frames: 12, smear: true });
+M.exit('#bBox', { at: 150, frames: 10, ease: 'accelExit', to: { y: -140, blur: 6 }, smear: true, hide: true });
+M.kf('#warm', 'opacity', [[MATCH - 1, 0], [MATCH, 0.55], [MATCH + 24, 1, 'softInOut']]);
+M.kf('#fog', 'opacity', [[RISE[0], 1], [RISE[1] - 2, 0, 'softInOut']]);   // the fog lifts as the template leaves the grid
+M.mark(MATCH, 'cut', 'template -> burger (match on the spin)');
+M.words('#c1', { at: 190, mech: 'rise', gaps: [4], dist: 90, frames: 12, smear: true });
+M.words('#c2', { at: 200, mech: 'rise', gaps: [4, 4, 4], dist: 90, frames: 12, smear: true });
+
+/* CTA */
+M.cut(CUT_CTA, { hide: ['#world'], show: ['#cta'] });
+M.words('#q1', { at: CUT_CTA, mech: 'rise', gaps: [3, 4], dist: 90, frames: 12, smear: true });
+M.words('#q2', { at: CUT_CTA + 10, mech: 'rise', gaps: [4], dist: 90, frames: 12, smear: true });
+M.enter('#num', { at: CUT_CTA + 30, frames: 14, ease: 'snapSettle', from: { scale: 1.6, blur: 10 } });
+M.enter('#mark', { at: CUT_CTA + 42, frames: 12, ease: 'softLand', from: { y: 60 }, smear: { axis: 'y', px: 24, frames: 3 } });
+M.kf('#ctaCam', 'scale', [[CUT_CTA + 30, 1.04], [359, 0.9, 'cruise']]);   // never resolves: the lockup keeps shrinking to the last frame
+
+window.__ready = Motion.loaded().then(() => { if (/selftest/.test(location.search)) Motion.selfTest(M, { samples: 24 }); });
+</script>
+</body>
+</html>

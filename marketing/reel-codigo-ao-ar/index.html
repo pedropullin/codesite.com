@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Do código ao ar</title>
+<meta name="viewport" content="width=1080, height=1920">
+<!-- Render with:
+     node .claude/skills/motionmaxxing/scripts/render.mjs marketing/reel-codigo-ao-ar/index.html marketing/reel-codigo-ao-ar/final.mp4 --grain 0.03 -->
+<style>
+@font-face { font-family: Bricolage; font-weight: 800; src: url(assets/fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2"); }
+@font-face { font-family: Bricolage; font-weight: 700; src: url(assets/fonts/bricolage-grotesque-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: Plex; font-weight: 500; src: url(assets/fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2"); }
+/* ACCENT = code, what CODE SITE writes: the flags of each command and "no ar?" */
+:root { --ink: #0b0b0c; --cream: #f4f1ea; --accent-dark: #7d90ff; --accent: #2b46ff; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#main { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); font-family: Bricolage, sans-serif; }
+.scene { position: absolute; inset: 0; }
+#world { background:
+  radial-gradient(ellipse 72% 40% at 50% 60%, rgba(43, 70, 255, .20), rgba(43, 70, 255, .05) 55%, transparent 76%),
+  radial-gradient(ellipse 130% 36% at 50% 112%, rgba(125, 144, 255, .14), transparent 70%),
+  radial-gradient(ellipse 90% 70% at 50% 50%, transparent 55%, rgba(0, 0, 0, .6)),
+  var(--ink); }
+#gl { position: absolute; inset: 0; width: 1080px; height: 1920px; z-index: 2; }
+#hook { position: absolute; inset: 0; z-index: 3; }
+.say { position: absolute; left: 0; width: 1080px; text-align: center; color: var(--cream); font-weight: 800; letter-spacing: -0.035em; white-space: pre; z-index: 3; }
+#hook1, #hook2 { font-size: 116px; line-height: 124px; }
+#hook1 { top: 262px; }
+#hook2 { top: 386px; }
+.code { position: absolute; left: 228px; top: 268px; font-family: Plex, monospace; font-weight: 500; font-size: 76px; line-height: 96px; color: var(--cream); white-space: pre; z-index: 3; }
+.code b { font-weight: 500; color: var(--accent-dark); }
+.caret { position: absolute; left: 228px; top: 280px; width: 8px; height: 76px; background: var(--accent-dark); z-index: 3; }
+#onair { font-size: 120px; line-height: 128px; top: 150px; }
+
+#cta { background:
+  radial-gradient(ellipse 90% 50% at 50% 18%, #fffdf8, rgba(255, 253, 248, 0) 70%),
+  radial-gradient(ellipse 100% 80% at 50% 50%, transparent 60%, rgba(60, 50, 30, .12)),
+  #efebe2; color: var(--ink); }
+#ctaCam { position: absolute; inset: 0; }
+#cta .say { color: var(--ink); font-size: 122px; line-height: 128px; }
+#q1 { top: 516px; }
+#q2 { top: 644px; color: var(--accent) !important; }
+#num { position: absolute; left: 0; width: 1080px; top: 900px; display: flex; justify-content: center; }
+#num span { display: inline-flex; align-items: center; gap: 26px; padding: 26px 50px 26px 34px; border-radius: 999px; background: #fff; box-shadow: 0 40px 80px -40px rgba(30, 25, 10, .45); font-weight: 800; font-size: 84px; letter-spacing: -0.03em; }
+#num svg { width: 84px; height: 84px; fill: #25d366; }
+#mark { position: absolute; left: 0; width: 1080px; top: 1168px; display: flex; justify-content: center; align-items: center; gap: 20px; font-weight: 700; font-size: 46px; letter-spacing: -0.01em; }
+#mark svg { width: 66px; height: 66px; }
+</style>
+</head>
+<body>
+<div id="main">
+
+  <section id="world" class="scene">
+    <canvas id="gl" width="1080" height="1920"></canvas>
+
+    <!-- BEAT 1 -->
+    <div id="hook">
+      <div id="hook1" class="say">Todo site</div>
+      <div id="hook2" class="say">começa assim.</div>
+    </div>
+
+    <!-- BEAT 2: the four steps of the Processo section of codesite.online -->
+    <div id="c0" class="code">git init</div><div id="k0" class="caret"></div>
+    <div id="c1" class="code">design <b>--figma</b></div><div id="k1" class="caret"></div>
+    <div id="c2" class="code">npm run build</div><div id="k2" class="caret"></div>
+    <div id="c3" class="code">deploy <b>--prod</b></div><div id="k3" class="caret"></div>
+
+    <div id="onair" class="say">No ar.</div>
+  </section>
+
+  <!-- BEAT 4 -->
+  <section id="cta" class="scene">
+    <div id="ctaCam">
+      <div id="q1" class="say">Quer o seu</div>
+      <div id="q2" class="say">no ar?</div>
+      <div id="num"><span><svg viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.07-.13-.27-.2-.57-.35M12.05 21.4h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.48-8.41"/></svg>(41) 98430-3059</span></div>
+      <div id="mark"><svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#0b0b0c"/><path d="M12.5 10.5 7 16l5.5 5.5M19.5 10.5 25 16l-5.5 5.5" fill="none" stroke="#f5f3ee" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.6 9 14.4 23" stroke="#2b46ff" stroke-width="2.6" stroke-linecap="round"/></svg>CODE SITE</div>
+    </div>
+  </section>
+
+</div>
+
+<script src="../../.claude/skills/motionmaxxing/runtime/vendor/gsap.min.js"></script>
+<script src="../../.claude/skills/motionmaxxing/runtime/motion.js"></script>
+<script>
+/* SEEK CONTRACT: everything visible is a pure function of t. */
+const M = Motion.film({ fps: 30, duration: 12, width: 1080, height: 1920, clock: 'smooth' });
+const E = Motion.ease;
+const ACCENT_DARK = '#7d90ff';
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const seg = (f, a, b, e = 'softLand') => E[e](clamp01((f - a) / (b - a)));
+const lerp = (a, b, x) => a + (b - a) * x;
+const lerp3 = (a, b, x) => a.map((v, i) => lerp(v, b[i], x));
+
+/* Frame plan (STORYBOARD.md) */
+const TYPE_AT = [46, 84, 126, 166];                   // git init, design --figma, npm run build, deploy --prod
+const ANSWER = [54, 94, 136, 176];                    // the 3D answers 2 f after each command finishes typing
+const SWAP = 186;                                     // the mark is edge-on: it becomes the phone
+const CUT_CTA = 270;
+const RUNTIME = new URL('../../.claude/skills/motionmaxxing/runtime/', location.href).href;
+
+/* The CODE SITE mark from src/components/icons.tsx (32-unit viewBox) built as solids */
+const K = 0.075;                                      // svg unit -> world unit (the tile is 2.4 wide)
+const P = (x, y) => [(x - 16) * K, (16 - y) * K];
+const STROKES = {
+  chevL: [[12.5, 10.5], [7, 16], [12.5, 21.5]],
+  chevR: [[19.5, 10.5], [25, 16], [19.5, 21.5]],
+  slash: [[17.6, 9], [14.4, 23]],
+};
+/* the "Vamos criar" button in the phone capture: css rect 20, 365.6, 211 x 50.2 on a 390 x 844 screen */
+const BTN_UV = [(20 + 105.5) / 390, (365.6 + 25.1) / 844];
+
+function roundedRect(THREE, w, h, r) {
+  const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r); s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h); s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+
+/* camera: target height, distance, elevation (deg) */
+function framing(f) {
+  const flip = seg(f, ANSWER[3], SWAP + 14, 'softInOut');
+  const ty = lerp(0.9, 0.35, flip);
+  let d = lerp(11.6, 11.0, seg(f, 0, ANSWER[0] + 14, 'glide'));     // creep in while the marks arrive
+  d = lerp(d, 10.6, seg(f, SWAP + 14, CUT_CTA, 'cruise'));          // slow push on the phone
+  const e = lerp(6, 4, flip), r = (e * Math.PI) / 180;
+  return { position: [0, ty + d * Math.sin(r), d * Math.cos(r)], target: [0, ty, 0], fov: 30 };
+}
+
+M.hero3d('#gl', {
+  width: 1080, height: 1920,
+  envMap: 'studio', toneMapping: 'neutral', envIntensity: 0.9,
+  key: { position: [-4, 6, 6], intensity: 1.8 },
+  rim: { position: [5, 3, -5], intensity: 3, color: '#9fb0ff' },
+  ground: { y: -2.75, opacity: 0.32 },
+  camera: { fov: 30, position: [0, 2.1, 11.5], target: [0, 0.9, 0] },
+  build: async (THREE, scene) => {
+    const { RoundedBoxGeometry } = await import(RUNTIME + 'hero3d/vendor/addons/geometries/RoundedBoxGeometry.js');
+    const lacquer = new THREE.MeshPhysicalMaterial({ color: '#0d0d10', roughness: 0.2, clearcoat: 1, clearcoatRoughness: 0.05 });
+    const paper = new THREE.MeshPhysicalMaterial({ color: '#f2efe8', roughness: 0.32, clearcoat: 0.5, clearcoatRoughness: 0.2 });
+    const blue = new THREE.MeshPhysicalMaterial({ color: '#2b46ff', roughness: 0.26, clearcoat: 1, clearcoatRoughness: 0.08 });
+
+    // mark: tile + three raised strokes (capsules = round caps and joins, like the SVG)
+    const mark = new THREE.Group();
+    const tile = new THREE.Mesh(new RoundedBoxGeometry(32 * K, 32 * K, 0.4, 6, 8 * K), lacquer);
+    mark.add(tile);
+    const R = 1.3 * K, zFace = 0.2 + R * 0.3;
+    const stroke = (pts, mat) => {
+      const g = new THREE.Group();
+      for (let i = 0; i < pts.length - 1; i++) {
+        const [ax, ay] = P(...pts[i]), [bx, by] = P(...pts[i + 1]);
+        const len = Math.hypot(bx - ax, by - ay);
+        const m = new THREE.Mesh(new THREE.CapsuleGeometry(R, len, 8, 20), mat);
+        m.position.set((ax + bx) / 2, (ay + by) / 2, zFace);
+        m.rotation.z = Math.atan2(by - ay, bx - ax) - Math.PI / 2;
+        g.add(m);
+      }
+      mark.add(g);
+      return g;
+    };
+    const chevL = stroke(STROKES.chevL, paper), chevR = stroke(STROKES.chevR, paper), slash = stroke(STROKES.slash, blue);
+
+    // phone with the real codesite.online capture as its screen
+    const phone = new THREE.Group();
+    const PW = 1, PH = 2.11, PD = 0.11, PR = 0.14;
+    phone.add(new THREE.Mesh(new RoundedBoxGeometry(PW, PH, PD, 8, PR), new THREE.MeshPhysicalMaterial({ color: '#141418', roughness: 0.35, metalness: 0.6, clearcoat: 0.6 })));
+    const SW = PW * 0.94, SH = PH * 0.965;
+    const sg = new THREE.ShapeGeometry(roundedRect(THREE, SW, SH, PR * 0.85), 12);
+    const uv = sg.attributes.uv, pos = sg.attributes.position;
+    for (let i = 0; i < uv.count; i++) uv.setXY(i, pos.getX(i) / SW + 0.5, pos.getY(i) / SH + 0.5);
+    const tx = await new THREE.TextureLoader().loadAsync('assets/codesite-mobile.png');
+    tx.colorSpace = THREE.SRGBColorSpace; tx.anisotropy = 8;
+    const glass = new THREE.MeshPhysicalMaterial({ color: '#000000', roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03, emissive: '#ffffff', emissiveIntensity: 1, emissiveMap: tx });
+    const screen = new THREE.Mesh(sg, glass);
+    screen.position.z = PD / 2 + 0.001;
+    phone.add(screen);
+    // the thumb, on the screen plane so it stays on "Vamos criar" whatever the camera does
+    const touch = new THREE.Mesh(new THREE.CircleGeometry(0.075, 48), new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0, depthWrite: false }));
+    touch.position.set((BTN_UV[0] - 0.5) * SW, (0.5 - BTN_UV[1]) * SH, PD / 2 + 0.006);
+    phone.add(touch);
+    phone.scale.setScalar(2);
+
+    scene.add(mark, phone);
+    return { mark, tile, chevL, chevR, slash, phone, touch };
+  },
+  state: (t, o, ctx) => {
+    const f = ctx.f;
+    if (f >= CUT_CTA) return { objects: { mark: { visible: false }, phone: { visible: false } } };
+    const objects = {};
+    const before = f < SWAP;
+    // chevrons drift in from deep space during the hook, then snap into place on `git init`
+    const drift = clamp01(f / ANSWER[0]), snap = seg(f, ANSWER[0], ANSWER[0] + 16, 'snapSettle');
+    const rotL = lerp3([0.3, -0.8, 0.4], [0.15, -0.5, 0.25], drift), rotR = lerp3([-0.3, 0.9, -0.35], [-0.15, 0.55, -0.2], drift);
+    objects.chevL = { position: lerp3(lerp3([-0.55, 1.0, -3.2], [-0.35, 0.45, -1.5], drift), [0, 0, 0], snap), rotation: lerp3(rotL, [0, 0, 0], snap) };
+    objects.chevR = { position: lerp3(lerp3([0.5, -0.8, -3.6], [0.35, -0.4, -1.7], drift), [0, 0, 0], snap), rotation: lerp3(rotR, [0, 0, 0], snap) };
+    // the tile rises on `design --figma`
+    const rise = seg(f, ANSWER[1], ANSWER[1] + 20, 'softLand');
+    objects.tile = { position: [0, lerp(-3.2, 0, rise), lerp(-1.5, 0, rise)], rotation: [lerp(1.1, 0, rise), 0, 0], visible: f >= ANSWER[1] };
+    // the slash drops on `npm run build`
+    const drop = seg(f, ANSWER[2], ANSWER[2] + 8, 'crashIn');
+    objects.slash = { position: [0, lerp(4.2, 0, drop), lerp(0.6, 0, drop)], visible: f >= ANSWER[2] };
+    // the whole mark: a slow turn, a bump on impact, then the flip on `deploy --prod`
+    const bump = 1 + 0.045 * Math.exp(-Math.max(0, f - (ANSWER[2] + 8)) / 3) * (f >= ANSWER[2] + 8 ? 1 : 0);
+    let ry = lerp(-0.34, 0.24, clamp01((f - ANSWER[0]) / (ANSWER[3] - ANSWER[0])));   // linear: the mark never stops turning
+    ry = lerp(ry, Math.PI / 2, seg(f, ANSWER[3], SWAP, 'accelExit'));
+    objects.mark = { rotation: [0.06, ry, 0], scale: bump, visible: before };
+    // the phone takes over edge-on and lands facing the camera
+    const land = seg(f, SWAP, SWAP + 16, 'softLand'), settle = seg(f, SWAP + 16, 248, 'softInOut');
+    objects.phone = { position: [0, 0, 0], rotation: [0.05 * (1 - settle), lerp(-Math.PI / 2, 0.16, land) * (1 - settle), 0], scale: 2, visible: !before };
+    // the thumb: parks, presses (the cut lands on the deepest point)
+    const park = seg(f, 244, 254, 'softLand'), press = seg(f, 263, 266, 'gentleIn');
+    o.touch.material.opacity = 0.42 * park;
+    objects.touch = { scale: lerp(2.2, 1, park) * lerp(1, 0.8, press) };
+    return {
+      camera: framing(f), objects,
+      sweep: f >= ANSWER[1] + 8 && f <= ANSWER[1] + 44 ? seg(f, ANSWER[1] + 8, ANSWER[1] + 44, 'softInOut') : null,
+      keyIntensity: 1.8 + 1.4 * Math.exp(-(((f - (ANSWER[2] + 8)) / 4) ** 2)),
+    };
+  },
+});
+
+/* BEAT 1  HOOK */
+M.words('#hook1', { at: 3, mech: 'rise', gaps: [4], dist: 90, frames: 12, smear: true });
+M.words('#hook2', { at: 12, mech: 'rise', gaps: [4], dist: 90, frames: 12, smear: true });
+M.exit('#hook', { at: 36, frames: 10, ease: 'accelExit', to: { y: -140, blur: 6 }, smear: true, hide: true });
+
+/* BEAT 2  the commands; each one is answered by the 3D */
+TYPE_AT.forEach((at, i) => {
+  const until = i < 3 ? TYPE_AT[i + 1] - 1 : 198;
+  M.show('#c' + i, at, until);
+  M.type('#c' + i, { at, style: 'fast', seed: 7 + i, caret: '#k' + i, caretOff: until, accentNewest: { color: ACCENT_DARK, frames: 2 } });
+});
+ANSWER.forEach((f, i) => M.mark(f, 'show', ['chevrons land', 'tile rises', 'slash drops', 'flip'][i]));
+
+/* BEAT 3  the site, live */
+M.words('#onair', { at: 202, mech: 'rise', gaps: [4], dist: 80, frames: 12, smear: true });
+M.mark(263, 'press', 'Vamos criar');
+
+/* BEAT 4  CTA */
+M.cut(CUT_CTA, { hide: ['#world'], show: ['#cta'] });
+M.words('#q1', { at: CUT_CTA, mech: 'rise', gaps: [3, 4], dist: 90, frames: 12, smear: true });
+M.words('#q2', { at: CUT_CTA + 10, mech: 'rise', gaps: [4], dist: 90, frames: 12, smear: true });
+M.enter('#num', { at: CUT_CTA + 30, frames: 14, ease: 'snapSettle', from: { scale: 1.6, blur: 10 } });
+M.enter('#mark', { at: CUT_CTA + 42, frames: 12, ease: 'softLand', from: { y: 60 }, smear: { axis: 'y', px: 24, frames: 3 } });
+M.kf('#ctaCam', 'scale', [[CUT_CTA + 30, 1.04], [359, 0.9, 'cruise']]);   // never resolves: the lockup keeps shrinking to the last frame
+
+window.__ready = Motion.loaded().then(() => { if (/selftest/.test(location.search)) Motion.selfTest(M, { samples: 24 }); });
+</script>
+</body>
+</html>
