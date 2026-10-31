@@ -16,7 +16,7 @@ export default function Hero() {
   return (
     <section id="topo" className="relative overflow-hidden bg-bg">
       <div className="mx-auto max-w-7xl px-5 pt-28 pb-12 md:px-10 md:pt-36 md:pb-16">
-        <h1 className="font-display text-[clamp(2.4rem,9.6vw,8.5rem)] font-bold leading-[0.92] tracking-[-0.045em]">
+        <h1 className="font-display text-[clamp(2.4rem,9.6vw,8.5rem)] font-bold leading-[0.92] tracking-[-0.04em]">
           Código que vira
           <br />
           experiência.

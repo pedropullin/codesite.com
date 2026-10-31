@@ -1,24 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Manrope, IBM_Plex_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-bricolage",
+  variable: "--font-geist",
   display: "swap",
 });
 
-const manrope = Manrope({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-manrope",
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-plex-mono",
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
@@ -44,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
-      className={`${bricolage.variable} ${manrope.variable} ${plexMono.variable}`}
+      className={`${geist.variable} ${geistMono.variable}`}
     >
       <body>{children}</body>
     </html>
