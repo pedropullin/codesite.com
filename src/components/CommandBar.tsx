@@ -26,7 +26,7 @@ const COMMANDS: Command[] = [
     label: "Ver projetos no ar",
     arg: "cd ~/trabalhos",
     href: "#trabalhos",
-    keywords: "projetos trabalhos portfolio saint ami prospecta brasa",
+    keywords: "projetos trabalhos portfolio saint ami prospecta arco clinica dentista",
     icon: "folder",
   },
   {

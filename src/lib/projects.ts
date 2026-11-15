@@ -35,14 +35,13 @@ export const projects: Project[] = [
     shots: { desktop: "/work/prospecta-desktop.jpg", mobile: "/work/prospecta-mobile.jpg" },
   },
   {
-    name: "BRASA 41",
-    category: "Conceito · Hamburgueria · Landing page",
+    name: "ARCO Odontologia",
+    category: "Conceito · Clínica odontológica · Site",
     description:
-      "Landing conceito para uma smash burger fictícia: um hambúrguer em 3D realista gira no topo e se desmonta camada por camada na rolagem, com cardápio em abas e brasas animadas.",
-    url: "https://codesite.online/projetos/brasa41",
-    theme: "ember",
-    stack: ["Landing page", "3D", "Cardápio"],
-    shots: { desktop: "/work/brasa41-desktop.jpg", mobile: "/work/brasa41-mobile.jpg" },
-    clip: "/work/brasa41-reel.mp4",
+      "Site conceito para uma clínica fictícia em Curitiba: o arco da arcada dentária vira janelas, botões e o rodapé, com tabela de valores e um cupom de agendamento que mostra como vai ser a primeira consulta.",
+    url: "https://codesite.online/projetos/arco/",
+    theme: "electric",
+    stack: ["Site", "Agendamento", "Valores"],
+    shots: { desktop: "/work/arco-desktop.jpg", mobile: "/work/arco-mobile.jpg" },
   },
 ];
