@@ -37,7 +37,7 @@ export default function Services() {
   return (
     <section id="servicos" className="mx-auto max-w-7xl px-5 py-28 md:px-10 md:py-36">
       <Reveal className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-        <h2 className="font-display text-[clamp(2.6rem,7vw,6.5rem)] font-bold leading-[0.95] tracking-[-0.04em]">
+        <h2 className="font-display text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
           Do design
           <br />
           ao deploy.
@@ -52,16 +52,16 @@ export default function Services() {
           <li key={s.title}>
             <Reveal
               delay={(i % 3) * 70}
-              className="group grid gap-4 rounded-3xl bg-bg-soft p-7 transition-colors duration-300 hover:bg-ink hover:text-paper md:grid-cols-[1.1fr_1fr] md:items-center md:p-10"
+              className="group grid gap-4 rounded-3xl border border-line bg-bg-soft p-7 transition-colors duration-300 hover:border-white/20 hover:bg-paper md:grid-cols-[1.1fr_1fr] md:items-center md:p-10"
             >
-              <h3 className="font-display text-[clamp(1.9rem,3.4vw,3rem)] font-bold leading-none tracking-[-0.03em]">
+              <h3 className="font-display text-[clamp(1.9rem,3.4vw,3rem)] font-semibold leading-none tracking-[-0.03em]">
                 {s.title}
               </h3>
               <div>
-                <p className="text-lg leading-relaxed text-ink transition-colors duration-300 group-hover:text-paper">
+                <p className="text-lg leading-relaxed text-ink ">
                   {s.text}
                 </p>
-                <p className="mt-3 hidden text-[0.95rem] text-ink-soft transition-colors duration-300 group-hover:text-paper/70 md:block">
+                <p className="mt-3 hidden text-[0.95rem] text-ink-soft md:block">
                   {s.tags.join(" · ")}
                 </p>
               </div>

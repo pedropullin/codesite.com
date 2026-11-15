@@ -74,8 +74,8 @@ function run(raw: string): { output: ReactNode; kind?: "out" | "err"; clear?: bo
             ["clear", "limpa o terminal"],
           ].map(([c, d]) => (
             <div key={c} className="contents">
-              <span className="text-paper">{c}</span>
-              <span className="text-paper/50">{d}</span>
+              <span className="text-white">{c}</span>
+              <span className="text-white/50">{d}</span>
             </div>
           ))}
         </div>
@@ -106,7 +106,7 @@ function run(raw: string): { output: ReactNode; kind?: "out" | "err"; clear?: bo
           {projects.map((p) => (
             <li key={p.name}>
               <ExtLink href={p.url}>{p.name}</ExtLink>{" "}
-              <span className="text-paper/50">— {p.category}</span>
+              <span className="text-white/50">— {p.category}</span>
             </li>
           ))}
         </ul>
@@ -120,7 +120,7 @@ function run(raw: string): { output: ReactNode; kind?: "out" | "err"; clear?: bo
         <ul className="space-y-1">
           {socials.map((s) => (
             <li key={s.id}>
-              <span className="inline-block w-20 text-paper/50 sm:w-24">{s.label}</span>
+              <span className="inline-block w-20 text-white/50 sm:w-24">{s.label}</span>
               <ExtLink href={s.href}>{s.handle}</ExtLink>
             </li>
           ))}
@@ -200,31 +200,31 @@ export default function Terminal() {
   };
 
   return (
-    <section id="terminal" className="relative bg-ink py-28 text-paper md:py-36">
+    <section id="terminal" className="relative border-y border-line bg-[#0b0c0f] py-28 text-white md:py-36">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-[1fr_1fr] lg:items-center">
         <Reveal>
-          <h2 className="font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-bold leading-[0.95] tracking-[-0.04em]">
+          <h2 className="font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
             Fale com a gente
             <br />
             em código.
           </h2>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-paper/85">
-            Um terminal de verdade: digite um comando e ele executa. Experimente <code className="text-paper">whatsapp</code>,{" "}
-            <code className="text-paper">projetos</code> ou <code className="text-paper">discord</code>.
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-white/85">
+            Um terminal de verdade: digite um comando e ele executa. Experimente <code className="text-white">whatsapp</code>,{" "}
+            <code className="text-white">projetos</code> ou <code className="text-white">discord</code>.
           </p>
         </Reveal>
 
         <Reveal delay={120}>
           <div
             data-ui
-            className="overflow-hidden rounded-2xl border border-paper/10 bg-[#111114]"
+            className="overflow-hidden rounded-2xl border border-white/10 bg-[#111114]"
             onClick={() => input.current?.focus({ preventScroll: true })}
           >
-            <div className="flex items-center gap-2 border-b border-paper/10 px-4 py-3">
+            <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
               <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
               <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
               <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-              <span className="ml-3 font-mono text-[0.7rem] text-paper/40" /* taste-skill-ignore: a working shell keeps its terminal styling */>codesite — zsh</span>
+              <span className="ml-3 font-mono text-[0.7rem] text-white/40" /* taste-skill-ignore: a working shell keeps its terminal styling */>codesite — zsh</span>
             </div>
 
             <div
@@ -236,10 +236,10 @@ export default function Terminal() {
                 <div key={l.id} className="mb-1.5">
                   {l.kind === "in" ? (
                     <span>
-                      <Prompt /> <span className="text-paper">{l.content}</span>
+                      <Prompt /> <span className="text-white">{l.content}</span>
                     </span>
                   ) : (
-                    <div className={l.kind === "err" ? "text-[#ff8a80]" : "text-paper/80"}>{l.content}</div>
+                    <div className={l.kind === "err" ? "text-[#ff8a80]" : "text-white/80"}>{l.content}</div>
                   )}
                 </div>
               ))}
@@ -258,13 +258,13 @@ export default function Terminal() {
                   autoCapitalize="off"
                   spellCheck={false}
                   enterKeyHint="send"
-                  className="w-0 min-w-0 flex-1 bg-transparent text-paper caret-[#8fa0ff] outline-none"
+                  className="w-0 min-w-0 flex-1 bg-transparent text-white caret-[#8fa0ff] outline-none"
                   aria-label="Digite um comando"
                 />
               </form>
             </div>
 
-            <div className="flex flex-wrap gap-2 border-t border-paper/10 px-4 py-3" /* taste-skill-ignore: a working shell keeps its terminal styling */>
+            <div className="flex flex-wrap gap-2 border-t border-white/10 px-4 py-3" /* taste-skill-ignore: a working shell keeps its terminal styling */>
               {SHORTCUTS.map((c) => (
                 <button
                   key={c}
@@ -273,7 +273,7 @@ export default function Terminal() {
                     e.stopPropagation();
                     exec(c);
                   }}
-                  className="rounded-full border border-paper/15 px-3 py-1.5 font-mono text-[0.7rem] text-paper/70 transition-colors hover:border-brand hover:bg-brand hover:text-paper" /* taste-skill-ignore: a working shell keeps its terminal styling */
+                  className="rounded-full border border-white/15 px-3 py-1.5 font-mono text-[0.7rem] text-white/70 transition-colors hover:border-brand hover:bg-brand hover:text-white" /* taste-skill-ignore: a working shell keeps its terminal styling */
                 >
                   {c}
                 </button>

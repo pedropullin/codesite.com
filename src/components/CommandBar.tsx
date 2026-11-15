@@ -245,7 +245,7 @@ export default function CommandBar() {
         <span className="hidden sm:inline">↑↓ navegar · ↵ abrir · esc limpar</span>
         <span className="sm:hidden">Toque numa opção</span>
         <span className="flex items-center gap-2 font-sans text-[12.5px] font-semibold text-white/75">
-          <CodeSiteMark className="h-4 w-4" inverted />
+          <CodeSiteMark className="h-4 w-4" />
           CODE SITE
         </span>
       </div>

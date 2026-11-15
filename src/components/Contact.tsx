@@ -45,10 +45,17 @@ export default function Contact() {
   const channels = socials.filter((s) => s.id !== "linkedin");
 
   return (
-    <section id="contato" className="relative overflow-hidden bg-bg py-28 md:py-36">
+    <section id="contato" className="relative isolate overflow-hidden bg-bg py-28 md:py-36">
+      <div className="aurora" aria-hidden>
+        <div className="aurora-blade aurora-b1" />
+        <div className="aurora-blade aurora-b3" />
+        <div className="aurora-blade aurora-b4" />
+      </div>
+      <div className="aurora-grain" aria-hidden />
+      <div className="aurora-vignette aurora-vignette-both" aria-hidden />
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <Reveal className="text-center">
-          <h2 className="mx-auto max-w-5xl font-display text-[clamp(2.8rem,9vw,8rem)] font-bold leading-[0.92] tracking-[-0.045em]">
+          <h2 className="mx-auto max-w-5xl font-display text-[clamp(2.8rem,9vw,8rem)] font-semibold leading-[0.92] tracking-[-0.045em]">
             Vamos tirar
             <br />
             do papel.
@@ -57,7 +64,7 @@ export default function Contact() {
             href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-10 inline-flex items-center gap-3 rounded-full bg-ink px-9 py-5 text-lg font-semibold text-paper transition-[background-color,transform] duration-200 hover:bg-brand active:scale-[0.97]"
+            className="group mt-10 keycap inline-flex items-center justify-center gap-2.5 rounded-lg px-8 py-4 text-lg font-medium"
           >
             <WhatsAppIcon className="h-5 w-5" />
             Vamos criar
@@ -77,21 +84,21 @@ export default function Contact() {
                       target={s.id === "email" ? undefined : "_blank"}
                       rel="noopener noreferrer"
                       className={`group flex items-center gap-4 rounded-2xl p-5 transition-[background-color,transform] duration-200 hover:-translate-y-0.5 ${
-                        s.id === "whatsapp" ? "bg-brand text-paper hover:bg-[#2238e0]" : "bg-bg-soft hover:bg-[#dededa]"
+                        s.id === "whatsapp" ? "bg-brand text-white hover:bg-[#2238e0]" : "border border-line bg-bg-soft hover:bg-paper"
                       }`}
                     >
                       <span
                         className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${
-                          s.id === "whatsapp" ? "bg-paper/15" : "bg-paper"
+                          s.id === "whatsapp" ? "bg-white/15" : "bg-paper"
                         }`}
                       >
                         <Icon className="h-6 w-6" />
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block font-display text-lg font-bold">{s.label}</span>
+                        <span className="block font-display text-lg font-semibold">{s.label}</span>
                         <span
                           className={`block truncate text-[0.95rem] ${
-                            s.id === "whatsapp" ? "text-paper/75" : "text-ink-soft"
+                            s.id === "whatsapp" ? "text-white/75" : "text-ink-soft"
                           }`}
                         >
                           {s.handle}
@@ -106,8 +113,8 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={120}>
-            <form onSubmit={sendWhatsApp} className="rounded-3xl bg-bg-soft p-6 md:p-8" noValidate>
-              <h3 className="font-display text-2xl font-bold tracking-tight">Conte sobre o projeto</h3>
+            <form onSubmit={sendWhatsApp} className="rounded-3xl border border-line bg-bg-soft p-6 md:p-8" noValidate>
+              <h3 className="font-display text-2xl font-semibold tracking-tight">Conte sobre o projeto</h3>
               <p className="mt-1 text-[0.95rem] text-ink-soft">
                 A mensagem já vai pronta para o WhatsApp ou e-mail, é só enviar.
               </p>
@@ -140,7 +147,7 @@ export default function Contact() {
                         onChange={() => setType(t)}
                         className="peer sr-only"
                       />
-                      <span className="block rounded-full bg-paper px-3.5 py-2 text-[0.95rem] transition-colors peer-checked:bg-ink peer-checked:text-paper peer-focus-visible:outline-2 peer-focus-visible:outline-brand hover:bg-[#dededa]">
+                      <span className="block rounded-full bg-paper px-3.5 py-2 text-[0.95rem] transition-colors peer-checked:bg-white peer-checked:text-[#07080a] peer-focus-visible:outline-2 peer-focus-visible:outline-brand hover:bg-white/10">
                         {t}
                       </span>
                     </label>
@@ -162,7 +169,7 @@ export default function Contact() {
               </label>
 
               {error && (
-                <p id="contact-error" role="alert" className="mt-3 text-sm text-[#c8361f]">
+                <p id="contact-error" role="alert" className="mt-3 text-sm text-[#ff8a80]">
                   {error}
                 </p>
               )}
@@ -170,7 +177,7 @@ export default function Contact() {
               <div className="mt-6 grid gap-2 sm:grid-cols-2">
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-4 text-base font-semibold text-paper transition-[background-color,transform] duration-200 hover:bg-brand active:scale-[0.97]"
+                  className="keycap inline-flex items-center justify-center gap-2.5 rounded-lg px-6 py-4 text-base font-medium"
                 >
                   <WhatsAppIcon className="h-4 w-4" />
                   Enviar no WhatsApp
@@ -178,7 +185,7 @@ export default function Contact() {
                 <button
                   type="button"
                   onClick={sendEmail}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-paper px-6 py-4 text-base font-semibold transition-[background-color,transform] duration-200 hover:bg-[#dededa] active:scale-[0.97]"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-paper px-6 py-4 text-base font-medium transition-[background-color,transform] duration-200 hover:bg-white/10 active:scale-[0.97]"
                 >
                   <MailIcon className="h-4 w-4" />
                   Enviar por e-mail

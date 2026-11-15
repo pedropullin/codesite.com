@@ -12,7 +12,7 @@ export default function Work() {
     <section id="trabalhos" className="bg-bg">
       <div className="mx-auto max-w-7xl px-5 py-28 md:px-10 md:py-36">
         <Reveal className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-          <h2 className="font-display text-[clamp(2.6rem,7vw,6.5rem)] font-bold leading-[0.95] tracking-[-0.04em]">
+          <h2 className="font-display text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
             Projetos
             <br />
             no ar.
@@ -33,7 +33,7 @@ export default function Work() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Abrir ${p.name}`}
-                    className={`group relative block overflow-hidden rounded-2xl bg-ink lg:col-span-8 ${flip ? "lg:order-2" : ""}`}
+                    className={`group relative block overflow-hidden rounded-2xl border border-line bg-bg-soft lg:col-span-8 ${flip ? "lg:order-2" : ""}`}
                   >
                     <img
                       src={p.shots.desktop}
@@ -46,7 +46,7 @@ export default function Work() {
                   </a>
 
                   <div className={`flex flex-col lg:col-span-4 ${flip ? "lg:order-1" : ""}`}>
-                    <h3 className="font-display text-[clamp(2rem,3.4vw,3rem)] font-bold leading-none tracking-[-0.03em]">
+                    <h3 className="font-display text-[clamp(2rem,3.4vw,3rem)] font-semibold leading-none tracking-[-0.03em]">
                       {p.name}
                     </h3>
                     <div className="mt-7 flex items-start gap-5">
@@ -60,7 +60,7 @@ export default function Work() {
                           playsInline
                           preload="metadata"
                           aria-label={`Reel do ${p.name}`}
-                          className="aspect-[9/16] w-24 shrink-0 rounded-xl bg-ink object-cover sm:w-28"
+                          className="aspect-[9/16] w-24 shrink-0 rounded-xl bg-bg-soft object-cover sm:w-28"
                         />
                       ) : (
                         <img
@@ -69,7 +69,7 @@ export default function Work() {
                           width={390}
                           height={844}
                           loading="lazy"
-                          className="w-24 shrink-0 rounded-xl bg-ink sm:w-28"
+                          className="w-24 shrink-0 rounded-xl bg-bg-soft sm:w-28"
                         />
                       )}
                       <p className="text-lg leading-relaxed text-ink">{p.description}</p>
@@ -79,7 +79,7 @@ export default function Work() {
                       href={p.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group mt-7 inline-flex w-fit items-center gap-2 text-base font-semibold text-brand"
+                      className="group mt-7 inline-flex w-fit items-center gap-2 text-base font-semibold text-brand-light"
                     >
                       Ver ao vivo em {hostname(p.url)}
                       <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

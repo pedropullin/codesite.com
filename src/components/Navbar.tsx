@@ -31,7 +31,7 @@ export default function Navbar() {
           }`}
         >
           <a href="#topo" className="flex items-center gap-2.5" aria-label={`${site.name}, início`}>
-            <CodeSiteMark className="h-7 w-7" inverted />
+            <CodeSiteMark className="h-7 w-7" />
             <span className="text-[0.95rem] font-semibold tracking-tight">{site.name}</span>
           </a>
 
@@ -91,7 +91,7 @@ export default function Navbar() {
                 href={l.href}
                 onClick={() => setOpen(false)}
                 tabIndex={open ? 0 : -1}
-                className="flex items-baseline gap-4 py-3 font-display text-5xl font-bold tracking-[-0.03em]"
+                className="flex items-baseline gap-4 py-3 font-display text-5xl font-semibold tracking-[-0.03em]"
               >
                 {l.label}
               </a>
