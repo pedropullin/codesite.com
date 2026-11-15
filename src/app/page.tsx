@@ -6,7 +6,7 @@ import Work from "@/components/Work";
 import Process from "@/components/Process";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import ScrollFX from "@/components/ScrollFX";
+import Motion from "@/components/Motion";
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <ScrollFX />
+      <Motion />
     </div>
   );
 }

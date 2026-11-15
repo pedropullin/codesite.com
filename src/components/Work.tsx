@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element -- static screenshots served from public/work */
-import Reveal from "./Reveal";
 import { ArrowUpRight } from "./icons";
 import { projects } from "@/lib/projects";
 
@@ -9,87 +8,89 @@ function hostname(url: string) {
 
 export default function Work() {
   return (
-    <section id="trabalhos" className="bg-bg">
-      <div className="mx-auto max-w-7xl px-5 py-28 md:px-10 md:py-36">
-        <Reveal className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-          <h2 className="font-display text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
-            Projetos
-            <br />
-            no ar.
-          </h2>
-          <p className="max-w-md text-lg leading-relaxed text-ink md:text-xl">
-            Cada projeto é feito do zero, com identidade própria. Clique e veja funcionando.
-          </p>
-        </Reveal>
+    <section id="trabalhos" className="work-section overflow-hidden bg-bg py-28 md:py-36">
+      <div className="mx-auto grid max-w-7xl gap-8 px-5 md:px-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+        <h2
+          data-split
+          className="font-display text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.04em]"
+        >
+          Projetos
+          <br />
+          no ar.
+        </h2>
+        <p data-fade className="max-w-md text-lg leading-relaxed text-ink md:text-xl">
+          Cada projeto é feito do zero, com identidade própria. Role para passar por eles e clique para ver
+          funcionando.
+        </p>
+      </div>
 
-        <div className="mt-16 flex flex-col gap-24 md:mt-24 md:gap-36">
-          {projects.map((p, i) => {
-            const flip = i % 2 === 1;
-            return (
-              <Reveal key={p.name}>
-                <article className="grid items-center gap-8 lg:grid-cols-12 lg:gap-10">
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Abrir ${p.name}`}
-                    data-scroll="through"
-                    className={`fx-shot group relative block overflow-hidden rounded-2xl border border-line bg-bg-soft lg:col-span-8 ${flip ? "lg:order-2" : ""}`}
-                  >
-                    <img
-                      src={p.shots.desktop}
-                      alt={`Página inicial do ${p.name} no computador`}
-                      width={1440}
-                      height={900}
-                      loading="lazy"
-                      className="block aspect-[16/10] w-full object-cover object-top"
+      {/* On large screens this row is pinned and scrolls sideways; on phones it stacks. */}
+      <div className="work-pin mt-16 md:mt-24 lg:flex lg:h-screen lg:items-center lg:mt-0">
+        <div className="work-track flex flex-col gap-24 px-5 md:px-10 lg:w-max lg:flex-row lg:gap-[6vw] lg:px-[max(2.5rem,calc(50vw-37.5rem))]">
+          {projects.map((p) => (
+            <article
+              key={p.name}
+              className="work-panel grid items-center gap-8 lg:w-[min(78vw,1180px)] lg:shrink-0 lg:grid-cols-12 lg:gap-10"
+            >
+              <a
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Abrir ${p.name}`}
+                className="work-shot group relative block overflow-hidden rounded-2xl border border-line bg-bg-soft lg:col-span-8"
+              >
+                <img
+                  src={p.shots.desktop}
+                  alt={`Página inicial do ${p.name} no computador`}
+                  width={1440}
+                  height={900}
+                  loading="lazy"
+                  className="block aspect-[16/10] w-full object-cover object-top"
+                />
+              </a>
+
+              <div className="flex flex-col lg:col-span-4">
+                <h3 className="font-display text-[clamp(2rem,3.4vw,3rem)] font-semibold leading-none tracking-[-0.03em]">
+                  {p.name}
+                </h3>
+                <div className="mt-7 flex items-start gap-5">
+                  {p.clip ? (
+                    <video
+                      src={p.clip}
+                      poster={p.shots.mobile}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      aria-label={`Reel do ${p.name}`}
+                      className="aspect-[9/16] w-24 shrink-0 rounded-xl bg-bg-soft object-cover sm:w-28"
                     />
-                  </a>
-
-                  <div className={`flex flex-col lg:col-span-4 ${flip ? "lg:order-1" : ""}`}>
-                    <h3 className="font-display text-[clamp(2rem,3.4vw,3rem)] font-semibold leading-none tracking-[-0.03em]">
-                      {p.name}
-                    </h3>
-                    <div className="mt-7 flex items-start gap-5">
-                      {p.clip ? (
-                        <video
-                          src={p.clip}
-                          poster={p.shots.mobile}
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          preload="metadata"
-                          aria-label={`Reel do ${p.name}`}
-                          className="aspect-[9/16] w-24 shrink-0 rounded-xl bg-bg-soft object-cover sm:w-28"
-                        />
-                      ) : (
-                        <img
-                          src={p.shots.mobile}
-                          alt={`${p.name} no celular`}
-                          width={390}
-                          height={844}
-                          loading="lazy"
-                          className="w-24 shrink-0 rounded-xl bg-bg-soft sm:w-28"
-                        />
-                      )}
-                      <p className="text-lg leading-relaxed text-ink">{p.description}</p>
-                    </div>
-                    <p className="mt-3 text-[0.95rem] text-ink-soft">{p.category}</p>
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group mt-7 inline-flex w-fit items-center gap-2 text-base font-semibold text-brand-light"
-                    >
-                      Ver ao vivo em {hostname(p.url)}
-                      <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </a>
-                  </div>
-                </article>
-              </Reveal>
-            );
-          })}
+                  ) : (
+                    <img
+                      src={p.shots.mobile}
+                      alt={`${p.name} no celular`}
+                      width={390}
+                      height={844}
+                      loading="lazy"
+                      className="w-24 shrink-0 rounded-xl bg-bg-soft sm:w-28"
+                    />
+                  )}
+                  <p className="text-lg leading-relaxed text-ink">{p.description}</p>
+                </div>
+                <p className="mt-3 text-[0.95rem] text-ink-soft">{p.category}</p>
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-7 inline-flex w-fit items-center gap-2 text-base font-semibold text-brand-light"
+                >
+                  Ver ao vivo em {hostname(p.url)}
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>

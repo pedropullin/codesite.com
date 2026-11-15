@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
-import Reveal from "./Reveal";
 import { projects } from "@/lib/projects";
 import { social, socials, type SocialId } from "@/lib/site";
 
@@ -202,23 +201,22 @@ export default function Terminal() {
   return (
     <section id="terminal" className="relative border-y border-line bg-[#0b0c0f] py-28 text-white md:py-36">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-[1fr_1fr] lg:items-center">
-        <Reveal>
-          <h2 className="font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
+        <div>
+          <h2 data-split className="font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
             Fale com a gente
             <br />
             em código.
           </h2>
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-white/85">
+          <p data-fade className="mt-6 max-w-md text-lg leading-relaxed text-white/85">
             Um terminal de verdade: digite um comando e ele executa. Experimente <code className="text-white">whatsapp</code>,{" "}
             <code className="text-white">projetos</code> ou <code className="text-white">discord</code>.
           </p>
-        </Reveal>
+        </div>
 
-        <Reveal delay={120}>
+        <div className="term-wrap [perspective:1400px]">
           <div
             data-ui
-            data-scroll="enter"
-            className="fx-tilt overflow-hidden rounded-2xl border border-white/10 bg-[#111114]"
+            className="term-window overflow-hidden rounded-2xl border border-white/10 bg-[#111114]"
             onClick={() => input.current?.focus({ preventScroll: true })}
           >
             <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
@@ -281,7 +279,7 @@ export default function Terminal() {
               ))}
             </div>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

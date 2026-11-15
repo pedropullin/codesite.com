@@ -54,8 +54,8 @@ export default function Contact() {
       <div className="aurora-grain" aria-hidden />
       <div className="aurora-vignette aurora-vignette-both" aria-hidden />
       <div className="mx-auto max-w-7xl px-5 md:px-10">
-        <Reveal className="fx-grow text-center">
-          <h2 className="mx-auto max-w-5xl font-display text-[clamp(2.8rem,9vw,8rem)] font-semibold leading-[0.92] tracking-[-0.045em]">
+        <div className="text-center">
+          <h2 data-split="chars" className="mx-auto max-w-5xl font-display text-[clamp(2.8rem,9vw,8rem)] font-semibold leading-[0.92] tracking-[-0.045em]">
             Vamos tirar
             <br />
             do papel.
@@ -64,13 +64,13 @@ export default function Contact() {
             href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-10 keycap inline-flex items-center justify-center gap-2.5 rounded-lg px-8 py-4 text-lg font-medium"
+            data-fade className="magnetic group mt-10 keycap inline-flex items-center justify-center gap-2.5 rounded-lg px-8 py-4 text-lg font-medium"
           >
             <WhatsAppIcon className="h-5 w-5" />
             Vamos criar
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
-        </Reveal>
+        </div>
 
         <div className="mt-20 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
           <Reveal>
