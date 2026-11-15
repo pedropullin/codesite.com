@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Reveal from "./Reveal";
 
 const STEPS = [
@@ -35,9 +36,9 @@ export default function Process() {
           </h2>
         </Reveal>
 
-        <ol className="mt-16 grid gap-3 md:mt-24 md:grid-cols-2 lg:grid-cols-4">
+        <ol data-scroll="enter" className="fx-steps mt-16 grid gap-3 md:mt-24 md:grid-cols-2 lg:grid-cols-4">
           {STEPS.map((s, i) => (
-            <li key={s.title}>
+            <li key={s.title} style={{ "--i": i } as CSSProperties}>
               <Reveal delay={i * 80} className="flex h-full flex-col rounded-3xl border border-line bg-bg-soft p-7 md:p-8">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
                   <h3 className="font-display text-3xl font-semibold tracking-[-0.02em]">{s.title}</h3>

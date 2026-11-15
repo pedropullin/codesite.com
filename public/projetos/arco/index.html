@@ -190,7 +190,7 @@ h2 { font-size: var(--step-head); }
 
 /* ---------- footer ---------- */
 footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
-.blocks { display: flex; align-items: flex-end; gap: 4px; height: 34svh; min-height: 220px; }
+.blocks { display: flex; align-items: flex-end; gap: 4px; height: 34svh; min-height: 220px; overflow: hidden; }
 .blocks div { flex: 1; display: grid; place-items: end center; border-radius: var(--arch); font-family: var(--display); font-size: clamp(4rem, 13vw, 12rem); line-height: .78; letter-spacing: -0.05em; padding-bottom: 2%; }
 .blocks .b1 { height: 100%; background: var(--accent); }
 .blocks .b2 { height: 74%; background: #fff; color: var(--ink); }
@@ -257,6 +257,24 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
   .foot { grid-template-columns: 1fr 1fr; }
   .foot address { grid-column: 1 / -1; }
 }
+
+/* ---------- scroll-linked motion (JS writes --p; these are the rest values) ---------- */
+.hero { --p: 0; }
+.hero-arch { transform: translate3d(0, calc(var(--p) * -90px), 0) scale(calc(1 + var(--p) * 0.12)); transform-origin: 50% 100%; }
+.hero-window { transform: translate3d(0, calc(var(--p) * -150px), 0); }
+.hero-copy { transform: translate3d(0, calc(var(--p) * -60px), 0); opacity: calc(1 - var(--p) * 1.2); }
+.band { --p: 0.5; }
+.band img { transform: scale(1.18) translate3d(0, calc((var(--p) - 0.5) * -12%), 0); }
+.band p { transform: translate(-50%, calc((0.5 - var(--p)) * 60px)); }
+.tile { --p: 1; }
+.shades div { transform-origin: 50% 100%; transform: scaleY(clamp(0.15, calc(var(--p) * 1.5 - var(--d, 0)), 1)); }
+.coupon-wrap { --p: 1; transform: translate3d(0, calc((1 - var(--p)) * 60px), 0) rotate(calc((1 - var(--p)) * -2.5deg)); transform-origin: 0 100%; }
+footer { --p: 1; overflow: hidden; }
+.blocks div { transform: translate3d(0, calc((1 - clamp(0, calc(var(--p) * 1.7 - var(--d, 0)), 1)) * 70%), 0); }
+.js .tiles .rise, .js .items .rise { transition-delay: calc(var(--i, 0) * 80ms); }
+@media (max-width: 900px) {
+  .hero-window { transform: none; }
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .js .hero-window { clip-path: none; }
@@ -280,7 +298,7 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
 </header>
 
 <main id="topo">
-  <section class="hero">
+  <section class="hero" data-scroll="exit">
     <div class="hero-copy wrap">
       <h1>Seu sorriso,<br />sem pressa.</h1>
       <p>Clínica odontológica no Batel, em Curitiba. Consultas de 60 minutos com o mesmo dentista do começo ao fim do tratamento.</p>
@@ -291,12 +309,12 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
     </div>
     <div class="hero-arch" aria-hidden="true"></div>
     <div class="hero-window">
-      <img src="img/consultorio.webp" width="1536" height="1024" alt="Consultório claro com cadeira odontológica branca, painéis de madeira e uma janela em arco com neblina lá fora" />
+      <img src="/projetos/arco/img/consultorio.webp" width="1536" height="1024" alt="Consultório claro com cadeira odontológica branca, painéis de madeira e uma janela em arco com neblina lá fora" />
     </div>
   </section>
 
   <section class="intro wrap rise" aria-label="Sobre a clínica">
-    <p>Uma clínica pequena <span class="thumb"><img src="img/recepcao.webp" alt="" loading="lazy" /></span> com hora marcada de verdade, salas com luz natural <span class="thumb"><img src="img/consultorio.webp" alt="" loading="lazy" /></span> e um plano escrito <span class="thumb"><img src="img/escova.webp" alt="" loading="lazy" /></span> antes de qualquer tratamento.</p>
+    <p>Uma clínica pequena <span class="thumb"><img src="/projetos/arco/img/recepcao.webp" alt="" loading="lazy" /></span> com hora marcada de verdade, salas com luz natural <span class="thumb"><img src="/projetos/arco/img/consultorio.webp" alt="" loading="lazy" /></span> e um plano escrito <span class="thumb"><img src="/projetos/arco/img/escova.webp" alt="" loading="lazy" /></span> antes de qualquer tratamento.</p>
   </section>
 
   <section class="treat wrap" id="tratamentos">
@@ -306,23 +324,23 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
     </div>
     <div class="tiles">
       <figure class="tile rise">
-        <div class="stage"><img src="img/alinhador.webp" width="800" height="1000" alt="Par de alinhadores transparentes num estojo branco" loading="lazy" /></div>
+        <div class="stage"><img src="/projetos/arco/img/alinhador.webp" width="800" height="1000" alt="Par de alinhadores transparentes num estojo branco" loading="lazy" /></div>
         <figcaption><b>Alinhadores invisíveis</b><span>Planejamento digital em 3D</span></figcaption>
       </figure>
-      <figure class="tile wide blue rise">
+      <figure class="tile wide blue rise" data-scroll="enter">
         <div class="stage">
           <div class="shades" aria-hidden="true">
-            <div style="height:100%;background:#fbf8ef"><small>B1</small></div>
-            <div style="height:92%;background:#f6efdc"><small>A1</small></div>
-            <div style="height:84%;background:#efe3c4"><small>A2</small></div>
-            <div style="height:76%;background:#e6d4ad"><small>A3</small></div>
-            <div style="height:68%;background:#dcc497"><small>A3,5</small></div>
+            <div style="--d:0.0;height:100%;background:#fbf8ef"><small>B1</small></div>
+            <div style="--d:0.12;height:92%;background:#f6efdc"><small>A1</small></div>
+            <div style="--d:0.24;height:84%;background:#efe3c4"><small>A2</small></div>
+            <div style="--d:0.36;height:76%;background:#e6d4ad"><small>A3</small></div>
+            <div style="--d:0.48;height:68%;background:#dcc497"><small>A3,5</small></div>
           </div>
         </div>
         <figcaption><b>Clareamento</b><span>Até 4 tons na escala de cor, em consultório ou em casa</span></figcaption>
       </figure>
       <figure class="tile rise">
-        <div class="stage"><img src="img/escova.webp" width="800" height="1000" alt="Escova de bambu num copo de cerâmica ao lado de um copo de água" loading="lazy" /></div>
+        <div class="stage"><img src="/projetos/arco/img/escova.webp" width="800" height="1000" alt="Escova de bambu num copo de cerâmica ao lado de um copo de água" loading="lazy" /></div>
         <figcaption><b>Prevenção</b><span>Limpeza e revisão a cada 6 meses</span></figcaption>
       </figure>
       <figure class="tile black rise">
@@ -336,7 +354,7 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
         <figcaption><b>Implantes</b><span>Com guia cirúrgico impresso</span></figcaption>
       </figure>
       <figure class="tile rise">
-        <div class="stage"><img src="img/recepcao.webp" width="1024" height="1280" alt="Recepção com balcão de madeira, banco curvo e um vaso azul, vista por uma porta em arco" loading="lazy" /></div>
+        <div class="stage"><img src="/projetos/arco/img/recepcao.webp" width="1024" height="1280" alt="Recepção com balcão de madeira, banco curvo e um vaso azul, vista por uma porta em arco" loading="lazy" /></div>
         <figcaption><b>Lentes e facetas</b><span>Prova do sorriso antes de começar</span></figcaption>
       </figure>
       <figure class="tile blue rise">
@@ -351,8 +369,8 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
     </div>
   </section>
 
-  <figure class="band rise">
-    <img src="img/araucarias.webp" width="1536" height="1024" alt="Araucárias na neblina da manhã" loading="lazy" />
+  <figure class="band rise" data-scroll="through">
+    <img src="/projetos/arco/img/araucarias.webp" width="1536" height="1024" alt="Araucárias na neblina da manhã" loading="lazy" />
     <p>Curitiba acorda na neblina. Aqui dentro, a luz é sempre a da manhã.</p>
   </figure>
 
@@ -386,22 +404,22 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
 
       <div class="cat rise"><h3>Prevenção</h3><span>3 itens</span></div>
       <ul class="items">
-        <li class="item rise"><div class="pic"><img src="img/escova.webp" alt="" loading="lazy" /></div><div><div class="row">Avaliação completa <em>R$ 180</em></div><p>Exame clínico, fotos e conversa de 60 minutos. Descontada se você fechar o tratamento.</p></div></li>
-        <li class="item rise"><div class="pic"><img src="img/consultorio.webp" alt="" loading="lazy" style="object-position:55% 50%" /></div><div><div class="row">Limpeza e profilaxia <em>R$ 250</em></div><p>Remoção de tártaro, polimento e aplicação de flúor.</p></div></li>
+        <li class="item rise"><div class="pic"><img src="/projetos/arco/img/escova.webp" alt="" loading="lazy" /></div><div><div class="row">Avaliação completa <em>R$ 180</em></div><p>Exame clínico, fotos e conversa de 60 minutos. Descontada se você fechar o tratamento.</p></div></li>
+        <li class="item rise"><div class="pic"><img src="/projetos/arco/img/consultorio.webp" alt="" loading="lazy" style="object-position:55% 50%" /></div><div><div class="row">Limpeza e profilaxia <em>R$ 250</em></div><p>Remoção de tártaro, polimento e aplicação de flúor.</p></div></li>
         <li class="item rise"><div class="pic flat"></div><div><div class="row">Raio-x panorâmico <em>R$ 120</em></div><p>Feito na própria clínica, com o laudo no mesmo dia.</p></div></li>
       </ul>
 
       <div class="cat rise"><h3>Estética</h3><span>3 itens</span></div>
       <ul class="items">
-        <li class="item rise"><div class="pic"><img src="img/alinhador.webp" alt="" loading="lazy" /></div><div><div class="row">Alinhadores invisíveis <em>a partir de R$ 7.900</em></div><p>Planejamento em 3D, todos os alinhadores e as revisões.</p><p class="note">Em até 12x sem juros</p></div></li>
+        <li class="item rise"><div class="pic"><img src="/projetos/arco/img/alinhador.webp" alt="" loading="lazy" /></div><div><div class="row">Alinhadores invisíveis <em>a partir de R$ 7.900</em></div><p>Planejamento em 3D, todos os alinhadores e as revisões.</p><p class="note">Em até 12x sem juros</p></div></li>
         <li class="item rise"><div class="pic flat"></div><div><div class="row">Clareamento em consultório <em>R$ 1.200</em></div><p>Duas sessões de 50 minutos com proteção para sensibilidade.</p></div></li>
-        <li class="item rise"><div class="pic"><img src="img/recepcao.webp" alt="" loading="lazy" /></div><div><div class="row">Lente de porcelana <em>R$ 2.400 / dente</em></div><p>Prova do sorriso em resina antes de qualquer desgaste.</p></div></li>
+        <li class="item rise"><div class="pic"><img src="/projetos/arco/img/recepcao.webp" alt="" loading="lazy" /></div><div><div class="row">Lente de porcelana <em>R$ 2.400 / dente</em></div><p>Prova do sorriso em resina antes de qualquer desgaste.</p></div></li>
       </ul>
 
       <div class="cat rise"><h3>Reabilitação</h3><span>2 itens</span></div>
       <ul class="items">
         <li class="item rise"><div class="pic flat"></div><div><div class="row">Implante unitário <em>R$ 4.500</em></div><p>Implante, componente e coroa, com guia cirúrgico impresso.</p></div></li>
-        <li class="item rise"><div class="pic"><img src="img/consultorio.webp" alt="" loading="lazy" style="object-position:20% 50%" /></div><div><div class="row">Tratamento de canal <em>R$ 1.300</em></div><p>Feito com microscópio, em uma ou duas sessões.</p></div></li>
+        <li class="item rise"><div class="pic"><img src="/projetos/arco/img/consultorio.webp" alt="" loading="lazy" style="object-position:20% 50%" /></div><div><div class="row">Tratamento de canal <em>R$ 1.300</em></div><p>Feito com microscópio, em uma ou duas sessões.</p></div></li>
       </ul>
     </div>
   </section>
@@ -419,7 +437,7 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
   </section>
 
   <section class="book wrap" id="agendar">
-    <div class="coupon rise">
+    <div class="coupon-wrap" data-scroll="enter"><div class="coupon rise">
       <div class="coupon-left">
         <h2>Marque sua<br />primeira visita</h2>
         <div class="visit" aria-live="polite">
@@ -449,17 +467,17 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
         <button type="submit">Pedir horário</button>
         <p class="done" id="book-done" role="status"></p>
       </form>
-    </div>
+    </div></div>
   </section>
 </main>
 
-<footer>
+<footer data-scroll="enter">
   <div class="wrap">
     <div class="blocks" aria-label="ARCO">
-      <div class="b1" aria-hidden="true">a</div>
-      <div class="b2" aria-hidden="true">r</div>
-      <div class="b3" aria-hidden="true">c</div>
-      <div class="b4" aria-hidden="true">o</div>
+      <div class="b1" style="--d:0.00" aria-hidden="true">a</div>
+      <div class="b2" style="--d:0.18" aria-hidden="true">r</div>
+      <div class="b3" style="--d:0.36" aria-hidden="true">c</div>
+      <div class="b4" style="--d:0.54" aria-hidden="true">o</div>
     </div>
     <div class="foot">
       <div><b>Clínica</b><a href="#tratamentos">Tratamentos</a><a href="#valores">Valores</a></div>
@@ -516,6 +534,50 @@ footer { background: var(--ink); color: #fff; padding-block: 72px 32px; }
   }
   drawWide(document.getElementById("flow"));
   drawTall(document.getElementById("flow-tall"));
+
+  // Index the staggered items so CSS can delay them.
+  document.querySelectorAll(".tiles, .items").forEach((list) => {
+    [...list.children].forEach((el, i) => el.style.setProperty("--i", i % 6));
+  });
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    // The arches start scattered and settle into the diagram as the section scrolls in.
+    const flows = [...document.querySelectorAll("#flow, #flow-tall")].map((svg) => {
+      const paths = [...svg.querySelectorAll("path")].map((p) => ({ p, dx: (rnd() - 0.5) * 260, dy: (rnd() - 0.5) * 160, r: (rnd() - 0.5) * 120 }));
+      return { svg, paths };
+    });
+    const scrollEls = [...document.querySelectorAll("[data-scroll]")];
+    const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const vh = innerHeight;
+      for (const el of scrollEls) {
+        const r = el.getBoundingClientRect();
+        if (r.bottom < -vh || r.top > vh * 2) continue;
+        const m = el.dataset.scroll;
+        const p = m === "exit" ? clamp(-r.top / r.height)
+          : m === "enter" ? clamp((vh - r.top) / Math.min(r.height, vh * 0.8))
+          : clamp((vh - r.top) / (vh + r.height));
+        el.style.setProperty("--p", p.toFixed(4));
+      }
+      for (const f of flows) {
+        const r = f.svg.getBoundingClientRect();
+        if (!r.width || r.bottom < 0 || r.top > vh) continue;
+        const t = ease(clamp((vh - r.top) / (vh * 0.75)));
+        const k = 1 - t;
+        for (const a of f.paths) {
+          a.p.style.transform = k > 0.001 ? `translate(${(a.dx * k).toFixed(1)}px, ${(a.dy * k).toFixed(1)}px) rotate(${(a.r * k).toFixed(1)}deg)` : "";
+          a.p.style.opacity = (0.25 + 0.75 * t).toFixed(2);
+        }
+      }
+    };
+    flows.forEach((f) => f.paths.forEach((a) => { a.p.style.transformBox = "fill-box"; a.p.style.transformOrigin = "center"; }));
+    update();
+    addEventListener("scroll", () => { if (!frame) frame = requestAnimationFrame(update); }, { passive: true });
+    addEventListener("resize", () => { if (!frame) frame = requestAnimationFrame(update); });
+  }
 
   // The live thing: the coupon tells you what your first visit will be.
   const VISITS = {

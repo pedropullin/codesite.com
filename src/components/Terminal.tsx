@@ -217,7 +217,8 @@ export default function Terminal() {
         <Reveal delay={120}>
           <div
             data-ui
-            className="overflow-hidden rounded-2xl border border-white/10 bg-[#111114]"
+            data-scroll="enter"
+            className="fx-tilt overflow-hidden rounded-2xl border border-white/10 bg-[#111114]"
             onClick={() => input.current?.focus({ preventScroll: true })}
           >
             <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">

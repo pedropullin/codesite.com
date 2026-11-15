@@ -49,7 +49,7 @@ export default function Services() {
 
       <ul className="mt-16 grid gap-3 md:mt-24">
         {SERVICES.map((s, i) => (
-          <li key={s.title}>
+          <li key={s.title} className="fx-card" data-scroll="enter">
             <Reveal
               delay={(i % 3) * 70}
               className="group grid gap-4 rounded-3xl border border-line bg-bg-soft p-7 transition-colors duration-300 hover:border-white/20 hover:bg-paper md:grid-cols-[1.1fr_1fr] md:items-center md:p-10"

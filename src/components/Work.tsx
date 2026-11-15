@@ -33,7 +33,8 @@ export default function Work() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Abrir ${p.name}`}
-                    className={`group relative block overflow-hidden rounded-2xl border border-line bg-bg-soft lg:col-span-8 ${flip ? "lg:order-2" : ""}`}
+                    data-scroll="through"
+                    className={`fx-shot group relative block overflow-hidden rounded-2xl border border-line bg-bg-soft lg:col-span-8 ${flip ? "lg:order-2" : ""}`}
                   >
                     <img
                       src={p.shots.desktop}
@@ -41,7 +42,7 @@ export default function Work() {
                       width={1440}
                       height={900}
                       loading="lazy"
-                      className="block aspect-[16/10] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                      className="block aspect-[16/10] w-full object-cover object-top"
                     />
                   </a>
 

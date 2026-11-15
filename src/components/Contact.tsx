@@ -54,7 +54,7 @@ export default function Contact() {
       <div className="aurora-grain" aria-hidden />
       <div className="aurora-vignette aurora-vignette-both" aria-hidden />
       <div className="mx-auto max-w-7xl px-5 md:px-10">
-        <Reveal className="text-center">
+        <Reveal className="fx-grow text-center">
           <h2 className="mx-auto max-w-5xl font-display text-[clamp(2.8rem,9vw,8rem)] font-semibold leading-[0.92] tracking-[-0.045em]">
             Vamos tirar
             <br />

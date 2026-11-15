@@ -15,7 +15,7 @@ const MARQUEE = [
 
 export default function Hero() {
   return (
-    <section id="topo" className="relative isolate overflow-hidden bg-[#07080a] text-white">
+    <section id="topo" className="fx-hero relative isolate overflow-hidden bg-[#07080a] text-white" data-scroll="exit">
       <div className="aurora" aria-hidden>
         <div className="aurora-blade aurora-b4" />
         <div className="aurora-blade aurora-b1" />
@@ -26,7 +26,7 @@ export default function Hero() {
       <div className="aurora-grain" aria-hidden />
       <div className="aurora-vignette" aria-hidden />
 
-      <div className="mx-auto flex max-w-7xl flex-col items-center px-5 pt-36 pb-16 text-center md:px-10 md:pt-44 md:pb-20">
+      <div className="fx-hero-content mx-auto flex max-w-7xl flex-col items-center px-5 pt-36 pb-16 text-center md:px-10 md:pt-44 md:pb-20">
         <h1 className="max-w-[860px] text-[clamp(2.6rem,6.4vw,4.75rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-balance">
           Código que vira <span className="text-aurora">experiência.</span>
         </h1>

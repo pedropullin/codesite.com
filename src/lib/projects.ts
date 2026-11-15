@@ -39,7 +39,7 @@ export const projects: Project[] = [
     category: "Conceito · Clínica odontológica · Site",
     description:
       "Site conceito para uma clínica fictícia em Curitiba: o arco da arcada dentária vira janelas, botões e o rodapé, com tabela de valores e um cupom de agendamento que mostra como vai ser a primeira consulta.",
-    url: "https://codesite.online/projetos/arco/",
+    url: "https://codesite.online/projetos/arco",
     theme: "electric",
     stack: ["Site", "Agendamento", "Valores"],
     shots: { desktop: "/work/arco-desktop.jpg", mobile: "/work/arco-mobile.jpg" },

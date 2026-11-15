@@ -48,7 +48,8 @@ export default function Footer() {
 
         <a
           href="#topo"
-          className="mt-20 block font-display text-[clamp(4rem,17.5vw,16rem)] font-semibold leading-[0.85] tracking-[-0.05em] md:mt-28"
+          data-scroll="enter"
+          className="fx-mark mt-20 block font-display text-[clamp(4rem,17.5vw,16rem)] font-semibold leading-[0.85] tracking-[-0.05em] md:mt-28"
           aria-label={`${site.name}, voltar ao início`}
         >
           {site.name}
