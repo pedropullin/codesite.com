@@ -1,4 +1,5 @@
 import CommandBar from "./CommandBar";
+import { HeroGlyphs } from "./three/Lazy";
 import { ArrowUpRight, WhatsAppIcon } from "./icons";
 import { site, whatsappLink } from "@/lib/site";
 import { projects } from "@/lib/projects";
@@ -25,8 +26,11 @@ export default function Hero() {
       </div>
       <div className="aurora-grain" aria-hidden />
       <div className="aurora-vignette" aria-hidden />
+      <div className="hero-3d absolute inset-0" aria-hidden>
+        <HeroGlyphs />
+      </div>
 
-      <div className="hero-content mx-auto flex max-w-7xl flex-col items-center px-5 pt-36 pb-16 text-center md:px-10 md:pt-44 md:pb-20">
+      <div className="hero-content relative z-10 mx-auto flex max-w-7xl flex-col items-center px-5 pt-36 pb-16 text-center md:px-10 md:pt-44 md:pb-20">
         <h1 data-hero-title className="max-w-[860px] text-[clamp(2.6rem,6.4vw,4.75rem)] font-semibold leading-[1.05] tracking-[-0.04em] text-balance">
           Código que vira <span className="text-aurora">experiência.</span>
         </h1>

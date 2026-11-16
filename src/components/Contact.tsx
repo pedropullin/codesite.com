@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import Reveal from "./Reveal";
+import { RunKeys } from "./three/Lazy";
 import { ArrowUpRight, MailIcon, WhatsAppIcon, socialIcons } from "./icons";
 import { mailtoLink, socials, whatsappLink } from "@/lib/site";
 
@@ -60,11 +61,15 @@ export default function Contact() {
             <br />
             do papel.
           </h2>
+          <div className="relative mx-auto mt-6 h-[230px] max-w-3xl sm:h-[300px]">
+            <RunKeys />
+          </div>
+          <p className="text-[0.95rem] text-ink-soft">Aperte RUN para chamar a gente no WhatsApp, ou use o botão.</p>
           <a
             href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
-            data-fade className="magnetic group mt-10 keycap inline-flex items-center justify-center gap-2.5 rounded-lg px-8 py-4 text-lg font-medium"
+            data-fade className="magnetic group mt-6 keycap inline-flex items-center justify-center gap-2.5 rounded-lg px-8 py-4 text-lg font-medium"
           >
             <WhatsAppIcon className="h-5 w-5" />
             Vamos criar

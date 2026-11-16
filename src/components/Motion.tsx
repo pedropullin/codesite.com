@@ -41,6 +41,10 @@ export default function Motion() {
         const title = document.querySelector<HTMLElement>("[data-hero-title]");
         if (title) {
           const split = SplitText.create(title, { type: "words", mask: "words" });
+          // A split word loses its parent's clipped gradient, so it carries the gradient itself.
+          split.words.forEach((w) => {
+            if ((w as HTMLElement).closest(".text-aurora")) w.classList.add("text-aurora");
+          });
           gsap.from(split.words, { yPercent: 110, duration: 1.2, ease: expo, stagger: 0.07, delay: 0.1 });
         }
         gsap.from("[data-hero-in]", { y: 36, autoAlpha: 0, duration: 1.1, ease: expo, stagger: 0.1, delay: 0.45 });
