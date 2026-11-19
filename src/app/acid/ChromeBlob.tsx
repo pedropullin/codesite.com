@@ -26,19 +26,19 @@ function Blob() {
   );
 }
 
-/** Neon studio: the chrome reflects acid green, magenta and cyan strips. */
+/** Studio in the brand colours: the chrome reflects blue, light blue and white strips. */
 function NeonStudio() {
   return (
     <Environment resolution={256}>
       <color attach="background" args={["#000000"]} />
-      <Lightformer form="rect" intensity={5} color="#ccff00" position={[-5, 2, 2]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} />
-      <Lightformer form="rect" intensity={5} color="#ff00ff" position={[5, -1, 2]} rotation-y={-Math.PI / 2} scale={[8, 2, 1]} />
-      <Lightformer form="rect" intensity={4} color="#00f0ff" position={[0, 5, -3]} rotation-x={Math.PI / 2} scale={[10, 2, 1]} />
+      <Lightformer form="rect" intensity={5} color="#2b46ff" position={[-5, 2, 2]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} />
+      <Lightformer form="rect" intensity={5} color="#7b9bff" position={[5, -1, 2]} rotation-y={-Math.PI / 2} scale={[8, 2, 1]} />
+      <Lightformer form="rect" intensity={4} color="#9fd2ff" position={[0, 5, -3]} rotation-x={Math.PI / 2} scale={[10, 2, 1]} />
       <Lightformer form="circle" intensity={6} color="#ffffff" position={[2, 2, 6]} scale={2} />
       <Lightformer form="rect" intensity={2} color="#ffffff" position={[0, -5, 0]} rotation-x={-Math.PI / 2} scale={[10, 10, 1]} />
-      <Lightformer form="ring" intensity={3} color="#ccff00" position={[-3, -3, 4]} scale={3} />
-      <Lightformer form="ring" intensity={3} color="#ff00ff" position={[3, 3, -4]} scale={4} />
-      <Lightformer form="circle" intensity={2} color="#00f0ff" position={[-4, 4, 3]} scale={3} />
+      <Lightformer form="ring" intensity={3} color="#2b46ff" position={[-3, -3, 4]} scale={3} />
+      <Lightformer form="ring" intensity={3} color="#ffffff" position={[3, 3, -4]} scale={4} />
+      <Lightformer form="circle" intensity={2} color="#4f86ff" position={[-4, 4, 3]} scale={3} />
     </Environment>
   );
 }

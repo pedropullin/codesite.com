@@ -1,10 +1,11 @@
-/* Acid Graphic: pure black, volt green, magenta, cyan and liquid chrome. Scoped to .acid. */
+/* Acid Graphic in CODE SITE colours: pure black, brand blue, light blues, white and liquid chrome. Scoped to .acid. */
 .acid {
   --void: #000000;
   --onyx: #0a0a0a;
-  --volt: #ccff00;
-  --pink: #ff00ff;
-  --cyan: #00f0ff;
+  /* Names kept from the acid kit; the values are the CODE SITE palette. */
+  --volt: #2b46ff;
+  --pink: #7b9bff;
+  --cyan: #9fd2ff;
   --chrome: linear-gradient(180deg, #ffffff 0%, #888888 48%, #e0e0e0 100%);
   --expo: cubic-bezier(0.19, 1, 0.22, 1);
   background: var(--void);
@@ -12,7 +13,7 @@
   font-family: var(--font-jakarta), system-ui, sans-serif;
   overflow-x: clip;
 }
-.acid ::selection { background: var(--volt); color: #000; }
+.acid ::selection { background: var(--volt); color: #fff; }
 .acid :focus-visible { outline: 2px solid var(--volt); outline-offset: 3px; }
 
 .acid .display {
@@ -46,7 +47,7 @@
 }
 
 /* Massive transparent outline text. */
-.acid .outline-volt { color: transparent; -webkit-text-stroke: 1px var(--volt); }
+.acid .outline-volt { color: transparent; -webkit-text-stroke: 1.5px var(--pink); }
 .acid .outline-white { color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35); }
 
 /* Chrome button: a metal cylinder whose label flips colour with what's behind it. */
@@ -69,7 +70,7 @@
 }
 .acid .chrome-btn:hover {
   transform: scale(1.1) rotate(2deg);
-  box-shadow: 0 0 30px rgba(204, 255, 0, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 34px rgba(43, 70, 255, 0.8), inset 0 2px 0 rgba(255, 255, 255, 0.9);
 }
 .acid .chrome-btn span { mix-blend-mode: difference; color: #fff; }
 
@@ -79,14 +80,14 @@
   gap: 0.5rem;
   padding: 1rem 1.6rem;
   border-radius: 999px;
-  border: 1px solid var(--volt);
-  color: var(--volt);
+  border: 1px solid var(--pink);
+  color: #fff;
   font-family: var(--font-syne), sans-serif;
   font-weight: 800;
   text-transform: uppercase;
   transition: background-color 0.4s var(--expo), color 0.4s var(--expo), transform 0.4s var(--expo);
 }
-.acid .ghost-btn:hover { background: var(--volt); color: #000; transform: rotate(-2deg); }
+.acid .ghost-btn:hover { background: var(--volt); color: #fff; transform: rotate(-2deg); }
 
 /* Liquid container: amoeba shape with an iridescent 2px border. */
 .acid .blob {

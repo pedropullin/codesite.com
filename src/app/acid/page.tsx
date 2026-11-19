@@ -46,14 +46,14 @@ function Ticker({ reverse = false, tone = "volt" }: { reverse?: boolean; tone?: 
   const items = [...TICKER, ...TICKER];
   return (
     <div
-      className={`overflow-hidden py-3 ${tone === "volt" ? "bg-[var(--volt)] text-black" : "border-y border-white/10 bg-black text-white"}`}
+      className={`overflow-hidden py-3 ${tone === "volt" ? "bg-[var(--volt)] text-white" : "border-y border-white/10 bg-black text-white"}`}
       aria-hidden
     >
       <div className={`marquee flex w-max gap-8 whitespace-nowrap ${reverse ? "reverse" : ""}`}>
         {items.map((t, i) => (
           <span key={i} className="display flex items-center gap-8 text-xl italic md:text-2xl">
             {t}
-            <Star className="h-4 w-4" color={tone === "volt" ? "#000" : "var(--pink)"} />
+            <Star className="h-4 w-4" color={tone === "volt" ? "#fff" : "var(--pink)"} />
           </span>
         ))}
       </div>
@@ -80,13 +80,13 @@ export default function AcidPage() {
       {/* ---------- nav ---------- */}
       <header className="relative z-30 flex items-center justify-between gap-4 px-5 py-5 md:px-10">
         <a href="#topo" className="display split text-xl md:text-3xl" aria-label={`${site.name}, início`}>
-          CODE<span className="text-[var(--volt)]">/</span>SITE
+          CODE<span className="text-[var(--pink)]">/</span>SITE
         </a>
         <nav aria-label="Principal" className="hidden md:block">
           <ul className="flex gap-7 text-sm font-bold tracking-wide uppercase">
             {navLinks.filter((l) => l.href !== "#duvidas").map((l) => (
               <li key={l.href}>
-                <a href={l.href} className="split-hover inline-block transition-colors hover:text-[var(--volt)]">
+                <a href={l.href} className="split-hover inline-block transition-colors hover:text-[var(--pink)]">
                   {l.label}
                 </a>
               </li>
@@ -112,7 +112,7 @@ export default function AcidPage() {
           </div>
 
           <p
-            className="absolute top-1/2 left-3 hidden origin-left -translate-y-1/2 -rotate-90 text-xs font-bold tracking-[0.4em] text-[var(--volt)] uppercase md:block"
+            className="absolute top-1/2 left-3 hidden origin-left -translate-y-1/2 -rotate-90 text-xs font-bold tracking-[0.4em] text-[var(--pink)] uppercase md:block"
             aria-hidden
           >
             Estúdio digital ✶ Código ✶ Design ✶ Experiência
@@ -122,7 +122,7 @@ export default function AcidPage() {
             <h1 className="display mt-[14vh] text-[clamp(3rem,10.5vw,10rem)] italic">
               <span className="split block origin-left md:scale-x-110">Código</span>
               <span className="split block pl-[8vw]">
-                que <span className="text-[var(--volt)]">vira</span>
+                que <span className="text-[var(--pink)]">vira</span>
               </span>
               <span className="chrome-text block origin-left -rotate-2 text-[0.66em] not-italic md:text-[0.8em]">experiência</span>
             </h1>
@@ -162,7 +162,7 @@ export default function AcidPage() {
                 <div className="flex min-h-[300px] flex-col justify-between p-10 md:p-12">
                   <Star className="h-8 w-8" color={s.color} />
                   <div>
-                    <h3 className="display split-hover text-4xl md:text-5xl" style={{ color: s.color }}>
+                    <h3 className="display split-hover text-[clamp(1.9rem,2.8vw,2.75rem)] [overflow-wrap:anywhere]" style={{ color: s.color }}>
                       {s.title}
                     </h3>
                     <p className="mt-4 max-w-xs leading-relaxed text-white/75">{s.text}</p>
@@ -222,10 +222,10 @@ export default function AcidPage() {
           </h2>
           <ol className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 md:grid-cols-4">
             {STEPS.map((s, i) => (
-              <li key={s.title} className="rise group relative bg-black p-8 transition-colors duration-500 hover:bg-[var(--volt)] hover:text-black">
-                <code className="font-mono text-sm text-[var(--volt)] group-hover:text-black">$ {s.cmd}</code>
+              <li key={s.title} className="rise group relative bg-black p-8 transition-colors duration-500 hover:bg-[var(--volt)] hover:text-white">
+                <code className="font-mono text-sm text-[var(--pink)] group-hover:text-white">$ {s.cmd}</code>
                 <h3 className="display mt-10 text-[clamp(1.6rem,2.2vw,2.2rem)] italic">{s.title}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-white/70 group-hover:text-black/80">{s.text}</p>
+                <p className="mt-4 text-sm leading-relaxed text-white/70 group-hover:text-white/85">{s.text}</p>
                 <Star className={`absolute top-6 right-6 h-5 w-5 transition-transform duration-700 group-hover:rotate-180 ${i % 2 ? "" : ""}`} color="var(--pink)" />
               </li>
             ))}
@@ -233,14 +233,14 @@ export default function AcidPage() {
         </section>
 
         {/* ---------- contact ---------- */}
-        <section id="contato" className="relative isolate overflow-hidden bg-[var(--volt)] px-5 py-28 text-black md:px-10 md:py-40">
-          <p className="display pointer-events-none absolute -bottom-10 left-0 -z-10 text-[30vw] leading-none text-black/10 select-none" aria-hidden>
+        <section id="contato" className="relative isolate overflow-hidden bg-[var(--volt)] px-5 py-28 text-white md:px-10 md:py-40">
+          <p className="display pointer-events-none absolute -bottom-10 left-0 -z-10 text-[30vw] leading-none text-white/10 select-none" aria-hidden>
             RUN
           </p>
           <h2 className="display rise text-[clamp(3.4rem,12vw,11rem)] italic">
             Vamos tirar
             <br />
-            <span className="ml-[10vw] inline-block -rotate-2 bg-black px-4 text-[var(--volt)] not-italic">do papel</span>
+            <span className="ml-[10vw] inline-block -rotate-2 bg-white px-4 text-[var(--volt)] not-italic">do papel</span>
           </h2>
           <div className="mt-14 grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-end">
             <div>
@@ -251,7 +251,7 @@ export default function AcidPage() {
                 href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-3 rounded-full bg-black px-8 py-5 font-[family-name:var(--font-syne)] text-lg font-extrabold text-[var(--volt)] uppercase transition-transform duration-500 hover:scale-105 hover:-rotate-2"
+                className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-8 py-5 font-[family-name:var(--font-syne)] text-lg font-extrabold text-[var(--volt)] uppercase transition-transform duration-500 hover:scale-105 hover:-rotate-2"
               >
                 <WhatsAppIcon className="h-5 w-5" /> {site.phoneDisplay}
               </a>
@@ -267,7 +267,7 @@ export default function AcidPage() {
                         href={s.href}
                         target={s.id === "email" ? undefined : "_blank"}
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full border-2 border-black px-5 py-3 font-bold transition-colors duration-300 hover:bg-black hover:text-[var(--volt)]"
+                        className="inline-flex items-center gap-2 rounded-full border-2 border-white px-5 py-3 font-bold transition-colors duration-300 hover:bg-white hover:text-[var(--volt)]"
                       >
                         <Icon className="h-4 w-4" /> {s.label}
                       </a>
@@ -285,7 +285,7 @@ export default function AcidPage() {
         <p className="display chrome-text text-[clamp(4rem,19vw,18rem)] italic leading-[0.8]">CODE SITE</p>
         <div className="mt-10 flex flex-col justify-between gap-3 text-sm text-white/60 sm:flex-row">
           <span>© {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</span>
-          <Link href="/" className="font-bold text-[var(--volt)] hover:underline">
+          <Link href="/" className="font-bold text-[var(--pink)] hover:underline">
             Ver a versão principal do site
           </Link>
         </div>
