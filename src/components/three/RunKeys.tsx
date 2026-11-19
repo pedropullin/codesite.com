@@ -50,7 +50,7 @@ export default function RunKeys() {
   return (
     <div ref={wrap} className="h-full w-full" style={{ touchAction: "pan-y" }}>
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={[1, 1.6]}
         frameloop={inView ? "always" : "never"}
         camera={{ position: [0, 0.6, 7], fov: 34 }}
         gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}

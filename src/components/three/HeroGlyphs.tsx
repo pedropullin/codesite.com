@@ -77,7 +77,7 @@ export default function HeroGlyphs() {
   return (
     <div ref={wrap} className="absolute inset-0" aria-hidden>
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={typeof window !== "undefined" && window.innerWidth < 768 ? [1, 1.25] : [1, 1.6]}
         frameloop={inView ? "always" : "never"}
         camera={{ position: [0, 0, 12], fov: 38 }}
         gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}

@@ -29,7 +29,7 @@ export default function Work() {
           {projects.map((p) => (
             <article
               key={p.name}
-              className="work-panel grid rounded-3xl border border-white/10 bg-[#16213a] items-center gap-8 p-4 md:p-6 lg:w-[min(80vw,1220px)] lg:shrink-0 lg:grid-cols-12 lg:gap-10"
+              className="work-panel glass-strong grid items-center gap-8 rounded-3xl p-4 md:p-6 lg:w-[min(80vw,1220px)] lg:shrink-0 lg:grid-cols-12 lg:gap-10"
             >
               <a
                 href={p.url}

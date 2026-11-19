@@ -216,7 +216,7 @@ export default function Terminal() {
         <div className="term-wrap [perspective:1400px]">
           <div
             data-ui
-            className="term-window overflow-hidden rounded-2xl border border-white/10 bg-[#0f172a]"
+            className="term-window overflow-hidden rounded-2xl border border-white/10 bg-[#0f172a]/80 backdrop-blur-xl"
             onClick={() => input.current?.focus({ preventScroll: true })}
           >
             <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
