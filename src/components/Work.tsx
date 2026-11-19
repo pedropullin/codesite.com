@@ -8,15 +8,14 @@ function hostname(url: string) {
 
 export default function Work() {
   return (
-    <section id="trabalhos" className="work-section overflow-hidden bg-bg py-28 md:py-36">
+    <section id="trabalhos" className="work-section relative isolate overflow-hidden bg-bg py-28 md:py-36">
+      <div className="pointer-events-none absolute top-1/3 left-1/2 -z-10 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-brand/25 blur-[140px]" aria-hidden />
       <div className="mx-auto grid max-w-7xl gap-8 px-5 md:px-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
         <h2
           data-split
-          className="font-display text-[clamp(2.6rem,7vw,6.5rem)] font-semibold leading-[0.95] tracking-[-0.04em]"
+          className="font-display text-[clamp(2.6rem,7vw,6.5rem)] font-medium leading-[1.05] tracking-tight"
         >
-          Projetos
-          <br />
-          no ar.
+          Projetos <em className="font-medium">no ar.</em>
         </h2>
         <p data-fade className="max-w-md text-lg leading-relaxed text-ink md:text-xl">
           Cada projeto é feito do zero, com identidade própria. Role para passar por eles e clique para ver
@@ -30,7 +29,7 @@ export default function Work() {
           {projects.map((p) => (
             <article
               key={p.name}
-              className="work-panel grid items-center gap-8 lg:w-[min(78vw,1180px)] lg:shrink-0 lg:grid-cols-12 lg:gap-10"
+              className="work-panel glass-strong grid items-center gap-8 rounded-3xl p-4 md:p-6 lg:w-[min(80vw,1220px)] lg:shrink-0 lg:grid-cols-12 lg:gap-10"
             >
               <a
                 href={p.url}
@@ -50,7 +49,7 @@ export default function Work() {
               </a>
 
               <div className="flex flex-col lg:col-span-4">
-                <h3 className="font-display text-[clamp(2rem,3.4vw,3rem)] font-semibold leading-none tracking-[-0.03em]">
+                <h3 className="font-display text-[clamp(2rem,3.4vw,3rem)] font-medium leading-[1.1] tracking-tight">
                   {p.name}
                 </h3>
                 <div className="mt-7 flex items-start gap-5">

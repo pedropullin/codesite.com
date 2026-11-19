@@ -5,6 +5,7 @@ import Terminal from "@/components/Terminal";
 import Work from "@/components/Work";
 import Process from "@/components/Process";
 import Contact from "@/components/Contact";
+import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
 import Motion from "@/components/Motion";
 
@@ -18,6 +19,7 @@ export default function Home() {
         <Terminal />
         <Work />
         <Process />
+        <Faq />
         <Contact />
       </main>
       <Footer />

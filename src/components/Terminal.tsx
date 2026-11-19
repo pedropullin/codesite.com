@@ -199,10 +199,10 @@ export default function Terminal() {
   };
 
   return (
-    <section id="terminal" className="relative border-y border-line bg-[#0b0c0f] py-28 text-white md:py-36">
+    <section id="terminal" className="relative isolate overflow-hidden bg-[#0b1220] py-28 text-white md:py-36">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-5 md:px-10 lg:grid-cols-[1fr_1fr] lg:items-center">
         <div>
-          <h2 data-split className="font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-semibold leading-[0.95] tracking-[-0.04em]">
+          <h2 data-split className="font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-medium leading-[1.05] tracking-tight">
             Fale com a gente
             <br />
             em código.
@@ -216,7 +216,7 @@ export default function Terminal() {
         <div className="term-wrap [perspective:1400px]">
           <div
             data-ui
-            className="term-window overflow-hidden rounded-2xl border border-white/10 bg-[#111114]"
+            className="term-window overflow-hidden rounded-2xl border border-white/10 bg-[#0f172a]/80 backdrop-blur-xl"
             onClick={() => input.current?.focus({ preventScroll: true })}
           >
             <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">

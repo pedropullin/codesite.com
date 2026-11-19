@@ -26,8 +26,8 @@ const GLYPHS: G[] = [
   { char: "}", at: [0.4, 0.2], z: -0.5, size: 2.1, depth: 0.5, kind: "chrome", rot: [0, -0.45, -0.08], speed: 1.2, mAt: [0.5, 0.41] },
   { char: "</>", at: [-0.34, -0.12], z: -1.5, size: 1.1, depth: 0.42, kind: "brand", rot: [0.2, 0.5, -0.12], speed: 1.6, mAt: [-0.46, 0.03] },
   { char: "#", at: [0.33, -0.08], z: -1, size: 1.05, depth: 0.45, kind: "glass", rot: [0.3, -0.4, 0.2], speed: 1.9, mAt: [0.47, 0.05] },
-  { char: ";", at: [0.27, 0.36], z: -3, size: 0.9, depth: 0.4, kind: "brand", rot: [0.1, -0.3, 0.3], speed: 2.1 },
-  { char: "=>", at: [-0.27, 0.36], z: -3.5, size: 0.8, depth: 0.32, kind: "glass", rot: [0.2, 0.3, -0.1], speed: 1.7 },
+  { char: ";", at: [0.3, 0.45], z: -3, size: 0.9, depth: 0.4, kind: "brand", rot: [0.1, -0.3, 0.3], speed: 2.1 },
+  { char: "=>", at: [-0.3, 0.45], z: -3.5, size: 0.8, depth: 0.32, kind: "glass", rot: [0.2, 0.3, -0.1], speed: 1.7 },
   { char: "()", at: [0.42, -0.36], z: -2, size: 0.8, depth: 0.3, kind: "chrome", rot: [-0.2, -0.5, 0.15], speed: 2.3 },
   { char: "*", at: [-0.43, -0.4], z: -2.5, size: 1, depth: 0.4, kind: "glass", rot: [0.4, 0.2, 0.3], speed: 2 },
 ];

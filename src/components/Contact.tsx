@@ -56,7 +56,7 @@ export default function Contact() {
       <div className="aurora-vignette aurora-vignette-both" aria-hidden />
       <div className="mx-auto max-w-7xl px-5 md:px-10">
         <div className="text-center">
-          <h2 data-split="chars" className="mx-auto max-w-5xl font-display text-[clamp(2.8rem,9vw,8rem)] font-semibold leading-[0.92] tracking-[-0.045em]">
+          <h2 data-split="chars" className="mx-auto max-w-5xl font-display text-[clamp(2.8rem,9vw,8rem)] font-medium leading-[1.02] tracking-tight">
             Vamos tirar
             <br />
             do papel.
@@ -100,7 +100,7 @@ export default function Contact() {
                         <Icon className="h-6 w-6" />
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block font-display text-lg font-semibold">{s.label}</span>
+                        <span className="block text-lg font-semibold">{s.label}</span>
                         <span
                           className={`block truncate text-[0.95rem] ${
                             s.id === "whatsapp" ? "text-white/75" : "text-ink-soft"
@@ -118,8 +118,8 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={120}>
-            <form onSubmit={sendWhatsApp} className="rounded-3xl border border-line bg-bg-soft p-6 md:p-8" noValidate>
-              <h3 className="font-display text-2xl font-semibold tracking-tight">Conte sobre o projeto</h3>
+            <form onSubmit={sendWhatsApp} className="glass-strong rounded-3xl p-6 md:p-8" noValidate>
+              <h3 className="font-display text-2xl font-medium tracking-tight">Conte sobre o projeto</h3>
               <p className="mt-1 text-[0.95rem] text-ink-soft">
                 A mensagem já vai pronta para o WhatsApp ou e-mail, é só enviar.
               </p>

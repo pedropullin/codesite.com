@@ -90,5 +90,6 @@ export const navLinks = [
   { href: "#servicos", label: "Serviços" },
   { href: "#trabalhos", label: "Trabalhos" },
   { href: "#processo", label: "Processo" },
+  { href: "#duvidas", label: "Dúvidas" },
   { href: "#contato", label: "Contato" },
 ];

@@ -28,23 +28,27 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:pt-5">
-        <nav
-          className={`mx-auto flex max-w-[920px] items-center justify-between gap-4 rounded-full border border-white/10 py-2 pr-2 pl-4 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-[16px] transition-colors duration-300 md:pl-5 ${
-            scrolled || open ? "bg-[rgba(10,11,13,0.86)]" : "bg-[rgba(14,15,18,0.55)]"
-          }`}
-        >
-          <a href="#topo" className="flex items-center gap-2.5" aria-label={`${site.name}, início`}>
-            <CodeSiteMark className="h-7 w-7" />
-            <span className="text-[0.95rem] font-semibold tracking-tight">{site.name}</span>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-500 ease-in-out ${
+          scrolled || open
+            ? "border-b border-white/10 bg-[rgba(15,23,42,0.92)] backdrop-blur-[16px]"
+            : "border-b border-transparent bg-transparent"
+        }`}
+      >
+        <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5 text-white md:h-20 md:px-10">
+          <a href="#topo" className="group flex items-center gap-2.5" aria-label={`${site.name}, início`}>
+            <span className="transition-transform duration-500 ease-in-out group-hover:rotate-180">
+              <CodeSiteMark className="h-8 w-8" />
+            </span>
+            <span className="font-brand text-lg font-bold tracking-tight lowercase">codesite</span>
           </a>
 
-          <ul className="hidden items-center gap-7 md:flex">
+          <ul className="glass-soft hidden items-center gap-1 rounded-full p-1 md:flex">
             {navLinks.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="text-sm font-medium text-[#9c9c9d] transition-colors hover:text-white"
+                  className="block rounded-full px-4 py-2 text-sm font-medium text-slate-300 transition-colors duration-300 hover:bg-white/10 hover:text-white"
                 >
                   {l.label}
                 </a>
@@ -57,9 +61,9 @@ export default function Navbar() {
               href={whatsappLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center gap-2 rounded-full bg-[#e6e6e6] px-4 py-2 text-[0.875rem] font-medium text-[#2f3031] transition-[background-color,transform] duration-200 hover:bg-white active:scale-[0.97] sm:inline-flex"
+              className="hidden items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-[box-shadow,transform] duration-300 hover:shadow-[0_0_28px_rgba(255,255,255,0.35)] active:scale-[0.97] sm:inline-flex"
             >
-              <WhatsAppIcon className="h-3.5 w-3.5" />
+              <WhatsAppIcon className="h-4 w-4" />
               Orçamento
             </a>
             <button
@@ -95,7 +99,7 @@ export default function Navbar() {
                 href={l.href}
                 onClick={() => setOpen(false)}
                 tabIndex={open ? 0 : -1}
-                className="flex items-baseline gap-4 py-3 font-display text-5xl font-semibold tracking-[-0.03em]"
+                className="flex items-baseline gap-4 py-3 font-display text-5xl font-medium tracking-[-0.02em]"
               >
                 {l.label}
               </a>

@@ -57,9 +57,28 @@ export default function Motion() {
           .to(".hero-section .aurora", { yPercent: 25, scale: 1.35, ease: "none" }, 0);
 
         // ---------- marquee leans with scroll speed ----------
-        const skewTo = gsap.quickTo(".marquee-skew", "skewX", { duration: 0.5, ease: "power3" });
-        ScrollTrigger.create({
-          onUpdate: (self) => skewTo(gsap.utils.clamp(-14, 14, self.getVelocity() / -180)),
+        // Feature rows: the visual slides in from its side.
+        gsap.utils.toArray<HTMLElement>(".feature-row").forEach((row, i) => {
+          gsap.from(row.querySelector(".feature-visual"), {
+            x: i % 2 ? -60 : 60,
+            rotate: i % 2 ? -2 : 2,
+            autoAlpha: 0,
+            duration: 1.2,
+            ease: expo,
+            scrollTrigger: { trigger: row, start: "top 80%" },
+          });
+          gsap.from(row.querySelectorAll("h3, p, li"), {
+            y: 24,
+            autoAlpha: 0,
+            duration: 1,
+            ease: expo,
+            stagger: 0.05,
+            scrollTrigger: { trigger: row, start: "top 82%" },
+          });
+        });
+
+        gsap.utils.toArray<HTMLElement>(".faq-item").forEach((el, i) => {
+          gsap.from(el, { y: 30, autoAlpha: 0, duration: 0.9, ease: expo, delay: i * 0.05, scrollTrigger: { trigger: el, start: "top 92%" } });
         });
 
         // ---------- section titles: lines rise out of a mask ----------
@@ -87,27 +106,6 @@ export default function Motion() {
             ease: expo,
             delay: 0.15,
             scrollTrigger: { trigger: el, start: "top 88%" },
-          });
-        });
-
-        // ---------- services: stacked sticky cards ----------
-        const items = gsap.utils.toArray<HTMLElement>(".svc-item");
-        items.forEach((item, i) => {
-          const card = item.querySelector(".svc-card");
-          const next = items[i + 1];
-          gsap.from(card, {
-            y: 80,
-            autoAlpha: 0,
-            duration: 1,
-            ease: expo,
-            scrollTrigger: { trigger: item, start: "top 92%" },
-          });
-          if (!next || !card) return;
-          gsap.to(card, {
-            scale: 0.9 + i * 0.012,
-            filter: "brightness(0.5)",
-            ease: "none",
-            scrollTrigger: { trigger: next, start: "top 65%", end: "top 15%", scrub: true },
           });
         });
 
