@@ -137,8 +137,12 @@
 }
 
 /* Warped photos: under water until you point at them. */
-.acid .warp img { filter: url(#wavy) saturate(1.4) contrast(1.1); transition: filter 0.6s var(--expo), transform 0.8s var(--expo); }
-.acid .warp:hover img { filter: none; transform: scale(1.03); }
+/* Only where there is a mouse to undo it: on touch screens the photos stay sharp. */
+.acid .warp img { transition: filter 0.6s var(--expo), transform 0.8s var(--expo); }
+@media (hover: hover) and (min-width: 768px) {
+  .acid .warp img { filter: url(#wavy) saturate(1.4) contrast(1.1); }
+  .acid .warp:hover img { filter: none; transform: scale(1.03); }
+}
 
 /* Entrance. */
 .acid .rise { opacity: 0; transform: translateY(60px) skewY(4deg); transition: opacity 1s var(--expo), transform 1.2s var(--expo); }

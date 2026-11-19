@@ -169,12 +169,12 @@ export default function AcidPage() {
         {/* ---------- work ---------- */}
         <section id="trabalhos" className="relative bg-[var(--onyx)] px-5 py-28 md:px-10 md:py-40">
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <h2 className="display rise text-[clamp(3rem,11vw,10rem)] italic">
+            <h2 className="display rise text-[clamp(2.4rem,9.4vw,10rem)] italic">
               <span className="split">Projetos</span>
               <br />
               <span className="chrome-text not-italic">no ar</span>
             </h2>
-            <p className="rise max-w-sm text-white/70">Passe o mouse para tirar as fotos de baixo d’água.</p>
+            <p className="rise hidden max-w-sm text-white/70 [@media(hover:hover)]:md:block">Passe o mouse para tirar as fotos de baixo d’água.</p>
           </div>
 
           <div className="mt-20 flex flex-col gap-28">
@@ -194,7 +194,7 @@ export default function AcidPage() {
                   <img src={p.shots.desktop} alt={`Página inicial do ${p.name}`} width={1440} height={900} loading="lazy" className="aspect-[16/10] w-full object-cover object-top" />
                 </a>
                 <div className="lg:col-span-4">
-                  <h3 className="display split-hover text-[clamp(2rem,3.4vw,3.4rem)] italic [overflow-wrap:anywhere]">{p.name}</h3>
+                  <h3 className="display split-hover text-[clamp(1.5rem,6.6vw,3.4rem)] italic md:text-[clamp(2rem,3.4vw,3.4rem)]">{p.name}</h3>
                   <p className="mt-5 leading-relaxed text-white/75">{p.description}</p>
                   <p className="mt-4 text-sm font-bold tracking-wide text-[var(--cyan)] uppercase">{p.category}</p>
                   <a href={p.url} target="_blank" rel="noopener noreferrer" className="ghost-btn mt-7 text-sm">
@@ -244,7 +244,7 @@ export default function AcidPage() {
                 href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-8 py-5 font-[family-name:var(--font-syne)] text-lg font-extrabold text-[var(--volt)] uppercase transition-transform duration-500 hover:scale-105 hover:-rotate-2"
+                className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-4 font-[family-name:var(--font-syne)] text-[clamp(0.95rem,4.4vw,1.125rem)] font-extrabold whitespace-nowrap md:px-8 md:py-5 text-[var(--volt)] uppercase transition-transform duration-500 hover:scale-105 hover:-rotate-2"
               >
                 <WhatsAppIcon className="h-5 w-5" /> {site.phoneDisplay}
               </a>
