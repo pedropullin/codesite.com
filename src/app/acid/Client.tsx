@@ -1,9 +1,22 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 
-export const ChromeBlob = dynamic(() => import("./ChromeBlob"), { ssr: false });
+const ChromeBlobScene = dynamic(() => import("./ChromeBlob"), { ssr: false });
+
+const WIDE = "(min-width: 768px)";
+const subscribe = (cb: () => void) => {
+  const mq = window.matchMedia(WIDE);
+  mq.addEventListener("change", cb);
+  return () => mq.removeEventListener("change", cb);
+};
+
+/** The 3D blob only on wider screens: on phones it is skipped entirely (nothing downloaded). */
+export function ChromeBlob() {
+  const wide = useSyncExternalStore(subscribe, () => window.matchMedia(WIDE).matches, () => false);
+  return wide ? <ChromeBlobScene /> : null;
+}
 
 /** Adds .in to every .rise element the first time it scrolls into view. */
 export function Rise() {

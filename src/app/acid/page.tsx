@@ -72,7 +72,7 @@ export default function AcidPage() {
 
       {/* ---------- nav ---------- */}
       <header className="relative z-30 flex items-center justify-between gap-4 px-5 py-5 md:px-10">
-        <a href="#topo" className="display split text-xl md:text-3xl" aria-label={`${site.name}, início`}>
+        <a href="#topo" className="display split shrink-0 text-lg md:text-3xl" aria-label={`${site.name}, início`}>
           CODE<span className="text-[var(--pink)]">/</span>SITE
         </a>
         <nav aria-label="Principal" className="hidden md:block">
@@ -86,7 +86,7 @@ export default function AcidPage() {
             ))}
           </ul>
         </nav>
-        <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="chrome-btn !px-4 !py-2.5 text-xs md:!px-6 md:!py-3 md:text-sm">
+        <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="chrome-btn shrink-0 !gap-2 !px-3.5 !py-2 text-[11px] md:!px-6 md:!py-3 md:text-sm">
           <span>Orçamento</span>
         </a>
       </header>
@@ -94,13 +94,13 @@ export default function AcidPage() {
       <main id="topo">
         {/* ---------- hero ---------- */}
         <section className="relative isolate min-h-[92svh] overflow-hidden px-5 pt-6 pb-20 md:px-10">
-          <div className="drift top-[8%] left-[55%] h-[340px] w-[340px]" aria-hidden />
+          <div className="drift top-[8%] left-[55%] h-[200px] w-[200px] md:h-[340px] md:w-[340px]" aria-hidden />
           <div className="drift bottom-[10%] left-[-6%] h-[220px] w-[220px] [animation-delay:-7s]" aria-hidden />
           <p className="display outline-white pointer-events-none absolute -right-6 bottom-6 -z-10 text-[34vw] leading-none select-none" aria-hidden>
             CODE
           </p>
 
-          <div className="absolute top-0 right-[-8%] h-[78vh] w-[78vw] opacity-55 md:right-[-4%] md:w-[52vw] md:opacity-100">
+          <div className="absolute top-0 right-[-4%] hidden h-[78vh] w-[52vw] md:block">
             <ChromeBlob />
           </div>
 
@@ -117,7 +117,7 @@ export default function AcidPage() {
               <span className="split block pl-[8vw]">
                 que <span className="text-[var(--pink)]">vira</span>
               </span>
-              <span className="chrome-text block origin-left -rotate-2 text-[0.66em] not-italic md:text-[0.8em]">experiência</span>
+              <span className="chrome-text mt-[0.12em] block origin-left -rotate-2 text-[0.66em] not-italic md:text-[0.8em]">experiência</span>
             </h1>
 
             <div className="mt-10 grid max-w-4xl gap-8 md:ml-[24vw] md:grid-cols-[minmax(0,26rem)_auto] md:items-end">
