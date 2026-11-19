@@ -1,0 +1,150 @@
+/* Acid Graphic: pure black, volt green, magenta, cyan and liquid chrome. Scoped to .acid. */
+.acid {
+  --void: #000000;
+  --onyx: #0a0a0a;
+  --volt: #ccff00;
+  --pink: #ff00ff;
+  --cyan: #00f0ff;
+  --chrome: linear-gradient(180deg, #ffffff 0%, #888888 48%, #e0e0e0 100%);
+  --expo: cubic-bezier(0.19, 1, 0.22, 1);
+  background: var(--void);
+  color: #f5f5f5;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  overflow-x: clip;
+}
+.acid ::selection { background: var(--volt); color: #000; }
+.acid :focus-visible { outline: 2px solid var(--volt); outline-offset: 3px; }
+
+.acid .display {
+  font-family: var(--font-syne), system-ui, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  line-height: 0.82;
+}
+
+/* Liquid chrome text. */
+.acid .chrome-text {
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Shadows would show through transparent letters, so the colour split is a filter here. */
+  text-shadow: none;
+  filter: drop-shadow(-1.5px 0 rgba(255, 0, 64, 0.8)) drop-shadow(1.5px 0 rgba(0, 200, 255, 0.8));
+}
+
+/* Chromatic aberration: the letters split into red and blue. */
+.acid .split {
+  text-shadow: -1.5px 0 rgba(255, 0, 64, 0.85), 1.5px 0 rgba(0, 200, 255, 0.85);
+}
+.acid .split-hover:hover { animation: rgb-glitch 0.35s steps(2) 2; }
+@keyframes rgb-glitch {
+  0% { text-shadow: -3px 0 #ff0040, 3px 0 #00c8ff; transform: translateX(0); }
+  50% { text-shadow: 3px 1px #ff0040, -3px -1px #00c8ff; transform: translateX(2px) skewX(-6deg); }
+  100% { text-shadow: -1.5px 0 #ff0040, 1.5px 0 #00c8ff; transform: none; }
+}
+
+/* Massive transparent outline text. */
+.acid .outline-volt { color: transparent; -webkit-text-stroke: 1px var(--volt); }
+.acid .outline-white { color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.35); }
+
+/* Chrome button: a metal cylinder whose label flips colour with what's behind it. */
+.acid .chrome-btn {
+  position: relative;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 1.8rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffffff 0%, #9ca3af 50%, #ffffff 100%);
+  color: #000;
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.9), inset 0 -3px 6px rgba(0, 0, 0, 0.35);
+  transition: transform 0.5s var(--expo), box-shadow 0.5s var(--expo);
+}
+.acid .chrome-btn:hover {
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 0 0 30px rgba(204, 255, 0, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.9);
+}
+.acid .chrome-btn span { mix-blend-mode: difference; color: #fff; }
+
+.acid .ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--volt);
+  color: var(--volt);
+  font-family: var(--font-syne), sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition: background-color 0.4s var(--expo), color 0.4s var(--expo), transform 0.4s var(--expo);
+}
+.acid .ghost-btn:hover { background: var(--volt); color: #000; transform: rotate(-2deg); }
+
+/* Liquid container: amoeba shape with an iridescent 2px border. */
+.acid .blob {
+  position: relative;
+  padding: 2px;
+  border-radius: var(--shape, 20% 80% 30% 70% / 50% 20% 80% 50%);
+  background: linear-gradient(135deg, var(--volt), #ffffff 45%, var(--pink));
+  transition: border-radius 1.2s var(--expo), transform 0.8s var(--expo);
+}
+.acid .blob > div {
+  border-radius: inherit;
+  background: rgba(0, 0, 0, 0.82);
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  height: 100%;
+}
+.acid .blob:hover { --shape: 60% 40% 70% 30% / 40% 70% 30% 60%; transform: rotate(-1.5deg) scale(1.02); }
+
+/* Drifting chrome blobs in the background. */
+.acid .drift {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #9a9a9a 25%, #1a1a1a 60%, transparent 70%);
+  animation: drift 20s ease-in-out infinite;
+  opacity: 0.55;
+}
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0) scale(1); border-radius: 50%; }
+  33% { transform: translate(40px, -30px) scale(1.08); border-radius: 42% 58% 60% 40% / 50% 40% 60% 50%; }
+  66% { transform: translate(-30px, 20px) scale(0.94); border-radius: 58% 42% 40% 60% / 40% 60% 40% 60%; }
+}
+
+/* Acid marquee. */
+.acid .marquee { animation: acid-marquee 22s linear infinite; }
+.acid .marquee.reverse { animation-direction: reverse; }
+@keyframes acid-marquee { to { transform: translateX(-50%); } }
+
+/* Grain. */
+.acid .grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Warped photos: under water until you point at them. */
+.acid .warp img { filter: url(#wavy) saturate(1.4) contrast(1.1); transition: filter 0.6s var(--expo), transform 0.8s var(--expo); }
+.acid .warp:hover img { filter: none; transform: scale(1.03); }
+
+/* Entrance. */
+.acid .rise { opacity: 0; transform: translateY(60px) skewY(4deg); transition: opacity 1s var(--expo), transform 1.2s var(--expo); }
+.acid .rise.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .acid .marquee, .acid .drift { animation: none; }
+  .acid .rise { opacity: 1; transform: none; }
+  .acid .warp img { filter: saturate(1.4); }
+}
