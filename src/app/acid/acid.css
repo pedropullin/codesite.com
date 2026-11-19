@@ -149,3 +149,7 @@
   .acid .rise { opacity: 1; transform: none; }
   .acid .warp img { filter: saturate(1.4); }
 }
+
+/* Paint the page edges black too, so overscroll never flashes the light default. */
+html:has(.acid),
+html:has(.acid) body { background: #000; color-scheme: dark; }

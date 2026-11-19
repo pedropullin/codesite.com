@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element -- static screenshots served from public/work */
-import type { Metadata } from "next";
-import Link from "next/link";
 import { Plus_Jakarta_Sans, Syne } from "next/font/google";
 import { ArrowUpRight, WhatsAppIcon, socialIcons } from "@/components/icons";
 import { projects } from "@/lib/projects";
@@ -10,11 +8,6 @@ import "./acid.css";
 
 const syne = Syne({ subsets: ["latin"], weight: ["700", "800"], variable: "--font-syne", display: "swap" });
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-jakarta", display: "swap" });
-
-export const metadata: Metadata = {
-  title: `${site.name} — Acid`,
-  description: site.description,
-};
 
 const TICKER = ["Web design", "Desenvolvimento", "Experiências 3D", "Landing pages", "E-commerce", "Identidade visual", "SEO"];
 
@@ -285,9 +278,7 @@ export default function AcidPage() {
         <p className="display chrome-text text-[clamp(4rem,19vw,18rem)] italic leading-[0.8]">CODE SITE</p>
         <div className="mt-10 flex flex-col justify-between gap-3 text-sm text-white/60 sm:flex-row">
           <span>© {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</span>
-          <Link href="/" className="font-bold text-[var(--pink)] hover:underline">
-            Ver a versão principal do site
-          </Link>
+          <span>Código. Design. Experiência.</span>
         </div>
       </footer>
 
