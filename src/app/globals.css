@@ -207,50 +207,46 @@
   overflow: hidden;
 }
 
+/* Soft by construction (a radial gradient), so no blur filter or blend mode has to run every frame. */
 .aurora-blade {
   position: absolute;
   border-radius: 50%;
-  mix-blend-mode: screen;
-  filter: blur(60px);
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    #9fd2ff 16%,
-    #4f86ff 34%,
-    #2b46ff 52%,
-    #4f86ff 68%,
-    #9fd2ff 84%,
-    transparent 100%
+  background: radial-gradient(
+    ellipse 50% 50% at 50% 50%,
+    rgba(79, 134, 255, 0.55) 0%,
+    rgba(43, 70, 255, 0.32) 35%,
+    rgba(43, 70, 255, 0.1) 60%,
+    transparent 72%
   );
-  will-change: transform, opacity;
+  will-change: transform;
 }
 
-.aurora-b1 { width: 1100px; height: 170px; left: -14%; top: 2%; animation: aurora1 17s ease-in-out infinite; }
-.aurora-b2 { width: 900px; height: 120px; right: -16%; top: 16%; animation: aurora2 21s ease-in-out infinite; }
-.aurora-b3 { width: 1250px; height: 90px; left: 4%; top: 32%; animation: aurora3 15s ease-in-out infinite; }
-.aurora-b4 { width: 700px; height: 220px; left: 28%; top: -12%; filter: blur(90px); animation: aurora4 22s ease-in-out infinite; }
-.aurora-b5 { width: 980px; height: 140px; right: -22%; top: 56%; animation: aurora5 19s ease-in-out infinite; }
+.aurora-b1 { width: 1100px; height: 442px; left: -14%; top: 2%; animation: aurora1 17s ease-in-out infinite; }
+.aurora-b2 { width: 900px; height: 312px; right: -16%; top: 16%; animation: aurora2 21s ease-in-out infinite; }
+.aurora-b3 { width: 1250px; height: 234px; left: 4%; top: 32%; animation: aurora3 15s ease-in-out infinite; }
+.aurora-b4 { width: 700px; height: 572px; left: 28%; top: -12%; animation: aurora4 22s ease-in-out infinite; }
+.aurora-b5 { width: 980px; height: 364px; right: -22%; top: 56%; animation: aurora5 19s ease-in-out infinite; }
 
 /* 0% is full bloom so a still frame (or reduced motion) shows the richest state. */
 @keyframes aurora1 {
-  0%, 100% { transform: translate(0, 0) rotate(-24deg) scale(1.05); opacity: 0.95; }
-  50% { transform: translate(90px, 40px) rotate(-20deg) scale(0.92); opacity: 0.55; }
+  0%, 100% { transform: translate(0, 0) rotate(-24deg) scale(1.05); }
+  50% { transform: translate(90px, 40px) rotate(-20deg) scale(0.92); }
 }
 @keyframes aurora2 {
-  0%, 100% { transform: translate(0, 0) rotate(-32deg) scale(1.06); opacity: 0.85; }
-  50% { transform: translate(-110px, 30px) rotate(-27deg) scale(0.9); opacity: 0.45; }
+  0%, 100% { transform: translate(0, 0) rotate(-32deg) scale(1.06); }
+  50% { transform: translate(-110px, 30px) rotate(-27deg) scale(0.9); }
 }
 @keyframes aurora3 {
-  0%, 100% { transform: translate(0, 0) rotate(-18deg) scale(1); opacity: 0.55; }
-  50% { transform: translate(60px, -50px) rotate(-22deg) scale(1.08); opacity: 0.28; }
+  0%, 100% { transform: translate(0, 0) rotate(-18deg) scale(1); }
+  50% { transform: translate(60px, -50px) rotate(-22deg) scale(1.08); }
 }
 @keyframes aurora4 {
-  0%, 100% { transform: translate(0, 0) rotate(-38deg) scale(1.1); opacity: 0.5; }
-  50% { transform: translate(-70px, 60px) rotate(-33deg) scale(0.95); opacity: 0.25; }
+  0%, 100% { transform: translate(0, 0) rotate(-38deg) scale(1.1); }
+  50% { transform: translate(-70px, 60px) rotate(-33deg) scale(0.95); }
 }
 @keyframes aurora5 {
-  0%, 100% { transform: translate(0, 0) rotate(-22deg) scale(1); opacity: 0.35; }
-  50% { transform: translate(80px, -30px) rotate(-26deg) scale(1.06); opacity: 0.18; }
+  0%, 100% { transform: translate(0, 0) rotate(-22deg) scale(1); }
+  50% { transform: translate(80px, -30px) rotate(-26deg) scale(1.06); }
 }
 
 .aurora-grain,
@@ -262,8 +258,7 @@
 }
 
 .aurora-grain {
-  opacity: 0.2;
-  mix-blend-mode: overlay;
+  opacity: 0.06;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -274,7 +269,7 @@
 }
 
 @media (max-width: 640px) {
-  .aurora-blade { filter: blur(44px); }
+  .aurora-b3, .aurora-b5 { display: none; }
 }
 
 /* Tactile light key on dark ground. */
@@ -338,12 +333,10 @@
   background: linear-gradient(90deg, #2b46ff, #6f97ff 45%, #9fd2ff 70%, #2b46ff);
   filter: blur(20px);
   opacity: 0.45;
-  transition: opacity 0.5s ease, filter 0.5s ease;
-  animation: glow-pan 8s linear infinite;
-  background-size: 200% 100%;
+  transition: opacity 0.5s ease;
 }
 .group\/vibe:hover .glow-under,
-.group\/vibe:focus-within .glow-under { opacity: 0.8; filter: blur(26px); }
+.group\/vibe:focus-within .glow-under { opacity: 0.8; }
 @keyframes glow-pan { to { background-position: 200% 0; } }
 
 /* Typing caret. */

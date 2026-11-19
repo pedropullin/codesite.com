@@ -61,10 +61,10 @@ export default function Contact() {
             <br />
             do papel.
           </h2>
-          <div className="relative mx-auto mt-6 h-[230px] max-w-3xl sm:h-[300px]">
+          <div className="relative mx-auto mt-6 hidden h-[300px] max-w-3xl min-[900px]:block">
             <RunKeys />
           </div>
-          <p className="text-[0.95rem] text-ink-soft">Aperte RUN para chamar a gente no WhatsApp, ou use o botão.</p>
+          <p className="hidden text-[0.95rem] text-ink-soft min-[900px]:block">Aperte RUN para chamar a gente no WhatsApp, ou use o botão.</p>
           <a
             href={whatsappLink()}
             target="_blank"

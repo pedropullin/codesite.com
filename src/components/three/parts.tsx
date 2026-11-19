@@ -43,17 +43,8 @@ export function GlyphMaterial({ kind, hovered = false }: { kind: GlyphMaterialKi
       return <meshPhysicalMaterial color="#e9ecf5" roughness={0.1} metalness={1} clearcoat={0.6} />;
     case "glass":
       return (
-        <meshPhysicalMaterial
-          color="#e4e9ff"
-          roughness={0.06}
-          metalness={0}
-          transmission={1}
-          thickness={0.8}
-          ior={1.5}
-          attenuationColor={COLORS.brandLight}
-          attenuationDistance={1.6}
-          clearcoat={1}
-        />
+        // Frosted look without transmission, which costs a whole extra render pass.
+        <meshStandardMaterial color="#9fb6ff" roughness={0.18} metalness={0.35} />
       );
     case "ceramic":
     default:
@@ -76,11 +67,11 @@ export function GlyphMesh({ char, size, depth, kind }: { char: string; size: num
         font={FONT}
         size={size}
         height={depth}
-        curveSegments={10}
+        curveSegments={5}
         bevelEnabled
         bevelThickness={depth * 0.16}
         bevelSize={size * 0.014}
-        bevelSegments={5}
+        bevelSegments={2}
       >
         {char}
         <GlyphMaterial kind={kind} />
@@ -92,7 +83,7 @@ export function GlyphMesh({ char, size, depth, kind }: { char: string; size: num
 /** A dark studio: soft white key lights and a strip of brand blue for the reflections. */
 export function Studio() {
   return (
-    <Environment resolution={256}>
+    <Environment resolution={128}>
       <group rotation={[-Math.PI / 3, 0, 1]}>
         <Lightformer form="circle" intensity={3} rotation-x={Math.PI / 2} position={[0, 5, -9]} scale={2} />
         <Lightformer form="circle" intensity={1.6} rotation-y={Math.PI / 2} position={[-5, 1, -1]} scale={2} />

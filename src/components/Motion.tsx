@@ -53,7 +53,7 @@ export default function Motion() {
         // ---------- hero: scrolling out ----------
         gsap
           .timeline({ scrollTrigger: { trigger: ".hero-section", start: "top top", end: "bottom top", scrub: true } })
-          .to(".hero-content", { yPercent: -18, scale: 0.9, autoAlpha: 0, filter: "blur(8px)", ease: "none" }, 0)
+          .to(".hero-content", { yPercent: -18, scale: 0.94, autoAlpha: 0, ease: "none" }, 0)
           .to(".hero-section .aurora", { yPercent: 25, scale: 1.35, ease: "none" }, 0);
 
         // ---------- marquee leans with scroll speed ----------
