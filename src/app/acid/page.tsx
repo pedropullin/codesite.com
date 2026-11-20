@@ -71,8 +71,8 @@ export default function AcidPage() {
       <Ticker />
 
       {/* ---------- nav ---------- */}
-      <header className="relative z-30 flex items-center justify-between gap-4 px-5 py-5 md:px-10">
-        <a href="#topo" className="display split shrink-0 text-lg md:text-3xl" aria-label={`${site.name}, início`}>
+      <header className="relative z-30 flex items-center justify-between gap-3 px-5 max-[380px]:px-4 py-5 md:px-10">
+        <a href="#topo" className="display split shrink-0 text-lg max-[380px]:text-base md:text-3xl" aria-label={`${site.name}, início`}>
           CODE<span className="text-[var(--pink)]">/</span>SITE
         </a>
         <nav aria-label="Principal" className="hidden md:block">
@@ -86,7 +86,7 @@ export default function AcidPage() {
             ))}
           </ul>
         </nav>
-        <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="chrome-btn shrink-0 !gap-2 !px-3.5 !py-2 text-[11px] md:!px-6 md:!py-3 md:text-sm">
+        <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="chrome-btn shrink-0 !gap-2 !px-3.5 !py-2 text-[11px] max-[380px]:!px-2.5 max-[380px]:text-[10px] md:!px-6 md:!py-3 md:text-sm">
           <span>Orçamento</span>
         </a>
       </header>
@@ -112,7 +112,7 @@ export default function AcidPage() {
           </p>
 
           <div className="relative z-10 max-w-[1500px] md:pl-10">
-            <h1 className="display mt-[14vh] text-[clamp(3rem,10.5vw,10rem)] italic">
+            <h1 className="display mt-[14vh] text-[clamp(2rem,10.5vw,10rem)] italic">
               <span className="split block origin-left md:scale-x-110">Código</span>
               <span className="split block pl-[8vw]">
                 que <span className="text-[var(--pink)]">vira</span>
@@ -141,7 +141,7 @@ export default function AcidPage() {
 
         {/* ---------- services ---------- */}
         <section id="servicos" className="relative px-5 py-28 md:px-10 md:py-40">
-          <h2 className="display rise text-[clamp(3rem,10vw,9rem)]">
+          <h2 className="display rise text-[clamp(2rem,10vw,9rem)]">
             Do design <br />
             <span className="outline-volt italic">ao deploy</span>
           </h2>
@@ -169,7 +169,7 @@ export default function AcidPage() {
         {/* ---------- work ---------- */}
         <section id="trabalhos" className="relative bg-[var(--onyx)] px-5 py-28 md:px-10 md:py-40">
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <h2 className="display rise text-[clamp(2.4rem,9.4vw,10rem)] italic">
+            <h2 className="display rise text-[clamp(1.8rem,9.4vw,10rem)] italic">
               <span className="split">Projetos</span>
               <br />
               <span className="chrome-text not-italic">no ar</span>
@@ -208,7 +208,7 @@ export default function AcidPage() {
 
         {/* ---------- process ---------- */}
         <section id="processo" className="relative overflow-hidden px-5 py-28 md:px-10 md:py-40">
-          <h2 className="display rise text-[clamp(3rem,10vw,9rem)]">
+          <h2 className="display rise text-[clamp(2rem,10vw,9rem)]">
             Quatro commits
             <br />
             <span className="text-[var(--pink)] italic">até o ar</span>
@@ -217,7 +217,7 @@ export default function AcidPage() {
             {STEPS.map((s, i) => (
               <li key={s.title} className="rise group relative bg-black p-8 transition-colors duration-500 hover:bg-[var(--volt)] hover:text-white">
                 <code className="font-mono text-sm text-[var(--pink)] group-hover:text-white">$ {s.cmd}</code>
-                <h3 className="display mt-10 text-[clamp(1.6rem,2.2vw,2.2rem)] italic">{s.title}</h3>
+                <h3 className="display mt-10 text-[clamp(1.4rem,2.2vw,2.2rem)] italic">{s.title}</h3>
                 <p className="mt-4 text-sm leading-relaxed text-white/70 group-hover:text-white/85">{s.text}</p>
                 <Star className={`absolute top-6 right-6 h-5 w-5 transition-transform duration-700 group-hover:rotate-180 ${i % 2 ? "" : ""}`} color="var(--pink)" />
               </li>
@@ -230,13 +230,13 @@ export default function AcidPage() {
           <p className="display pointer-events-none absolute -bottom-10 left-0 -z-10 text-[30vw] leading-none text-white/10 select-none" aria-hidden>
             RUN
           </p>
-          <h2 className="display rise text-[clamp(3.4rem,12vw,11rem)] italic">
+          <h2 className="display rise text-[clamp(2rem,12vw,11rem)] italic">
             Vamos tirar
             <br />
             <span className="ml-[10vw] inline-block -rotate-2 bg-white px-4 text-[var(--volt)] not-italic">do papel</span>
           </h2>
           <div className="mt-14 grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-end">
-            <div>
+            <div className="min-w-0">
               <p className="max-w-md text-lg font-medium leading-relaxed">
                 Chama no WhatsApp e conta a ideia. O orçamento é sem compromisso.
               </p>
@@ -244,7 +244,7 @@ export default function AcidPage() {
                 href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-4 font-[family-name:var(--font-syne)] text-[clamp(0.95rem,4.4vw,1.125rem)] font-extrabold whitespace-nowrap md:px-8 md:py-5 text-[var(--volt)] uppercase transition-transform duration-500 hover:scale-105 hover:-rotate-2"
+                className="mt-8 inline-flex items-center gap-3 rounded-full bg-white px-6 py-4 font-[family-name:var(--font-syne)] text-[clamp(0.85rem,4.2vw,1.125rem)] font-extrabold whitespace-nowrap md:px-8 md:py-5 text-[var(--volt)] uppercase transition-transform duration-500 hover:scale-105 hover:-rotate-2"
               >
                 <WhatsAppIcon className="h-5 w-5" /> {site.phoneDisplay}
               </a>
@@ -275,7 +275,7 @@ export default function AcidPage() {
       <Ticker reverse />
 
       <footer className="relative overflow-hidden px-5 pt-20 pb-10 md:px-10">
-        <p className="display chrome-text text-[clamp(4rem,19vw,18rem)] italic leading-[0.8]">CODE SITE</p>
+        <p className="display chrome-text text-[clamp(2.5rem,19vw,18rem)] italic leading-[0.8]">CODE SITE</p>
         <div className="mt-10 flex flex-col justify-between gap-3 text-sm text-white/60 sm:flex-row">
           <span>© {new Date().getFullYear()} {site.name}. Todos os direitos reservados.</span>
           <span>Código. Design. Experiência.</span>
